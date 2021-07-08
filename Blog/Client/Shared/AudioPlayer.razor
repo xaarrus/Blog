@@ -1,0 +1,14 @@
+﻿<span class="@(hidden ? spanplay : spanmute)" @onclick=@(()=>hidden=!hidden)></span>
+<div class=" invisible">
+    @if (!hidden)
+    {<audio autoplay><source src="/Blog/mus/Taishi%20-%20Strayer.mp3" /></audio> }
+    else
+    { <audio muted><source src="/Blog/mus/Taishi%20-%20Strayer.mp3" /></audio>}
+</div>
+
+
+@code{
+    bool hidden = true;
+    string spanplay = "oi oi-media-play";
+    string spanmute = "oi oi-musical-note";
+}

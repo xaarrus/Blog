@@ -1,0 +1,33 @@
+﻿@page "/About"
+<Title Value="Об авторе" />
+
+<div class="card m-auto">
+    <div class="row g-0">
+
+        <div class="col-md-6">
+            <div class="card-body">
+                <h5 class="card-title">Меня зовут Илья, мне @old </h5>
+                <p class="card-text">
+                    Изучаю C#, MSSQL, .Net. Данный блог написан с использованием Blazor WA.
+                </p>
+                <p class="card-text"><small class="text-muted">28.06.2020</small></p>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <img src="/Blog/img/p/profileavatar.jpg" class="img-fluid rounded-start">
+        </div>
+
+    </div>
+</div>
+
+@code {
+    private int old;
+    protected override async Task OnInitializedAsync()
+    {
+        DateTime CreateMan = new DateTime(1992, 08, 05, 0, 0, 0);
+        DateTime OnVoidTime = DateTime.Now;
+        TimeSpan oldTime = OnVoidTime - CreateMan;
+        old = oldTime.Days / 365;
+    }
+}
