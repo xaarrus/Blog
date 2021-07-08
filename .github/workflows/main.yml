@@ -1,0 +1,39 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Deploy to GitHub Page
+
+# Controls when the workflow will run
+on:
+  push:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      # sdk .net
+      - name: Setup .NET 5
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '5.0'
+      - name: Publish .NET Core Project
+        run: dotnet publish Blog.sln -c Release --output release --nologo
+        
+      - name: Change base-tag in index.html from / to Blog
+        run: sed -i 's/<base href="\/" \/>/<base href="\/Blog\/" \/>/g' release/wwwroot/index.html
+        
+      - name: Add .nojekyll file
+        run: touch release/wwwroot/.nojekyll
+        
+      - name: Uploading files to gh-pages branch
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages
+          folder: release/wwwroot
