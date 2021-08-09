@@ -1,3 +1,19 @@
+/* /Pages/NoteBook/NavNoteBook.razor.rz.scp.css */
+.nav-note-p1[b-r1ia01xhp7] {
+    color: black;
+    display: block;
+    width: 70px;
+    height: 40px;
+    background: url(/Blog/img/NoteBook/bktabbg_1.png) 0 0 no-repeat;
+}
+
+.nav-note-p2[b-r1ia01xhp7] {
+    color: black;
+    display: block;
+    width: 70px;
+    height: 40px;
+    background: url(/Blog/img/NoteBook/bktabbg_1.png) -70px -40px no-repeat;
+}
 /* /Shared/MainLayout.razor.rz.scp.css */
 .page[b-c0b3irjypo] {
     position: relative;
