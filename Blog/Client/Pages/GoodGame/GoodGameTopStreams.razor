@@ -1,0 +1,56 @@
+﻿@page "/goodgame/top"
+@inject ILocalStorageService LocalStorage
+@inject IToastService ToastService
+@inject IGoodGameService GoodGameService
+@inject IFavoritesService FavoritesService
+
+<div class="text-dark mb-3 h-690">
+    @if (Streams is null)
+    {
+        <p>Ищем годноту...</p>
+    }
+    else
+    {
+        <div>
+            <table class="table table-striped table-dark">
+                <thead>
+                    <tr>
+                        <th>Канал</th>
+                        <th>Игра</th>
+                        <th>Название трансляции</th>
+                        <th>Зрители</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var StreamGG in Streams._embedded.streams)
+                    {
+                        <tr>
+                            <td>@StreamGG.channel.key</td>
+                            <td>@StreamGG.channel.games[0].title</td>
+                            <td>@StreamGG.channel.title</td>
+                            <td>@StreamGG.player_viewers</td>
+                            <td>
+                                <a class="btn btn-primary" href=@StreamGG.url target="_blank">Смотреть</a>
+                                <button class="btn btn-dark" @onclick="(()=>AddFavorite(StreamGG))">В избранное</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+@code {
+    private GGStreams Streams;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Streams = await GoodGameService.GetStreams();
+        Streams._embedded.streams = Streams._embedded.streams.OrderByDescending(x => x.player_viewers).Take(6).ToList();
+    }
+    private async Task AddFavorite(Stream stream)
+    {
+        await FavoritesService.AddToFavorites(stream);
+    }
+}

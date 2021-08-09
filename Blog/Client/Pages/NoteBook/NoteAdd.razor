@@ -1,0 +1,33 @@
+﻿@page "/notebook/notes/add"
+@inject IToastService ToastService
+@inject INoteService NoteService
+
+<div>
+    <h3>Добавить задачу:</h3>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">Заголовок</span>
+        <input type="text" class="form-control" placeholder="" @bind="NewNote.Title">
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">Описание</span>
+        <textarea class="form-control" @bind="NewNote.Description"></textarea>
+    </div>
+    <button type="button" class="btn btn-danger" @onclick="(()=>AddNoteToStorage(NewNote))">Добавить</button>
+</div>
+
+@code {
+    [Parameter]
+    public Note? NewNote { get; set; }
+    protected override void OnInitialized()
+    {
+        if (NewNote == null)
+        {
+            NewNote = new Note();
+        }
+    }
+    private async Task AddNoteToStorage(Note newnote)
+    {
+        await NoteService.AddNoteToStorage(NewNote);
+        NewNote = new Note();
+    }
+}

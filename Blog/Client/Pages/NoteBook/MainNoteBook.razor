@@ -1,0 +1,24 @@
+﻿@page "/notebook/notes"
+
+<NavNoteBook />
+<div class="notebook-body">
+    <div class="row justify-content-evenly">
+        <div class="col-md-6">
+            <NoteList OnNoteEdit="NoteToEditFromList" />
+        </div>
+        <div class="col-md-4">
+            <NoteAdd NewNote="notetoedit" />
+        </div>
+    </div>
+</div>
+@code{
+    [Parameter]
+    public Note? notetoedit { get; set; }
+
+    public void NoteToEditFromList(Note note)
+    {
+        notetoedit = note;
+        StateHasChanged();
+        return;
+    }
+}

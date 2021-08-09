@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31402.337
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Server", "Blog\Server\Blog.Server.csproj", "{DB5FD71B-D369-408A-A544-25D7F86380F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Server", "Blog\Server\Blog.Server.csproj", "{DB5FD71B-D369-408A-A544-25D7F86380F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Client", "Blog\Client\Blog.Client.csproj", "{839F24A3-8AC8-4199-BA17-F55ABD8EFFA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Client", "Blog\Client\Blog.Client.csproj", "{839F24A3-8AC8-4199-BA17-F55ABD8EFFA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Shared", "Blog\Shared\Blog.Shared.csproj", "{F6819AE8-997D-4E63-9637-E2396294376B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Shared", "Blog\Shared\Blog.Shared.csproj", "{F6819AE8-997D-4E63-9637-E2396294376B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -7,6 +7,16 @@
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
             <li><a href="/Blog/" class="nav-link px-2 text-secondary">Блог</a></li>
             <li><a href="/Blog/about" class="nav-link px-2 text-white">Обо мне</a></li>
+            <li class="dropdown">
+                <a class="nav-link px-2 text-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Записная книжка
+                </a>
+                <ul class="nav-item dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="/Blog/notebook/notes">Заметки/Задачи</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="/Blog/notebook/streams">Стримы</a></li>
+                </ul>
+            </li>
         </ul>
         <AudioPlayer />
     </div>

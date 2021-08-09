@@ -1,0 +1,15 @@
+﻿.nav-note-p1 {
+    color: black;
+    display: block;
+    width: 70px;
+    height: 40px;
+    background: url(/Blog/img/NoteBook/bktabbg_1.png) 0 0 no-repeat;
+}
+
+.nav-note-p2 {
+    color: black;
+    display: block;
+    width: 70px;
+    height: 40px;
+    background: url(/Blog/img/NoteBook/bktabbg_1.png) -70px -40px no-repeat;
+}

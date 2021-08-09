@@ -23,24 +23,28 @@ a, .btn-link {
 
 .content {
     padding-top: 1.1rem;
-    flex:1;
+    flex: 1;
 }
 
-.spinner-border{
-    margin:auto;
+.spinner-border {
+    margin: auto;
 }
 
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
 }
 
+.h-690 {
+    min-height: 690px;
+}
+
 .invalid {
     outline: 1px solid red;
 }
 
-.img-ico{
-    height:30px;
-    width:30px;
+.img-ico {
+    height: 30px;
+    width: 30px;
 }
 
 .validation-message {
@@ -48,7 +52,7 @@ a, .btn-link {
 }
 
 body {
-    background-image: url(/Blog/img/bg-site.JPG);
+    background-image: url(/Blog/img/bg-site.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -60,8 +64,8 @@ body {
     white-space: nowrap;
 }
 
-.my-00 img{
-    max-height:500px;
+.my-00 img {
+    max-height: 500px;
 }
 
 #blazor-error-ui {
@@ -82,3 +86,89 @@ body {
         right: 0.75rem;
         top: 0.5rem;
     }
+/* start notebook */
+.notebook-body {
+    background-image: url(/Blog/img/NoteBook/NoteBookBgBody.png);
+    background-repeat: repeat-y;
+    background-size: contain;
+    background-position: center;
+    min-height: 90px;
+    min-width: 848px;
+}
+
+    .notebook-body:before {
+        content: "";
+        display: block;
+        background-image: url(/Blog/img/NoteBook/NoteBookBgHeader.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top;
+        min-height: 90px;
+        min-width: 848px;
+    }
+
+    .notebook-body:after {
+        content: "";
+        display: block;
+        background-image: url(/Blog/img/NoteBook/NoteBookBgFooter.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: bottom;
+        min-height: 90px;
+        min-width: 848px;
+    }
+
+.notebook-main {
+    background-image: url(/Blog/img/NoteBook/NoteBookBg.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    min-height: 551px;
+    min-width: 848px;
+}
+
+.loading-wheel {
+    display: block;
+    margin: 15% 50%;
+    width: 73px;
+    height: 86px;
+    background: url(/Blog/img/NoteBook/idwheel_1.png);
+    animation: loadingWheelTwo 0.5s steps(1) infinite;
+}
+
+@keyframes loadingWheel {
+    0% {
+        background-position: -73px -85px;
+    }
+
+    25% {
+        background-position: -146px -85px;
+    }
+
+    50% {
+        background-position: -73px -171px;
+    }
+
+    75% {
+        background-position: -146px -171px;
+    }
+}
+
+@keyframes loadingWheelTwo {
+    0% {
+        background-position: -146px -171px;
+    }
+
+    25% {
+        background-position: -73px -171px;
+    }
+
+    50% {
+        background-position: -146px -85px;
+    }
+
+    75% {
+        background-position: -73px -85px;
+    }
+}
+/* end notebook */
