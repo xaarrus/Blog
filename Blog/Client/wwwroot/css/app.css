@@ -88,7 +88,7 @@ body {
     }
 /* start notebook */
 .notebook-body {
-    background-image: url(/Blog/img/NoteBook/NoteBookBgBody.PNG);
+    background-image: url(/Blog/img/NoteBook/NoteBookBgBody.png);
     background-repeat: repeat-y;
     background-size: contain;
     background-position: center;
@@ -99,7 +99,7 @@ body {
     .notebook-body:before {
         content: "";
         display: block;
-        background-image: url(/Blog/img/NoteBook/NoteBookBgHeader.PNG);
+        background-image: url(/Blog/img/NoteBook/NoteBookBgHeader.png);
         background-repeat: no-repeat;
         background-size: cover;
         background-position: top;
@@ -110,7 +110,7 @@ body {
     .notebook-body:after {
         content: "";
         display: block;
-        background-image: url(/Blog/img/NoteBook/NoteBookBgFooter.PNG);
+        background-image: url(/Blog/img/NoteBook/NoteBookBgFooter.png);
         background-repeat: no-repeat;
         background-size: cover;
         background-position: bottom;
@@ -119,7 +119,7 @@ body {
     }
 
 .notebook-main {
-    background-image: url(/Blog/img/NoteBook/NoteBookBg.PNG);
+    background-image: url(/Blog/img/NoteBook/NoteBookBg.png);
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
@@ -132,7 +132,7 @@ body {
     margin: 15% 50%;
     width: 73px;
     height: 86px;
-    background: url(/Blog/img/NoteBook/idwheel_1.PNG);
+    background: url(/Blog/img/NoteBook/idwheel_1.png);
     animation: loadingWheelTwo 0.5s steps(1) infinite;
 }
 
