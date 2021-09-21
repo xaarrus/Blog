@@ -13,3 +13,19 @@
     height: 40px;
     background: url(/Blog/img/NoteBook/bktabbg_1.png) -70px -40px no-repeat;
 }
+
+.nav-note-p3 {
+    color: black;
+    display: block;
+    width: 70px;
+    height: 40px;
+    background: url(/Blog/img/NoteBook/bktabbg_1.png) -70px 0px no-repeat;
+}
+
+.nav-note-p4 {
+    color: black;
+    display: block;
+    width: 70px;
+    height: 40px;
+    background: url(/Blog/img/NoteBook/bktabbg_1.png) 0px -40px no-repeat;
+}

@@ -1,0 +1,358 @@
+﻿@page "/notebook/calc/"
+@page "/notebook/calc/{addrSkill?}"
+@inject NavigationManager navigationManager
+
+<NavNoteBook />
+<div class="notebook-body">
+    <div class="row h-690 justify-content-evenly">
+        <div class="col-md-6 @chClassBg">
+            @if (addrSkill[0].ToString() == "0")
+            {
+                <div>
+                    <span class="loading-wheel"></span>
+                </div>
+            }
+            @if (addrSkill[0].ToString() == "1")
+            {
+                <div>
+                    <span class="loading-wheel"></span>
+                </div>
+            }
+            @if (addrSkill[0].ToString() == "2")
+            {
+                <div class="">
+                    <div class="row g-1 h-80">
+                        <div class="col-1"></div>
+                        <div class="col-2"></div>
+                        <div class="col-2"></div>
+                        <div class="col-2"></div>
+                        <div class="col-2"></div>
+                        <div class="col-2"></div>
+                        <div class="col-1"></div>
+                    </div>
+                    <div class="row g-1 h-80"></div>
+                    <div class="row g-1 h-80">
+                        <div class="col-1"></div>
+                        <div class="col-2" style="height:60px;">
+                            <div class="arw-down" title="@LocalSkillStorage[0].SkillTitle
+
+@LocalSkillStorage[0].SkillDescription" style="width: 40px; height: 40px; background: url(/Blog/img/NoteBook/calc/iconskill_1.png) -240px -80px no-repeat; ">
+                                <button class="btn-minus" @onclick="() => SkillDownLv(LocalSkillStorage[0].SkillId)"></button>
+                                <button class="btn-plus" @onclick="() => SkillUpLv(LocalSkillStorage[0].SkillId)"></button>
+                            </div>
+                            <span class="counter-skill-lv counter-skill-lv-bg">@LocalSkillStorage[0].SkillLvCurrent / @LocalSkillStorage[0].SkillLvMax</span>
+                        </div>
+                        <div class="col-2">
+                            <div class="arw-down" title='@LocalSkillStorage[1].SkillTitle
+
+@LocalSkillStorage[1].SkillDescription
+                         ' style="width: 40px; height: 40px; background: url(/Blog/img/NoteBook/calc/iconskill_1.png) 0px -120px no-repeat; ">
+                                <button class="btn-minus" @onclick="() => SkillDownLv(LocalSkillStorage[1].SkillId)"></button>
+                                <button class="btn-plus" @onclick="() => SkillUpLv(LocalSkillStorage[1].SkillId)"></button>
+                            </div>
+                            <span class="counter-skill-lv  counter-skill-lv-bg arw-right">@LocalSkillStorage[1].SkillLvCurrent / @LocalSkillStorage[1].SkillLvMax</span>
+                        </div>
+                        <div class="col-2  arw-right-down"></div>
+                        <div class="col-2"></div>
+                        <div class="col-2">
+                            <div title='@LocalSkillStorage[2].SkillTitle
+
+@LocalSkillStorage[2].SkillDescription
+                         ' style="width: 40px; height: 40px; background: url(/Blog/img/NoteBook/calc/iconskill_1.png) -400px -80px no-repeat; ">
+                                <button class="btn-minus" @onclick="() => SkillDownLv(LocalSkillStorage[2].SkillId)"></button>
+                                <button class="btn-plus" @onclick="() => SkillUpLv(LocalSkillStorage[2].SkillId)"></button>
+                            </div>
+                            <span class="counter-skill-lv counter-skill-lv-bg">@LocalSkillStorage[2].SkillLvCurrent / @LocalSkillStorage[2].SkillLvMax</span>
+                        </div>
+                        <div class="col-1"></div>
+                    </div>
+                    <div class="row g-1 h-80">
+                        <div class="col-1"></div>
+                        <div class="col-2">
+                            <div title='@LocalSkillStorage[3].SkillTitle
+
+@LocalSkillStorage[3].SkillDescription
+                         ' style="width: 40px; height: 40px; background: url(/Blog/img/NoteBook/calc/iconskill_1.png) -280px -80px no-repeat; ">
+                                <button class="btn-minus" @onclick="() => SkillDownLv(LocalSkillStorage[3].SkillId)"></button>
+                                <button class="btn-plus" @onclick="() => SkillUpLv(LocalSkillStorage[3].SkillId)"></button>
+                            </div>
+                            <span class="counter-skill-lv counter-skill-lv-bg">@LocalSkillStorage[3].SkillLvCurrent / @LocalSkillStorage[3].SkillLvMax</span>
+                        </div>
+                        <div class="col-2">
+                            <div title='@LocalSkillStorage[4].SkillTitle
+
+@LocalSkillStorage[4].SkillDescription
+                         ' class="arw-down" style="width: 40px; height: 40px; background: url(/Blog/img/NoteBook/calc/iconskill2_1.png) -160px -160px no-repeat; ">
+                                <button class="btn-minus" @onclick="() => SkillDownLv(LocalSkillStorage[4].SkillId)"></button>
+                                <button class="btn-plus" @onclick="() => SkillUpLv(LocalSkillStorage[4].SkillId)"></button>
+                            </div>
+                            <span class="counter-skill-lv counter-skill-lv-bg">@LocalSkillStorage[4].SkillLvCurrent / @LocalSkillStorage[4].SkillLvMax</span>
+                        </div>
+                        <div class="col-2">
+                            <div title='@LocalSkillStorage[5].SkillTitle
+
+@LocalSkillStorage[5].SkillDescription
+                         ' class="arw-down" style="width: 40px; height: 40px; background: url(/Blog/img/NoteBook/calc/iconskill_1.png) -360px -80px no-repeat; ">
+                                <button class="btn-minus" @onclick="() => SkillDownLv(LocalSkillStorage[5].SkillId)"></button>
+                                <button class="btn-plus" @onclick="() => SkillUpLv(LocalSkillStorage[5].SkillId)"></button>
+                            </div>
+                            <span class="counter-skill-lv counter-skill-lv-bg arw-right">@LocalSkillStorage[5].SkillLvCurrent / @LocalSkillStorage[5].SkillLvMax</span>
+                        </div>
+                        <div class="col-2  arw-right-down"></div>
+                        <div class="col-2"></div>
+                        <div class="col-1"></div>
+                    </div>
+                    <div class="row g-1 h-80">
+                        <div class="col-1"></div>
+                        <div class="col-2"></div>
+                        <div class="col-2">
+                            <div title='@LocalSkillStorage[6].SkillTitle
+
+@LocalSkillStorage[6].SkillDescription
+                         ' style="width: 40px; height: 40px; background: url(/Blog/img/NoteBook/calc/iconskill_1.png) -40px -120px no-repeat; ">
+                                <button class="btn-minus" @onclick="() => SkillDownLv(LocalSkillStorage[6].SkillId)"></button>
+                                <button class="btn-plus" @onclick="() => SkillUpLv(LocalSkillStorage[6].SkillId)"></button>
+                            </div>
+                            <span class="counter-skill-lv counter-skill-lv-bg">@LocalSkillStorage[6].SkillLvCurrent / @LocalSkillStorage[6].SkillLvMax</span>
+                        </div>
+                        <div class="col-2">
+                            <div title='@LocalSkillStorage[7].SkillTitle
+
+@LocalSkillStorage[7].SkillDescription
+                         ' style="width: 40px; height: 40px; background: url(/Blog/img/NoteBook/calc/iconskill_1.png) -80px -120px no-repeat; ">
+                                <button class="btn-minus" @onclick="() => SkillDownLv(LocalSkillStorage[7].SkillId)"></button>
+                                <button class="btn-plus" @onclick="() => SkillUpLv(LocalSkillStorage[7].SkillId)"></button>
+                            </div>
+                            <span class="counter-skill-lv counter-skill-lv-bg">@LocalSkillStorage[7].SkillLvCurrent / @LocalSkillStorage[7].SkillLvMax</span>
+                        </div>
+                        <div class="col-2">
+                            <div title='@LocalSkillStorage[8].SkillTitle
+
+@LocalSkillStorage[8].SkillDescription
+                         ' style="width: 40px; height: 40px; background: url(/Blog/img/NoteBook/calc/iconskill_1.png) -320px -80px no-repeat; ">
+                                <button class="btn-minus" @onclick="() => SkillDownLv(LocalSkillStorage[8].SkillId)"></button>
+                                <button class="btn-plus" @onclick="() => SkillUpLv(LocalSkillStorage[8].SkillId)"></button>
+                            </div>
+                            <span class="counter-skill-lv counter-skill-lv-bg">@LocalSkillStorage[8].SkillLvCurrent / @LocalSkillStorage[8].SkillLvMax</span>
+                        </div>
+                        <div class="col-2"></div>
+                        <div class="col-1"></div>
+                    </div>
+                    <div class="row g-1 h-80">
+                        <div class="col-1"></div>
+                        <div class="col-2"></div>
+                        <div class="col-2"></div>
+                        <div class="col-2"></div>
+                        <div class="col-2"></div>
+                        <div class="col-2">
+                            <div title='@LocalSkillStorage[9].SkillTitle
+
+@LocalSkillStorage[9].SkillDescription
+                         ' style="width: 40px; height: 40px; background: url(/Blog/img/NoteBook/calc/iconskill_1.png) -440px -80px no-repeat; ">
+                                <button class="btn-minus" @onclick="() => SkillDownLv(LocalSkillStorage[9].SkillId)"></button>
+                                <button class="btn-plus" @onclick="() => SkillUpLv(LocalSkillStorage[9].SkillId)"></button>
+                            </div>
+                            <span class="counter-skill-lv counter-skill-lv-bg">@LocalSkillStorage[9].SkillLvCurrent / @LocalSkillStorage[9].SkillLvMax</span>
+                        </div>
+                        <div class="col-1"></div>
+                    </div>
+                    <div class="row g-1 h-80">
+                        <div class="col-1"></div>
+                        <div class="col-2"></div>
+                        <div class="col-2"></div>
+                        <div class="col-2">
+                            <div title='@LocalSkillStorage[10].SkillTitle
+
+@LocalSkillStorage[10].SkillDescription
+                         ' style="width: 40px; height: 40px; background: url(/Blog/img/NoteBook/calc/iconskill3_1.png) 0px -200px no-repeat;">
+                                <button class="btn-minus" @onclick="() => SkillDownLv(LocalSkillStorage[10].SkillId)"></button>
+                                <button class="btn-plus" @onclick="() => SkillUpLv(LocalSkillStorage[10].SkillId)"></button>
+                            </div>
+                            <span class="counter-skill-lv counter-skill-lv-bg">@LocalSkillStorage[10].SkillLvCurrent / @LocalSkillStorage[10].SkillLvMax</span>
+                        </div>
+                        <div class="col-2"></div>
+                        <div class="col-2"></div>
+                        <div class="col-1"></div>
+                    </div>
+                </div>
+            }
+            @if (addrSkill[0].ToString() == "3")
+            {
+                <div>
+                    <span class="loading-wheel"></span>
+                </div>
+            }
+        </div>
+        <div class="col-md-4">
+            <h2>Выберите класс:</h2>
+            <div class="d-flex">
+                @for (int i = 0; i < 4; i++)
+                {
+                    <a class=@CharacterClassName[i] href="/Blog/notebook/calc/@i"></a>
+                }
+            </div>
+            <div class="input-group mb-3">
+                <button class="btn btn-outline-secondary" type="button" @onclick="GetUrlToShare">Создать ссылку</button>
+                <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="" value="@ResultUrl">
+            </div>           
+        </div>
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public string addrSkill { get; set; }
+    private string classChar, addrskill, skillvar, chClassBg, ResultUrl;
+    private int newSkillLv;
+    public string[] CharacterClassName = new string[4] { "chwar", "chmag", "charc", "chthi" };
+    public List<char> validChar = new List<char>() { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k' };
+    private List<SkillExampleModel> LocalSkillStorage = new List<SkillExampleModel>();
+
+    protected override void OnInitialized()
+    {
+        chClassBg = "none";
+        LocalSkillStorage.Add(new SkillExampleModel() { SkillId = 301, SkillLvMin = 0, SkillLvMax = 1, SkillTitle = "Лунная походка", SkillDescription = "Отступает на 3 секунды, получая сверхмощную защиту." });
+        LocalSkillStorage.Add(new SkillExampleModel() { SkillId = 302, SkillLvMin = 0, SkillLvMax = 5, SkillTitle = "Мощный выстрел", SkillDescription = "Атакует, подбрасывая 2 противников в воздух. При 4 уровне навыка высота подбрасывания достигает максимума." });
+        LocalSkillStorage.Add(new SkillExampleModel() { SkillId = 303, SkillLvMin = 0, SkillLvMax = 10, SkillTitle = "Мастер луков", SkillDescription = "Увеличивает силу атаки на 10 при использовании луков." });
+        LocalSkillStorage.Add(new SkillExampleModel() { SkillId = 304, SkillLvMin = 0, SkillLvMax = 1, SkillTitle = "Выстрел лунатика", SkillDescription = "Выпускает стрелы во время активации Лунной походки, атакуя до 5 противников, находящихся вместе. Работает только во время активации Лунной походки и никак иначе." });
+        LocalSkillStorage.Add(new SkillExampleModel() { SkillId = 305, SkillLvMin = 0, SkillLvMax = 5, SkillTitle = "Противовоздушная оборона", SkillDescription = "Атакует, подброшенных 2 противников." });
+        LocalSkillStorage.Add(new SkillExampleModel() { SkillId = 306, SkillLvMin = 0, SkillLvMax = 3, SkillTitle = "Меткий выстрел", SkillDescription = "Выпускает в воздухе 3 стрелы, атакующие 3 стоящих или лежащих противников. Жертв при этом слегка подбрасывает в воздух. Для активации нажмите (в воздухе) клавишу вниз + клавишу атаки." });
+        LocalSkillStorage.Add(new SkillExampleModel() { SkillId = 307, SkillLvMin = 0, SkillLvMax = 10, SkillTitle = "Двойной удар", SkillDescription = "Производит двойной выстрел с чуть большей дальностью, чем при обычной атаке." });
+        LocalSkillStorage.Add(new SkillExampleModel() { SkillId = 308, SkillLvMin = 0, SkillLvMax = 10, SkillTitle = "Залп", SkillDescription = "Выпускает 3 стрелы в противников перед персонажем в довольно большом секторе. Если цель оказывается рядом, все стрелы попадают в нее. Ей же достается и весь урон." });
+        LocalSkillStorage.Add(new SkillExampleModel() { SkillId = 309, SkillLvMin = 0, SkillLvMax = 5, SkillTitle = "Повторный запуск", SkillDescription = "Атакует, снова подбрасывая 2 упавших противников в воздух. При 4 уровне навыка высота подбрасывания достигает максимума." });
+        LocalSkillStorage.Add(new SkillExampleModel() { SkillId = 310, SkillLvMin = 0, SkillLvMax = 5, SkillTitle = "Быстрый шаг", SkillDescription = "Ускоряет передвижение на 10." });
+        LocalSkillStorage.Add(new SkillExampleModel() { SkillId = 311, SkillLvMin = 0, SkillLvMax = 1, SkillTitle = "Проворство лучника", SkillDescription = "Особый навык лучника. Все члены отряда и те, кто стоит рядом с персонажем, получают увеличение скорости передвижения и шанса критического удара на 10%." });
+        addrskill = addrSkill;
+        if (addrskill == null || addrskill.Length > 12)
+        {
+            addrskill = "0";
+            addrSkill = "0";
+        }
+        GetChClass();
+        GetChSkillVar();
+    }
+    protected override async Task OnParametersSetAsync()
+    {
+        if (addrSkill == null)
+            return;
+        if (addrSkill.Length > 12)
+            return;
+        if (addrskill != addrSkill)
+        {
+            addrskill = addrSkill;
+            GetChClass();
+            GetChSkillVar();
+        }
+    }
+    void GetChClass()
+    {
+        classChar = addrSkill[0].ToString();
+        switch (classChar)
+        {
+            case "0":
+                classChar = CharacterClassName[0];
+                chClassBg = SetChClassBg(classChar);
+                break;
+            case "1":
+                classChar = CharacterClassName[1];
+                chClassBg = SetChClassBg(classChar);
+                break;
+            case "2":
+                classChar = CharacterClassName[2];
+                chClassBg = SetChClassBg(classChar);
+                break;
+            case "3":
+                classChar = CharacterClassName[3];
+                chClassBg = SetChClassBg(classChar);
+                break;
+            default:
+                classChar = "Nonset";
+                chClassBg = SetChClassBg(CharacterClassName[new Random().Next(0,4)]);
+                break;
+        }
+    }
+    void GetChSkillVar()
+    {
+        if (addrskill == null | addrskill?.Length < 2)
+        {
+            return;
+        }
+        skillvar = addrskill.Remove(0, 1).ToLower();
+        if (skillvar == null)
+        {
+            return;
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            if (validChar.Contains(skillvar[i]))
+            {
+                newSkillLv = validChar.IndexOf(skillvar[i]);
+                if (LocalSkillStorage[i].SkillLvMin < newSkillLv & newSkillLv <= LocalSkillStorage[i].SkillLvMax)
+                {
+                    LocalSkillStorage[i].SkillLvCurrent = newSkillLv;
+                }
+                else
+                {
+                    LocalSkillStorage[i].SkillLvCurrent = 0;
+                }
+            }
+        }
+    }
+    void GetUrlToShare()
+    {
+        string tempSkillVar = "";
+        string tempCharClassVar = "";
+        for (int i = 0; i < CharacterClassName.Count(); i++)
+        {
+            if (CharacterClassName[i] == classChar)
+            {
+                tempCharClassVar = i.ToString();
+            }
+        }
+
+        for (int i = 0; i < LocalSkillStorage.Count(); i++)
+        {
+            tempSkillVar += validChar[LocalSkillStorage[i].SkillLvCurrent].ToString();
+        }
+
+        ResultUrl = navigationManager.ToAbsoluteUri("/Blog/notebook/calc/") + tempCharClassVar + tempSkillVar;
+    }
+    void SkillUpLv(int skId)
+    {
+        if (LocalSkillStorage == null)
+        {
+            return;
+        }
+        SkillExampleModel TemplSkillInfo = LocalSkillStorage.Find(x => x.SkillId == skId);
+        if (TemplSkillInfo.SkillLvCurrent < TemplSkillInfo.SkillLvMax)
+        {
+            TemplSkillInfo.SkillLvCurrent++;
+            LocalSkillStorage[LocalSkillStorage.FindIndex(index => index.SkillId.Equals(skId))] = TemplSkillInfo;
+        }
+    }
+    void SkillDownLv(int skId)
+    {
+        if (LocalSkillStorage == null)
+        {
+            return;
+        }
+        SkillExampleModel TemplSkillInfo = LocalSkillStorage.Find(x => x.SkillId == skId);
+        if (TemplSkillInfo.SkillLvCurrent > TemplSkillInfo.SkillLvMin)
+        {
+            TemplSkillInfo.SkillLvCurrent--;
+            LocalSkillStorage[LocalSkillStorage.FindIndex(index => index.SkillId.Equals(skId))] = TemplSkillInfo;
+        }
+    }
+    string SetChClassBg(string classname) => classname + "bg";
+
+    public class SkillExampleModel
+    {
+        public int SkillId { get; set; }
+        public int SkillLvMin { get; set; }
+        public int SkillLvMax { get; set; }
+        public int SkillLvCurrent { get; set; } = 0;
+        public string SkillTitle { get; set; }
+        public string SkillDescription { get; set; }
+    }
+}

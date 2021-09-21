@@ -126,7 +126,129 @@ body {
     min-height: 551px;
     min-width: 848px;
 }
+/* Start calc */
+.h-80 {
+    height: 80px;
+}
 
+.arw-down:after {
+    content: "";
+    height: 15px;
+    background: url(/Blog/img/NoteBook/calc/skarw01_1.png) no-repeat;
+    top: 60px;
+    right: -15px;
+    position: relative;
+    display: block;
+}
+
+.arw-right:after {
+    content: "";
+    height: 10px;
+    background: url(/Blog/img/NoteBook/calc/skarw-right.png) no-repeat;
+    top: -42px;
+    right: -40px;
+    position: relative;
+    display: block;
+    background-size: 40px 10px;
+}
+
+.arw-right-down:after {
+    content: "";
+    height: 39px;
+    background: url(/Blog/img/NoteBook/calc/skarw05_1.png) no-repeat;
+    top: 20px;
+    right: 20px;
+    position: relative;
+    display: block;
+}
+
+.btn-plus {
+    margin-top: 26px;
+    float: right;
+    width: 14px;
+    height: 14px;
+    background: url(/Blog/img/NoteBook/calc/skbup_1.png) -14px 0px no-repeat;
+    border: none;
+}
+
+.btn-minus {
+    margin-top: 26px;
+    float: left;
+    width: 14px;
+    height: 14px;
+    background: url(/Blog/img/NoteBook/calc/skbdown_1.png) -14px 0px no-repeat;
+    border: none;
+}
+
+    .btn-plus:active, .btn-minus:active {
+        transform: translateY(2px);
+    }
+
+.counter-skill-lv {
+    text-align: center;
+    color: orangered;
+    width: 40px;
+    display: block;
+    font-size: 13px;
+}
+
+.counter-skill-lv-bg {
+    z-index: -1;
+    background: url(/Blog/img/NoteBook/calc/skpitbg_1.png) 0px -2px no-repeat;
+}
+
+.chwar {
+    display: block;
+    width: 70px;
+    height: 70px;
+    background: url(/Blog/img/NoteBook/calc/chclassmap.png) 0px 0px no-repeat;
+}
+
+.chmag {
+    display: block;
+    width: 70px;
+    height: 70px;
+    background: url(/Blog/img/NoteBook/calc/chclassmap.png) -70px 0px no-repeat;
+}
+
+.charc {
+    display: block;
+    width: 70px;
+    height: 70px;
+    background: url(/Blog/img/NoteBook/calc/chclassmap.png) -140px 0px no-repeat;
+}
+
+.chthi {
+    display: block;
+    width: 70px;
+    height: 70px;
+    background: url(/Blog/img/NoteBook/calc/chclassmap.png) -210px 0px no-repeat;
+}
+
+.chwarbg {
+    background: url(/Blog/img/NoteBook/calc/skbg01_1.png) no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.chmagbg {
+    background: url(/Blog/img/NoteBook/calc/skbg02_1.png) no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.charcbg {
+    background: url(/Blog/img/NoteBook/calc/skbg03_1.png) no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.chthibg {
+    background: url(/Blog/img/NoteBook/calc/skbg04_1.png) no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+/* End calc */
 .loading-wheel {
     display: block;
     margin: 15% 50%;
