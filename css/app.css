@@ -86,6 +86,11 @@ body {
         right: 0.75rem;
         top: 0.5rem;
     }
+/* war3 */
+.war3logo {
+    margin: 0 auto;
+    display: block;
+}
 /* start notebook */
 .notebook-body {
     background-image: url(/Blog/img/NoteBook/NoteBookBgBody.png);
