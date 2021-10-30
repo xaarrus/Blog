@@ -1,0 +1,684 @@
+﻿@using Blog.Shared.Data.WAR3
+
+<div class="bg-secondary row">
+    <div class="row">
+        <div class="col-3">
+
+        </div>
+        <div class="col-3">
+            <a class="btn btn-outline-warning" download="itemSave.json" href=@GetDataToJson() target="_blank">Download Json</a>            
+        </div>
+    </div>
+
+    <h3 class="text-center">Поиск предметов</h3>
+    <div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Поиск предмета:</span>
+            <input type="text" class="form-control" @bind-value:event="oninput" @bind-value="SearchItemOnWord" placeholder="Введите название..." aria-label="" aria-describedby="basic-addon1">
+        </div>
+        <div>
+            <table class="table table-striped table-dark">
+                <thead>
+                    <tr>
+                        <th class="col-4">Название</th>
+                        <th class="col-4">Состоит из</th>
+                        <th class="col-4">Бонусы</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (SearchItemOnWord == "")
+                    {
+                        <tr class="table-warning text-dark"><td class="text-center" colspan="3">Введите название...</td></tr>
+                    }
+                    else
+                    {
+                        @foreach (var item in SearchItem)
+                        {
+                            <tr>
+                                <td>@item.NameItem : @item.Description</td>
+                                <td>
+                                    @if (item.ForgeFrom?.Count > 0)
+                                    {
+                                        @foreach (int itemId in item.ForgeFrom)
+                                        {
+                                            @FindItemOnId(itemId)
+                                        }
+                                    }
+                                </td>
+                                <td>@item.SeeMeBonus()</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <h3 class="text-center">Список предметов</h3>
+    <div class="col-6">
+
+        @if (ListItemForgeds.Where(x => x.TypeItem == ItemType.weapon).Count() > 0)
+        {
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="panelsStayOpen-headingWeapone">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-Weapone" aria-expanded="false" aria-controls="panelsStayOpen-Weapone">
+                        Weapone
+                    </button>
+                </h2>
+                <div id="panelsStayOpen-Weapone" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingWeapone">
+                    <div class="accordion-body">
+                        <table class="table table-striped table-dark">
+                            <thead>
+                                <tr>
+                                    <th class="col-4">Название</th>
+                                    <th class="col-4">Состоит из</th>
+                                    <th class="col-4">Бонусы</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-warning text-dark"><td class="text-center" colspan="3">Sword</td></tr>
+                                @foreach (var item in ListItemForgeds.Where(x => x.TypeItem == ItemType.weapon & x.Id > 199 & x.Id < 217))
+                                {
+                                    <tr>
+                                        <td>@item.NameItem : @item.Description</td>
+                                        <td>
+                                            @if (item.ForgeFrom?.Count > 0)
+                                            {
+                                                @foreach (int itemId in item.ForgeFrom)
+                                                {
+                                                    @FindItemOnId(itemId)
+                                                }
+                                            }
+                                        </td>
+                                        <td>@item.SeeMeBonus()</td>
+                                    </tr>
+                                }
+                                <tr class="table-warning text-dark"><td class="text-center" colspan="3">Scimitar</td></tr>
+                                @foreach (var item in ListItemForgeds.Where(x => x.TypeItem == ItemType.weapon & x.Id >= 220 & x.Id <= 226))
+                                {
+                                    <tr>
+                                        <td>@item.NameItem : @item.Description</td>
+                                        <td>
+                                            @if (item.ForgeFrom?.Count > 0)
+                                            {
+                                                @foreach (int itemId in item.ForgeFrom)
+                                                {
+                                                    @FindItemOnId(itemId)
+                                                }
+                                            }
+                                        </td>
+                                        <td>@item.SeeMeBonus()</td>
+                                    </tr>
+                                }
+                                <tr class="table-warning text-dark"><td class="text-center" colspan="3">Axe/Hammer</td></tr>
+                                @foreach (var item in ListItemForgeds.Where(x => x.TypeItem == ItemType.weapon & x.Id >= 230 & x.Id <= 240))
+                                {
+                                    <tr>
+                                        <td>@item.NameItem : @item.Description</td>
+                                        <td>
+                                            @if (item.ForgeFrom?.Count > 0)
+                                            {
+                                                @foreach (int itemId in item.ForgeFrom)
+                                                {
+                                                    @FindItemOnId(itemId)
+                                                }
+                                            }
+                                        </td>
+                                        <td>@item.SeeMeBonus()</td>
+                                    </tr>
+                                }
+                                <tr class="table-warning text-dark"><td class="text-center" colspan="3">Staff/Wands</td></tr>
+                                @foreach (var item in ListItemForgeds.Where(x => x.TypeItem == ItemType.weapon & x.Id >= 250 & x.Id <= 254))
+                                {
+                                    <tr>
+                                        <td>@item.NameItem : @item.Description</td>
+                                        <td>
+                                            @if (item.ForgeFrom?.Count > 0)
+                                            {
+                                                @foreach (int itemId in item.ForgeFrom)
+                                                {
+                                                    @FindItemOnId(itemId)
+                                                }
+                                            }
+                                        </td>
+                                        <td>@item.SeeMeBonus()</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+        @if (ListItemForgeds.Where(x => x.TypeItem == ItemType.jeweler).Count() > 0)
+        {
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="panelsStayOpen-headingJeweler">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-Jeweler" aria-expanded="false" aria-controls="panelsStayOpen-Jeweler">
+                        Jeweler
+                    </button>
+                </h2>
+                <div id="panelsStayOpen-Jeweler" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingJeweler">
+                    <div class="accordion-body">
+                        <table class="table table-striped table-dark">
+                            <thead>
+                                <tr>
+                                    <th class="col-4">Название</th>
+                                    <th class="col-4">Состоит из</th>
+                                    <th class="col-4">Бонусы</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-warning text-dark"><td class="text-center" colspan="3">Ring/Scroll</td></tr>
+                                @foreach (var item in ListItemForgeds.Where(x => x.TypeItem == ItemType.jeweler & x.Id >= 600 & x.Id <= 610))
+                                {
+                                    <tr>
+                                        <td>@item.NameItem : @item.Description</td>
+                                        <td>
+                                            @if (item.ForgeFrom?.Count > 0)
+                                            {
+                                                @foreach (int itemId in item.ForgeFrom)
+                                                {
+                                                    @FindItemOnId(itemId)
+                                                }
+                                            }
+                                        </td>
+                                        <td>@item.SeeMeBonus()</td>
+                                    </tr>
+                                }
+                                <tr class="table-warning text-dark"><td class="text-center" colspan="3">Necklace</td></tr>
+                                @foreach (var item in ListItemForgeds.Where(x => x.TypeItem == ItemType.jeweler & x.Id >= 620 & x.Id <= 625))
+                                {
+                                    <tr>
+                                        <td>@item.NameItem : @item.Description</td>
+                                        <td>
+                                            @if (item.ForgeFrom?.Count > 0)
+                                            {
+                                                @foreach (int itemId in item.ForgeFrom)
+                                                {
+                                                    @FindItemOnId(itemId)
+                                                }
+                                            }
+                                        </td>
+                                        <td>@item.SeeMeBonus()</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+        @if (ListItemForgeds.Where(x => x.TypeItem == ItemType.weapon).Count() > 0)
+        {
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="panelsStayOpen-headingETC">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-ETC" aria-expanded="false" aria-controls="panelsStayOpen-ETC">
+                        ETC
+                    </button>
+                </h2>
+                <div id="panelsStayOpen-ETC" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingETC">
+                    <div class="accordion-body">
+                        <table class="table table-striped table-dark">
+                            <thead>
+                                <tr>
+                                    <th class="col-4">Название</th>
+                                    <th class="col-4">Состоит из</th>
+                                    <th class="col-4">Бонусы</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-warning text-dark"><td class="text-center" colspan="3">ETC</td></tr>
+                                @foreach (var item in ListItemForgeds.Where(x => x.Id >= 700 & x.Id <= 726))
+                                {
+                                    <tr>
+                                        <td>@item.NameItem : @item.Description</td>
+                                        <td>
+                                            @if (item.ForgeFrom?.Count > 0)
+                                            {
+                                                @foreach (int itemId in item.ForgeFrom)
+                                                {
+                                                    @FindItemOnId(itemId)
+                                                }
+                                            }
+                                        </td>
+                                        <td>@item.SeeMeBonus()</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-6">
+        @if (ListItemForgeds.Where(x => x.TypeItem == ItemType.armor).Count() > 0)
+        {
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="panelsStayOpen-headingArmor">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-Armor" aria-expanded="false" aria-controls="panelsStayOpen-Armor">
+                        Armor
+                    </button>
+                </h2>
+                <div id="panelsStayOpen-Armor" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingArmor">
+                    <div class="accordion-body">
+                        <table class="table table-striped table-dark">
+                            <thead>
+                                <tr>
+                                    <th class="col-4">Название</th>
+                                    <th class="col-4">Состоит из</th>
+                                    <th class="col-4">Бонусы</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-warning text-dark"><td class="text-center" colspan="3">Body</td></tr>
+                                @foreach (var item in ListItemForgeds.Where(x => x.TypeItem == ItemType.armor & x.Id >= 400 & x.Id <= 417))
+                                {
+                                    <tr>
+                                        <td>@item.NameItem : @item.Description</td>
+                                        <td>
+                                            @if (item.ForgeFrom?.Count > 0)
+                                            {
+                                                @foreach (int itemId in item.ForgeFrom)
+                                                {
+                                                    @FindItemOnId(itemId)
+                                                }
+                                            }
+                                        </td>
+                                        <td>@item.SeeMeBonus()</td>
+                                    </tr>
+                                }
+                                <tr class="table-warning text-dark"><td class="text-center" colspan="3">Helm</td></tr>
+                                @foreach (var item in ListItemForgeds.Where(x => x.TypeItem == ItemType.armor & x.Id >= 450 & x.Id <= 455))
+                                {
+                                    <tr>
+                                        <td>@item.NameItem : @item.Description</td>
+                                        <td>
+                                            @if (item.ForgeFrom?.Count > 0)
+                                            {
+                                                @foreach (int itemId in item.ForgeFrom)
+                                                {
+                                                    @FindItemOnId(itemId)
+                                                }
+                                            }
+                                        </td>
+                                        <td>@item.SeeMeBonus()</td>
+                                    </tr>
+                                }
+                                <tr class="table-warning text-dark"><td class="text-center" colspan="3">Shield</td></tr>
+                                @foreach (var item in ListItemForgeds.Where(x => x.TypeItem == ItemType.armor & x.Id >= 430 & x.Id <= 434))
+                                {
+                                    <tr>
+                                        <td>@item.NameItem : @item.Description</td>
+                                        <td>
+                                            @if (item.ForgeFrom?.Count > 0)
+                                            {
+                                                @foreach (int itemId in item.ForgeFrom)
+                                                {
+                                                    @FindItemOnId(itemId)
+                                                }
+                                            }
+                                        </td>
+                                        <td>@item.SeeMeBonus()</td>
+                                    </tr>
+                                }
+                                <tr class="table-warning text-dark"><td class="text-center" colspan="3">Gloves</td></tr>
+                                @foreach (var item in ListItemForgeds.Where(x => x.TypeItem == ItemType.armor & x.Id >= 460 & x.Id <= 463))
+                                {
+                                    <tr>
+                                        <td>@item.NameItem : @item.Description</td>
+                                        <td>
+                                            @if (item.ForgeFrom?.Count > 0)
+                                            {
+                                                @foreach (int itemId in item.ForgeFrom)
+                                                {
+                                                    @FindItemOnId(itemId)
+                                                }
+                                            }
+                                        </td>
+                                        <td>@item.SeeMeBonus()</td>
+                                    </tr>
+                                }
+                                <tr class="table-warning text-dark"><td class="text-center" colspan="3">Boots</td></tr>
+                                @foreach (var item in ListItemForgeds.Where(x => x.TypeItem == ItemType.armor & x.Id >= 470 & x.Id <= 473))
+                                {
+                                    <tr>
+                                        <td>@item.NameItem : @item.Description</td>
+                                        <td>
+                                            @if (item.ForgeFrom?.Count > 0)
+                                            {
+                                                @foreach (int itemId in item.ForgeFrom)
+                                                {
+                                                    @FindItemOnId(itemId)
+                                                }
+                                            }
+                                        </td>
+                                        <td>@item.SeeMeBonus()</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+        @if (ListItemForgeds.Where(x => x.Id > 99 & x.Id < 150).Count() > 0)
+        {
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="panelsStayOpen-headingWeaponeBase">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-WeaponeBase" aria-expanded="false" aria-controls="panelsStayOpen-WeaponeBase">
+                        Base Item
+                    </button>
+                </h2>
+                <div id="panelsStayOpen-WeaponeBase" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingWeaponeBase">
+                    <div class="accordion-body">
+                        <table class="table table-striped table-dark">
+                            <thead>
+                                <tr>
+                                    <th class="col-6">Название</th>
+                                    <th class="col-6">Бонусы</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in ListItemForgeds.Where(x => x.Id > 99 & x.Id < 150))
+                                {
+                                    <tr>
+                                        <td>@item.NameItem </td>
+                                        <td>@item.SeeMeBonus()</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    List<ItemForge> ListItemForgeds = new List<ItemForge>() {
+
+        #region BaseItemForge
+        new ItemForge { Id = 100 , NameItem = "Iron Sword", TypeItem = ItemType.weapon, DMG = 30, ASPD = 10 },
+        new ItemForge { Id = 101 , NameItem = "Scimitar", TypeItem = ItemType.weapon, DMG = 30, Agi = 10 },
+        new ItemForge { Id = 102 , NameItem = "Iron Axe", TypeItem = ItemType.weapon, DMG = 50 },
+        new ItemForge { Id = 103 , NameItem = "Hide Armor", TypeItem = ItemType.armor, Defence = 16, HP = 350 },
+        new ItemForge { Id = 104 , NameItem = "Rusty Shield", TypeItem = ItemType.armor, Defence = 10, BlockChance = new ItemBlock { Chance=30, Modificator = 60 } },
+        new ItemForge { Id = 105 , NameItem = "Hide Helm", TypeItem = ItemType.armor, Defence = 8, HPRegen = 3 },
+        new ItemForge { Id = 106 , NameItem = "Leather Gloves", TypeItem = ItemType.armor, ASPD = 30, Defence = 3 },
+        new ItemForge { Id = 107 , NameItem = "Leather Boots", TypeItem = ItemType.armor, MoveSpeed = 30, Defence = 3 },
+        new ItemForge { Id = 108 , NameItem = "Lesser Mana Talisman", TypeItem = ItemType.jeweler, MP = 350, MPRegen = 75 },
+        new ItemForge { Id = 999 , NameItem = "AYAYA", TypeItem = ItemType.weapon },
+        // Base Item Lv1 End Iron
+        new ItemForge { Id = 110 , NameItem = "Steel Sword", TypeItem = ItemType.weapon, DMG = 70, ASPD = 30 },
+        new ItemForge { Id = 111 , NameItem = "Steel Scimitar", TypeItem = ItemType.weapon, DMG = 50, Agi = 20 },
+        new ItemForge { Id = 112 , NameItem = "Steel Axe", TypeItem = ItemType.weapon, DMG = 100 },
+        new ItemForge { Id = 113 , NameItem = "Steel Armor", TypeItem = ItemType.armor, Defence = 30, HP = 800 },
+        new ItemForge { Id = 114 , NameItem = "Steel Shield", TypeItem = ItemType.armor, Defence = 22, BlockChance = new ItemBlock { Chance=32, Modificator = 120 } },
+        new ItemForge { Id = 115 , NameItem = "Steel Helm", TypeItem = ItemType.armor, Defence = 10, HPRegen = 10 },
+        new ItemForge { Id = 116 , NameItem = "Steel Gloves", TypeItem = ItemType.armor, ASPD = 50, Defence = 5 },
+        new ItemForge { Id = 117 , NameItem = "Improve Boots", TypeItem = ItemType.armor, MoveSpeed = 70, Defence = 8 },
+        new ItemForge { Id = 118 , NameItem = "Mana Talisman", TypeItem = ItemType.jeweler, MP = 500, MPRegen = 160 },
+        // Base Item Lv2 End Steel
+        new ItemForge { Id = 120 , NameItem = "Mithril Sword", TypeItem = ItemType.weapon, DMG = 100, ASPD = 50 },
+        new ItemForge { Id = 121 , NameItem = "Mithril Scimitar", TypeItem = ItemType.weapon, DMG = 50, Agi = 20 },
+        new ItemForge { Id = 122 , NameItem = "Mithril Axe", TypeItem = ItemType.weapon, DMG = 100 },
+        new ItemForge { Id = 123 , NameItem = "Mithril Armor", TypeItem = ItemType.armor, Defence = 50, HP = 1100 },
+        new ItemForge { Id = 124 , NameItem = "Mithril Shield", TypeItem = ItemType.armor, Defence = 22, BlockChance = new ItemBlock { Chance=32, Modificator = 120 } },
+        new ItemForge { Id = 125 , NameItem = "Mithril Helm", TypeItem = ItemType.armor, Defence = 10, HPRegen = 10 },
+        new ItemForge { Id = 126 , NameItem = "Mithril Gloves", TypeItem = ItemType.armor, ASPD = 80, Defence = 10 },
+        new ItemForge { Id = 127 , NameItem = "Mithril Boots", TypeItem = ItemType.armor, MoveSpeed = 70, Defence = 8 },
+        // Base Item Lv2-3 End Mithril
+        new ItemForge { Id = 130 , NameItem = "Titanium Sword", TypeItem = ItemType.weapon, DMG = 250, ASPD = 80 },
+        new ItemForge { Id = 131 , NameItem = "Titanium Scimitar", TypeItem = ItemType.weapon, DMG = 50, Agi = 20 },
+        new ItemForge { Id = 132 , NameItem = "Titanium Axe", TypeItem = ItemType.weapon, DMG = 100 },
+        new ItemForge { Id = 133 , NameItem = "Titanium Armor", TypeItem = ItemType.armor, Defence = 30, HP = 800 },
+        new ItemForge { Id = 134 , NameItem = "Titanium Shield", TypeItem = ItemType.armor, Defence = 22, BlockChance = new ItemBlock { Chance=32, Modificator = 120 } },
+        new ItemForge { Id = 135 , NameItem = "Titanium Helm", TypeItem = ItemType.armor, Defence = 10, HPRegen = 10 },
+        new ItemForge { Id = 136 , NameItem = "Titanium Gloves", TypeItem = ItemType.armor, ASPD = 50, Defence = 5 },
+        new ItemForge { Id = 138 , NameItem = "Bigger Mana Talisman", TypeItem = ItemType.jeweler, MP = 1300, MPRegen = 250 },
+        // Base Item Lv3 End Titanium
+        new ItemForge { Id = 140 , NameItem = "Rune Sword", TypeItem = ItemType.weapon, DMG = 70, ASPD = 30 },
+        new ItemForge { Id = 141 , NameItem = "Rune Scimitar", TypeItem = ItemType.weapon, DMG = 180, Agi = 56 },
+        new ItemForge { Id = 142 , NameItem = "Rune Axe", TypeItem = ItemType.weapon, DMG = 100 },
+        new ItemForge { Id = 143 , NameItem = "Rune Armor", TypeItem = ItemType.armor, Defence = 200, HP = 3000 },
+        new ItemForge { Id = 144 , NameItem = "Rune Shield", TypeItem = ItemType.armor, Defence = 22, BlockChance = new ItemBlock { Chance=32, Modificator = 120 } },
+        new ItemForge { Id = 145 , NameItem = "Rune Helm", TypeItem = ItemType.armor, Defence = 10, HPRegen = 10 },
+        new ItemForge { Id = 146 , NameItem = "Rune Gloves", TypeItem = ItemType.armor, ASPD = 50, Defence = 5 },
+        new ItemForge { Id = 147 , NameItem = "Rune Boots", TypeItem = ItemType.armor, MoveSpeed = 70, Defence = 8 },
+        new ItemForge { Id = 148 , NameItem = "Greator Mana Talisman", TypeItem = ItemType.jeweler, MP = 500, MPRegen = 160 },
+        // Base Item Lv4 End Rune
+        #endregion BaseItemForge
+        new ItemForge { Id = 1000 , NameItem = "Rusty Mining Pick", TypeItem = ItemType.weapon, DMG = 17 },
+        new ItemForge { Id = 1001 , NameItem = "Assasin Lance", TypeItem = ItemType.weapon, DMG = 200 },
+        new ItemForge { Id = 1002 , NameItem = "Vampire Fang", TypeItem = ItemType.weapon, LifeSteal = 16 },
+        new ItemForge { Id = 1003 , NameItem = "J ring", TypeItem = ItemType.jeweler, Agi = 7 },
+        new ItemForge { Id = 1004 , NameItem = "Shamanic Totem", TypeItem = ItemType.weapon, DMG = 40 },
+        new ItemForge { Id = 1005 , NameItem = "Elegant Armor", TypeItem = ItemType.armor },
+        new ItemForge { Id = 1006 , NameItem = "Belt of Strength", TypeItem = ItemType.armor, Str = 6 },
+        new ItemForge { Id = 1007 , NameItem = "Wand of wizard", TypeItem = ItemType.weapon, Int = 22 },
+        new ItemForge { Id = 1008 , NameItem = "Shimmerweed", TypeItem = ItemType.jeweler, Agi = 4, Str = 4, Int = 4 },
+        new ItemForge { Id = 1009 , NameItem = "Scroll of Strength", TypeItem = ItemType.jeweler, Str = 30 },
+        new ItemForge { Id = 1010 , NameItem = "Scroll of Agility", TypeItem = ItemType.jeweler, Agi = 30 },
+        new ItemForge { Id = 1011 , NameItem = "Horn of Toughness", TypeItem = ItemType.jeweler },
+        new ItemForge { Id = 1012 , NameItem = "Ring of Superiority", TypeItem = ItemType.jeweler },
+        new ItemForge { Id = 1013 , NameItem = "Gem of Hades", TypeItem = ItemType.jeweler, AllStats = 80 },
+        new ItemForge { Id = 1014 , NameItem = "Robe of the Magic", TypeItem = ItemType.armor },
+        new ItemForge { Id = 1015 , NameItem = "Mage Armor", TypeItem = ItemType.armor },
+        new ItemForge { Id = 1016 , NameItem = "Merlinis Cape", TypeItem = ItemType.armor },
+        new ItemForge { Id = 1017 , NameItem = "Spiked Carapace", TypeItem = ItemType.armor },
+        new ItemForge { Id = 1018 , NameItem = "Voodoo Doll", TypeItem = ItemType.armor },
+        new ItemForge { Id = 1019 , NameItem = "Boots of Courage", TypeItem = ItemType.armor },
+        new ItemForge { Id = 1020 , NameItem = "Green Flag", TypeItem = ItemType.armor, HP = 420, Int = 12 },
+        new ItemForge { Id = 1021 , NameItem = "Soul Gem", TypeItem = ItemType.armor, HPRegen = 7 },
+        new ItemForge { Id = 1022 , NameItem = "Heart Container", TypeItem = ItemType.armor, HPRegen = 100 },
+        new ItemForge { Id = 1023 , NameItem = "Assassin?kller Blade", TypeItem = ItemType.weapon },
+        new ItemForge { Id = 1024 , NameItem = "Savage Claws", TypeItem = ItemType.weapon },
+        new ItemForge { Id = 1025 , NameItem = "Bloody Katana", TypeItem = ItemType.weapon },
+        new ItemForge { Id = 1026 , NameItem = "Choro Spear", TypeItem = ItemType.weapon },
+        new ItemForge { Id = 1027 , NameItem = "Tome of Sacrifices", TypeItem = ItemType.weapon },
+        new ItemForge { Id = 1028 , NameItem = "Figurine", TypeItem = ItemType.armor },
+        new ItemForge { Id = 1029 , NameItem = "Boots of Quel’thalas", TypeItem = ItemType.armor },
+        new ItemForge { Id = 1030 , NameItem = "Scroll of Agi (+90 AGI)", TypeItem = ItemType.jeweler },
+        new ItemForge { Id = 1031 , NameItem = "Artemis Flute", TypeItem = ItemType.armor },
+        new ItemForge { Id = 1032 , NameItem = "Nosferatu Fangs", TypeItem = ItemType.weapon },
+        // Drop Item from monster
+        new ItemForge { Id = 2000 , NameItem = "Basic Claws", Description = "1300 gold", TypeItem = ItemType.weapon, DMG = 15, AllStats = 5 },
+        new ItemForge { Id = 2001 , NameItem = "Sturdy Axe", Description = "1560 gold", TypeItem = ItemType.weapon, DMG = 30 },
+        new ItemForge { Id = 2002 , NameItem = "Accurate Sword", Description = "2000 gold", TypeItem = ItemType.weapon, DMG = 30, CriticalChance = new ItemCritical{ Chance = 9, Modificator = 2.6m } },
+        new ItemForge { Id = 2003 , NameItem = "Deadly Spear", Description = "5000 + 2300 gold", TypeItem = ItemType.weapon, DMG = 90 },
+        new ItemForge { Id = 2004 , NameItem = "Perfect Ruby", Description = "Sacred Gem of War 12700(+4200 +1200 +1000 +1560 +2600) + Recipe 12700", TypeItem = ItemType.jeweler },
+        new ItemForge { Id = 2005 , NameItem = "Perfect Topaz", Description = "6000 + 4470 +1200+720 +2600 + 4900 +1200+1800", TypeItem = ItemType.jeweler },
+        new ItemForge { Id = 2006 , NameItem = "Perfect Emerald", Description = "4470 +1200+720 +2600 +RECEIP x? to4max", TypeItem = ItemType.jeweler },
+        new ItemForge { Id = 2007 , NameItem = "Crystal Ball", Description = "2600 gold", TypeItem = ItemType.jeweler, AllStats = 15 },
+        new ItemForge { Id = 2008 , NameItem = "War Hammer", Description = "1800 gold", TypeItem = ItemType.weapon },
+        new ItemForge { Id = 2009 , NameItem = "Decapitator", Description = "8850 gold", TypeItem = ItemType.weapon },
+        new ItemForge { Id = 2010 , NameItem = "Large War Axe", Description = "2500 gold", TypeItem = ItemType.weapon },
+        new ItemForge { Id = 2011 , NameItem = "Deadly Lance", Description = "5000 gold", TypeItem = ItemType.weapon, DMG = 60 },
+        new ItemForge { Id = 2012 , NameItem = "Decapitator recipe", Description = "8850 gold", TypeItem = ItemType.weapon },
+        new ItemForge { Id = 2013 , NameItem = "Dark Staff", Description = "??? gold", TypeItem = ItemType.weapon },
+        new ItemForge { Id = 2014 , NameItem = "Khadgar’s Gem of Energy", Description = "??? gold", TypeItem = ItemType.jeweler },
+        new ItemForge { Id = 2015 , NameItem = "Ring of Strength", Description = "1200 gold", TypeItem = ItemType.jeweler, Str = 10 },
+        new ItemForge { Id = 2016 , NameItem = "Ring of Agility", Description = "1200 gold", TypeItem = ItemType.jeweler, Agi = 12 },
+        new ItemForge { Id = 2017 , NameItem = "Ring of Intelligency", Description = "1200 gold", TypeItem = ItemType.jeweler, Int = 10 },
+        new ItemForge { Id = 2018 , NameItem = "Flag of Strength", Description = "???? gold", TypeItem = ItemType.jeweler },
+        new ItemForge { Id = 2019 , NameItem = "Flute of Accuracy", Description = "???? gold", TypeItem = ItemType.jeweler },
+        new ItemForge { Id = 2020 , NameItem = "Tizona", Description = "???? gold", TypeItem = ItemType.weapon },
+        new ItemForge { Id = 2021 , NameItem = "Circlet of Nobility", Description = "720 gold", TypeItem = ItemType.jeweler },
+        new ItemForge { Id = 2022 , NameItem = "Heart of Searinox", Description = "????? gold", TypeItem = ItemType.jeweler },
+        new ItemForge { Id = 2023 , NameItem = "Medallion of Warlock", Description = "???? gold", TypeItem = ItemType.jeweler },
+        new ItemForge { Id = 2024 , NameItem = "Quality Armor", Description = "3000 gold", TypeItem = ItemType.armor },
+        new ItemForge { Id = 2025 , NameItem = "Divine Armor", Description = "???? gold", TypeItem = ItemType.armor },
+        new ItemForge { Id = 2026 , NameItem = "Warrior Armor", Description = "???? gold", TypeItem = ItemType.armor },
+        new ItemForge { Id = 2027 , NameItem = "Talisman of the Wild", Description = "4200 gold", TypeItem = ItemType.jeweler },
+        new ItemForge { Id = 2028 , NameItem = "Zombie Helm", Description = "750+400+900+2600 gold", TypeItem = ItemType.armor },
+        new ItemForge { Id = 2029 , NameItem = "Leather Helm", Description = "400 gold", TypeItem = ItemType.armor },
+        new ItemForge { Id = 2030 , NameItem = "Atlas", Description = "????? gold", TypeItem = ItemType.armor },
+        new ItemForge { Id = 2031 , NameItem = "Heart of Searinox", Description = "????? gold", TypeItem = ItemType.armor },
+        new ItemForge { Id = 2032 , NameItem = "Heart of Searinox Recipe", Description = "????? gold", TypeItem = ItemType.armor },
+        new ItemForge { Id = 2033 , NameItem = "Katana", Description = "????? gold", TypeItem = ItemType.weapon },
+        new ItemForge { Id = 2034 , NameItem = "Katana Recipe", Description = "????? gold", TypeItem = ItemType.weapon },
+        new ItemForge { Id = 2035 , NameItem = "Runed Bracers", Description = "800+720+700+400 gold", TypeItem = ItemType.jeweler },
+        new ItemForge { Id = 2036 , NameItem = "Perfect Sapphire", Description = "????? gold", TypeItem = ItemType.jeweler },
+        new ItemForge { Id = 2037 , NameItem = "Diamond of Knowledge", Description = "????? gold", TypeItem = ItemType.jeweler },
+        new ItemForge { Id = 2038 , NameItem = "Royal Emblem", Description = "????? gold", TypeItem = ItemType.jeweler },
+        new ItemForge { Id = 2039 , NameItem = "Corrupted Sword", Description = "????? gold", TypeItem = ItemType.weapon },
+        new ItemForge { Id = 2040 , NameItem = "Masamune", Description = "????? gold", TypeItem = ItemType.weapon },
+        // Buy item
+
+        new ItemForge { Id = 200 , NameItem = "Improve Sword", TypeItem = ItemType.weapon, DMG = 50, ASPD = 15, ForgeFrom = new List<int> { 100, 1000 } },
+        new ItemForge { Id = 201 , NameItem = "Keen Sword", TypeItem = ItemType.weapon, DMG = 70, ASPD = 25, AllStats=10, ForgeFrom = new List<int> { 200, 2000 } },
+        new ItemForge { Id = 202 , NameItem = "Cutting Sword", TypeItem = ItemType.weapon, DMG = 120, ASPD = 30, AllStats=12, ForgeFrom = new List<int> { 201, 2001 } },
+        new ItemForge { Id = 203 , NameItem = "Sharp Sword", TypeItem = ItemType.weapon, DMG = 160, ASPD = 50, AllStats=22, CriticalChance = new ItemCritical{ Chance = 16, Modificator = 2.1m }, ForgeFrom = new List<int> { 202, 2002 } },
+        new ItemForge { Id = 204 , NameItem = "Edged Sword", TypeItem = ItemType.weapon, DMG = 250, ASPD = 70, AllStats = 40, CriticalChance = new ItemCritical{ Chance = 14, Modificator = 3m }, ForgeFrom = new List<int> { 203, 2003 } },
+        new ItemForge { Id = 205 , NameItem = "Razor Sword", TypeItem = ItemType.weapon, DMG = 500, ASPD = 80, AllStats = 50, CriticalChance = new ItemCritical{ Chance = 12, Modificator = 5m }, ForgeFrom = new List<int> { 204, 1001 } },
+        new ItemForge { Id = 206 , NameItem = "Sacred Edge Sword", TypeItem = ItemType.weapon, DMG = 700, ASPD = 100, AllStats = 70, ForgeFrom = new List<int> { 205, 2004 } },
+        new ItemForge { Id = 207 , NameItem = "Blessing Sword", Description = "PASSIVE – 10% 5x AGI magic damage on attack", TypeItem = ItemType.weapon, DMG = 240, ASPD = 80, HPRegen = 12, CriticalChance = new ItemCritical{ Chance = 16, Modificator = 2.1m }, ForgeFrom = new List<int> { 120, 202 } },
+        new ItemForge { Id = 208 , NameItem = "Golden Sword", TypeItem = ItemType.weapon, DMG = 250, ASPD = 140, HPRegen = 16, Str = 25, ForgeFrom = new List<int> { 207, 2005 } },
+        new ItemForge { Id = 209 , NameItem = "Sacred Sword", Description = "PASSIVE – 1x AGI magic damage on attack", TypeItem = ItemType.weapon, DMG = 300, ASPD = 80, HPRegen = 18, HP = 600, ForgeFrom = new List<int> { 207, 2004 } },
+        new ItemForge { Id = 210 , NameItem = "Elite Rune Sword", Description = "PASSIVE – 30% chance to deal 6000 damage on attack. This attack can not miss.", TypeItem = ItemType.weapon, DMG = 700, ASPD = 160, ForgeFrom = new List<int> { 140, 2006 } },
+        new ItemForge { Id = 211 , NameItem = "Divine Sword", Description = "DMG% (Base DMG and Primary Stat)", TypeItem = ItemType.weapon, DMG = 400, DMGPercent = 150, ASPD = 100, HP = 1500, ForgeFrom = new List<int> { 130, 2004 } },
+        new ItemForge { Id = 212 , NameItem = "Celestial Sword", TypeItem = ItemType.weapon, DMGPercent = 250, ASPD = 160, HP = 1800, ForgeFrom = new List<int> { 211, 2038, 140 } },
+        new ItemForge { Id = 213 , NameItem = "Unholy Sword", TypeItem = ItemType.weapon, DMG = 150, ASPD = 30, AllStats = 20, LifeSteal = 20, ForgeFrom = new List<int> { 2039, 2006 } },
+        new ItemForge { Id = 214 , NameItem = "Vampiric Sword", TypeItem = ItemType.weapon, DMG = 250, ASPD = 70, Agi = 32, Str = 26, LifeSteal = 23, ForgeFrom = new List<int> { 1002, 120, 2004 } },
+        new ItemForge { Id = 215 , NameItem = "Nosferatu Sword", TypeItem = ItemType.weapon, DMG = 700, ASPD = 300, Agi = 50, Str = 50, LifeSteal = 25, ForgeFrom = new List<int> { 140, 1032, 2038 } },
+        new ItemForge { Id = 216 , NameItem = "Masamune", Description = "crit non miss" , TypeItem = ItemType.weapon, DMG = 1800, ASPD = 100, AllStats = 150, CriticalChance = new ItemCritical{ Chance = 10, Modificator = 10 }, ForgeFrom = new List<int> { 2040, 2036 } },
+
+        //Sword end
+
+        new ItemForge { Id = 220 , NameItem = "Improve Scimitar", TypeItem = ItemType.weapon, DMG = 30, Agi = 12, ForgeFrom = new List<int> { 101, 1003 } },
+        new ItemForge { Id = 221 , NameItem = "Elite Mithril Scimitar", TypeItem = ItemType.weapon, DMG = 120, Agi = 62, Str = 18, Int = 18, ForgeFrom = new List<int> { 121, 2007 } },
+        new ItemForge { Id = 222 , NameItem = "Diabolic Scimitar", Description ="PASSIVE: Reduces the armor of all nearby enemy units by 40", TypeItem = ItemType.weapon, DMG = 400, Agi = 190, Str = 20, Int = 20, ForgeFrom = new List<int> { 221, 141 } },
+        new ItemForge { Id = 223 , NameItem = "Swords Pair", TypeItem = ItemType.weapon, DMG = 80, Agi = 15, ASPD = 15, ForgeFrom = new List<int> { 200, 220 } },
+        new ItemForge { Id = 224 , NameItem = "Duo Swords", TypeItem = ItemType.weapon, DMG = 120, Agi = 30, ASPD = 30, ForgeFrom = new List<int> { 110, 111 } },
+        new ItemForge { Id = 225 , NameItem = "Twin Swords", TypeItem = ItemType.weapon, DMG = 200, Agi = 70, ASPD = 70, ForgeFrom = new List<int> { 223, 224 } },
+        new ItemForge { Id = 226 , NameItem = "Elite Rune Scimitar", TypeItem = ItemType.weapon, DMG = 400, Agi = 170, CriticalChance = new ItemCritical{ Chance = 5, Modificator = 11 }, ForgeFrom = new List<int> { 141, 2004 } },
+
+        //Scimitar end
+
+
+        new ItemForge { Id = 230 , NameItem = "Heavy War Hammer", TypeItem = ItemType.weapon, DMG = 300, ForgeFrom = new List<int> { 122, 2008 } },
+        new ItemForge { Id = 231 , NameItem = "Two Tons War Hammer", TypeItem = ItemType.weapon, DMG = 1700, ASPD = -80, ForgeFrom = new List<int> { 230, 132, 2009 } },
+        new ItemForge { Id = 232 , NameItem = "Adamantium War Maul", TypeItem = ItemType.weapon, DMG = 6000, ASPD = -250, ForgeFrom = new List<int> { 231, 2004 } },
+        new ItemForge { Id = 233 , NameItem = "Shaman Axe", TypeItem = ItemType.weapon, DMG = 120, ForgeFrom = new List<int> { 102, 2004 } },
+        new ItemForge { Id = 234 , NameItem = "Bone Axe", TypeItem = ItemType.weapon, DMG = 160, CleaveChance = new ItemCleave{ Chance = 30, Modificator = 300 }, ForgeFrom = new List<int> { 233, 2010 } },
+        new ItemForge { Id = 235 , NameItem = "Destructive War Axe", TypeItem = ItemType.weapon, DMG = 280, CleaveChance = new ItemCleave{ Chance = 35, Modificator = 330 }, ForgeFrom = new List<int> { 234, 112 } },
+        new ItemForge { Id = 236 , NameItem = "Decapitator (1400 damage)", TypeItem = ItemType.weapon, DMG = 1400, ForgeFrom = new List<int> { 2009, 2011, 2012 } },
+        new ItemForge { Id = 237 , NameItem = "Green Decapitator (1600 damage)", TypeItem = ItemType.weapon, DMG = 1600, ForgeFrom = new List<int> { 236, 142, 1001 } },
+        new ItemForge { Id = 238 , NameItem = "Blue Decapitator (1600 damage, 200 armor)", TypeItem = ItemType.weapon, DMG = 1600, Defence = 200, ForgeFrom = new List<int> { 237, 2005 } },
+        new ItemForge { Id = 239 , NameItem = "Genocidal Axe", TypeItem = ItemType.weapon, DMG = 1000, CleaveChance = new ItemCleave{ Chance = 40, Modificator = 400 }, ForgeFrom = new List<int> { 235, 2009 } },
+        new ItemForge { Id = 240 , NameItem = "Elite Rune Axe", TypeItem = ItemType.weapon, DMG = 900, CriticalChance = new ItemCritical{ Chance = 100, Modificator = 2 }, ForgeFrom = new List<int> { 142, 2005 } },
+
+
+        //Axes Hammer end
+        new ItemForge { Id = 250 , NameItem = "Firebolt Wand", Description = "ACTIVE: Shoot a firebolt that deals 1000 DMG and stuns for 2 sec (15 sec CD)", TypeItem = ItemType.weapon, Int = 40, ForgeFrom = new List<int> { 1007, 2012 } },
+        new ItemForge { Id = 251 , NameItem = "Firebolt Staff", Description = "ACTIVE: Shoot a firebolt that deals 1400 DMG and stuns for 3 seconds (14 sec CD)", TypeItem = ItemType.weapon, Int = 50, MP = 500, ForgeFrom = new List<int> { 250, 108 } },
+        new ItemForge { Id = 252 , NameItem = "Firebolt Scepter", Description = "ACTIVE: Shoots a firebolt that deals 2100 dmg and stuns for 4 seconds (13 sec CD)", TypeItem = ItemType.weapon, Int = 80, MP = 900, MPRegen = 100, ForgeFrom = new List<int> { 251, 118 } },
+        new ItemForge { Id = 253 , NameItem = "Mystic Firebolt Scepter", Description = "ACTIVE:  Shoot a firebolt that deals 3300 DMG and stuns for 5 sec (12 sec CD)", TypeItem = ItemType.weapon, Int = 100, MP = 1300, MPRegen = 160, ForgeFrom = new List<int> { 252, 138 } },
+        new ItemForge { Id = 254 , NameItem = "Sacred Firebolt Scepter", Description = "ACTIVE: Shoot a firebolt that deals 4500 DMG and stuns for 6 sec (11 sec CD)", TypeItem = ItemType.weapon, Int = 180, MP = 3000, MPRegen = 250, ForgeFrom = new List<int> { 253, 2014 } },
+        //Staff Wands end
+        new ItemForge { Id = 400 , NameItem = "Fashion Armor", TypeItem = ItemType.armor, HP = 800, Defence = 20, Agi = 20, Str = 20, ForgeFrom = new List<int> { 1003, 1005, 1006 } },
+        new ItemForge { Id = 401 , NameItem = "Moon Armor", TypeItem = ItemType.armor, HP = 1500, Defence = 80, Agi = 50, Str = 50, HPRegen = 20, ForgeFrom = new List<int> { 400, 605, 600 } },
+        new ItemForge { Id = 402 , NameItem = "Magician Armor", TypeItem = ItemType.armor, HP = 500, MP = 500, Defence = 18, ForgeFrom = new List<int> { 1014, 1015 } },
+        new ItemForge { Id = 403 , NameItem = "Magus Armor", TypeItem = ItemType.armor, HP = 900, MP = 900, Defence = 40, MPRegen = 100, ForgeFrom = new List<int> { 402, 103, 108 } },
+        new ItemForge { Id = 404 , NameItem = "Wizard Armor", TypeItem = ItemType.armor, HP = 1300, MP = 1300, Defence = 60, MPRegen = 160, ForgeFrom = new List<int> { 403, 2023, 2024 } },
+        new ItemForge { Id = 405 , NameItem = "Sorcerer Armor", TypeItem = ItemType.armor, HP = 2000, MP = 2000, Defence = 90, MPRegen = 250, ForgeFrom = new List<int> { 404, 1016 } },
+        new ItemForge { Id = 406 , NameItem = "Diviner Armor", Description = "PASSIVE: 30% chance to heal 900 HP for 300 MP when attacked", TypeItem = ItemType.armor, HP = 4000, MP = 4000, Defence = 180, MPRegen = 400, ForgeFrom = new List<int> { 405, 2014, 2025 } },
+        new ItemForge { Id = 407 , NameItem = "Hard Armor", TypeItem = ItemType.armor, HP = 800, Defence = 25, ForgeFrom = new List<int> { 103, 1005 } },
+        new ItemForge { Id = 408 , NameItem = "Knight Armor", TypeItem = ItemType.armor, HP = 1800, Defence = 80, ForgeFrom = new List<int> { 407, 2026 } },
+        new ItemForge { Id = 409 , NameItem = "Centurion Armor", TypeItem = ItemType.armor, HP = 2500, Defence = 122, HPRegen = 40, ForgeFrom = new List<int> { 408, 701, 451 } },
+        new ItemForge { Id = 410 , NameItem = "Royal Armor", TypeItem = ItemType.armor, HP = 2500, Defence = 150, HPRegen = 50, AllStats = 150, DefenceTypeModeTo = "Hero", ForgeFrom = new List<int> { 409, 623, 2006 } },
+        new ItemForge { Id = 411 , NameItem = "Diamond Armor", TypeItem = ItemType.armor, HP = 4000, Defence = 300, ForgeFrom = new List<int> { 408, 133, 2027 } },
+        new ItemForge { Id = 412 , NameItem = "Adamantium Armor", Description = "Move speed -30%", TypeItem = ItemType.armor, HP = 15000, Defence = 800, DefenceTypeModeTo = "Hero", ASPD = -150, ForgeFrom = new List<int> { 411, 2005 } },
+        new ItemForge { Id = 413 , NameItem = "Elite Rune Armor", TypeItem = ItemType.armor, HP = 5000, Defence = 300, DefenceTypeModeTo = "Hero", HPRegen = 20, ForgeFrom = new List<int> { 143, 2004 } },
+        new ItemForge { Id = 414 , NameItem = "Spiked Armor", TypeItem = ItemType.armor, HP = 1000, Defence = 60, ReflectMeleDMG = 40, ForgeFrom = new List<int> { 113, 1017 } },
+        new ItemForge { Id = 415 , NameItem = "Sharp Armor", TypeItem = ItemType.armor, HP = 1300, Defence = 100, HPRegen = 26, ReflectMeleDMG = 60, ForgeFrom = new List<int> { 414, 451 } },
+        new ItemForge { Id = 416 , NameItem = "Impale Armor", TypeItem = ItemType.armor, HP = 4000, Defence = 400, HPRegen = 50, ReflectMeleDMG = 100, ForgeFrom = new List<int> { 415, 123, 2006 } },
+        new ItemForge { Id = 417 , NameItem = "Unholy Crystal",Description = "PASSIVE: 50% chance  to return STR+AGI in spell damage when attacked", TypeItem = ItemType.armor, HP = 4000, Defence = 100, DMG = 150, ForgeFrom = new List<int> { 414, 2004, 2006 } },
+        //Armor end
+        new ItemForge { Id = 430 , NameItem = "Guard Shield", TypeItem = ItemType.armor, Defence = 50, BlockChance = new ItemBlock { Chance = 33, Modificator = 230 }, ForgeFrom = new List<int> { 104, 114 } },
+        new ItemForge { Id = 431 , NameItem = "Plate Shield", TypeItem = ItemType.armor, Defence = 60, HP = 1000, BlockChance = new ItemBlock { Chance = 35, Modificator = 400 }, ForgeFrom = new List<int> { 430, 2027 } },
+        new ItemForge { Id = 432 , NameItem = "Edge and Defense", TypeItem = ItemType.armor, DMG = 250, ASPD = 80, Defence = 90, BlockChance = new ItemBlock { Chance = 33, Modificator = 1500 }, ForgeFrom = new List<int> { 430, 202 } },
+        new ItemForge { Id = 433 , NameItem = "Defender", Description = "ACTIVE: Divine Skin (12 sec duration, 80 sec CD)", TypeItem = ItemType.armor, HP = 1300, Defence = 180, BlockChance = new ItemBlock { Chance = 50, Modificator = 800 }, ForgeFrom = new List<int> { 134, 2005, 431 } },
+        new ItemForge { Id = 434 , NameItem = "Elite Rune Shield", Description = "ACTIVE: Become invulnerable to normal attacks (10 sec duration, 55 sec CD)", TypeItem = ItemType.armor, HPRegen = 20, Defence = 180, BlockChance = new ItemBlock { Chance = 60, Modificator = 600 }, ForgeFrom = new List<int> { 2005, 144 } },
+        //Shields end
+        new ItemForge { Id = 450 , NameItem = "Magic Helm", TypeItem = ItemType.armor, Defence = 10, HPRegen = 10, ForgeFrom = new List<int> { 105, 1018 } },
+        new ItemForge { Id = 451 , NameItem = "Magic Iron Helm", TypeItem = ItemType.armor, Defence = 22, HPRegen = 20, ForgeFrom = new List<int> { 450, 115 } },
+        new ItemForge { Id = 452 , NameItem = "Mystic Helm", TypeItem = ItemType.armor, Defence = 60, HPRegen = 40, MagRes = 25, ForgeFrom = new List<int> { 451, 125, 2028 } },
+        new ItemForge { Id = 453 , NameItem = "Sacred Helm", TypeItem = ItemType.armor, Defence = 80, HPRegen = 40, MagRes = 40, AllStats = 50, ForgeFrom = new List<int> { 452, 2007, 622 } },
+        new ItemForge { Id = 454 , NameItem = "Hephaestus Helm", TypeItem = ItemType.armor, Defence = 200, HPRegen = 100, MagRes = 80, AllStats = 100, ForgeFrom = new List<int> { 453, 2005, 2004, 135 } },
+        new ItemForge { Id = 455 , NameItem = "Elite Rune Helm", TypeItem = ItemType.armor, Defence = 150, HPRegen = 100, MagRes = 50, ForgeFrom = new List<int> { 145, 2006 } },
+        //Helms end
+        new ItemForge { Id = 460 , NameItem = "Mystic Gloves", TypeItem = ItemType.armor, ASPD = 230, Defence = 18, Str = 25, ForgeFrom = new List<int> { 106, 116, 126 } },
+        new ItemForge { Id = 461 , NameItem = "Sacred Gloves", TypeItem = ItemType.armor, ASPD = 500, Defence = 40, Str = 60, DMG = 70, ForgeFrom = new List<int> { 460, 136 } },
+        new ItemForge { Id = 462 , NameItem = "Divine Gloves", TypeItem = ItemType.armor, ASPD = 1200, Defence = 180, Str = 160, DMG = 150, ForgeFrom = new List<int> { 461, 2004 } },
+        new ItemForge { Id = 463 , NameItem = "Elite Rune Gloves", Description = "Deal 1700 normal damage on attack", TypeItem = ItemType.armor, ASPD = 300, Defence = 50, Str = 30, ForgeFrom = new List<int> { 146, 2006 } },
+        //Gloves end
+        new ItemForge { Id = 470 , NameItem = "Valor Boots", TypeItem = ItemType.armor, MoveSpeed = 70, Defence = 7, HP = 200, ForgeFrom = new List<int> { 107, 1019 } },
+        new ItemForge { Id = 471 , NameItem = "Audacity Boots", TypeItem = ItemType.armor, MoveSpeed = 135, Defence = 16, HP = 350, ForgeFrom = new List<int> { 470, 117 } },
+        new ItemForge { Id = 472 , NameItem = "Bravery Boots", TypeItem = ItemType.armor, MoveSpeed = 150, Defence = 18, HP = 500, AllStats = 40, ForgeFrom = new List<int> { 471, 621 } },
+        new ItemForge { Id = 473 , NameItem = "Heroism Boots", TypeItem = ItemType.armor, MoveSpeed = 250, Defence = 30, HP = 800, AllStats = 60, ForgeFrom = new List<int> { 472, 127 } },
+        new ItemForge { Id = 473 , NameItem = "Elite Rune Boots", Description = "PASSIVE: You are immune to slows, MAX Move Speed", TypeItem = ItemType.armor, MoveSpeed = 999, Defence = 40, ASPD = 35, AllStats = 20, HPRegen = 20, ForgeFrom = new List<int> { 472, 127 } },
+        //Boots end
+        new ItemForge { Id = 600 , NameItem = "Belt of Giant Strength", TypeItem = ItemType.jeweler, Str = 16, ForgeFrom = new List<int> { 1008, 1006 } },
+        new ItemForge { Id = 601 , NameItem = "Greater Ring of Strength", TypeItem = ItemType.jeweler, Str = 34, ForgeFrom = new List<int> { 600, 2015 } },
+        new ItemForge { Id = 602 , NameItem = "Elite Scroll of Strength", TypeItem = ItemType.jeweler, Str = 85, ForgeFrom = new List<int> { 601, 1009 } },
+        new ItemForge { Id = 603 , NameItem = "Mystic Scroll of Strength", TypeItem = ItemType.jeweler, Str = 185, ForgeFrom = new List<int> { 602, 2018 } },
+        new ItemForge { Id = 604 , NameItem = "Sacred Scroll of Strength", TypeItem = ItemType.jeweler, Str = 400, ForgeFrom = new List<int> { 603, 2015, 1011 } },
+        new ItemForge { Id = 605 , NameItem = "Q. Ring", TypeItem = ItemType.jeweler, Agi = 16, ForgeFrom = new List<int> { 1008, 1003 } },
+        new ItemForge { Id = 606 , NameItem = "K. Ring", TypeItem = ItemType.jeweler, Agi = 35, ForgeFrom = new List<int> { 605, 2016 } },
+        new ItemForge { Id = 607 , NameItem = "A. Ring", TypeItem = ItemType.jeweler, Agi = 102, ForgeFrom = new List<int> { 606, 1010 } },
+        new ItemForge { Id = 608 , NameItem = "Mystic A. Ring", TypeItem = ItemType.jeweler, Agi = 210, ForgeFrom = new List<int> { 607, 2019 } },
+        new ItemForge { Id = 609 , NameItem = "Sacred A. Ring", TypeItem = ItemType.jeweler, Agi = 430, ForgeFrom = new List<int> { 608, 2020 } },
+        new ItemForge { Id = 610 , NameItem = "Artemis Ring", TypeItem = ItemType.jeweler,DMG = 500, Agi = 500, Defence = 100, ForgeFrom = new List<int> { 609, 2005, 131 } },        
+        //Ring Scroll end        
+        new ItemForge { Id = 620 , NameItem = "Circlet of Aristocracy", TypeItem = ItemType.jeweler, AllStats = 10, ForgeFrom = new List<int> { 1008, 2021 } },
+        new ItemForge { Id = 621 , NameItem = "Circlet of Grandeur", TypeItem = ItemType.jeweler, AllStats = 28, ForgeFrom = new List<int> { 620, 2016, 2017, 2018 } },
+        new ItemForge { Id = 622 , NameItem = "Necklace of Greatness", TypeItem = ItemType.jeweler, AllStats = 50, ForgeFrom = new List<int> { 621, 2007 } },
+        new ItemForge { Id = 623 , NameItem = "Necklace of Majesty", TypeItem = ItemType.jeweler, AllStats = 100, ForgeFrom = new List<int> { 622, 1012 } },
+        new ItemForge { Id = 624 , NameItem = "Necklace of Magnificence", TypeItem = ItemType.jeweler, AllStats = 200, ForgeFrom = new List<int> { 623, 1013 } },
+        new ItemForge { Id = 625 , NameItem = "Necklace of Divinity", TypeItem = ItemType.jeweler, AllStats = 350, ForgeFrom = new List<int> { 624, 2022 } },
+        //Necklace end
+        new ItemForge { Id = 700 , NameItem = "Hide Leather", TypeItem = ItemType.armor, HP = 500, HPRegen = 6, ForgeFrom = new List<int> { 103, 2029 } },
+        new ItemForge { Id = 701 , NameItem = "Life Gem", TypeItem = ItemType.jeweler, HP = 1000, HPRegen = 12, ForgeFrom = new List<int> { 700, 1018, 1020 } },
+        new ItemForge { Id = 702 , NameItem = "Vigor Gem", TypeItem = ItemType.jeweler, HP = 2000, HPRegen = 23, ForgeFrom = new List<int> { 701, 1021 } },
+        new ItemForge { Id = 703 , NameItem = "Spirit Gem", TypeItem = ItemType.jeweler, HP = 3000, HPRegen = 50, ForgeFrom = new List<int> { 702, 135 } },
+        new ItemForge { Id = 704 , NameItem = "Vitality Gem", TypeItem = ItemType.jeweler, HP = 5000, HPRegen = 80, ForgeFrom = new List<int> { 703, 2027, 2028 } },
+        new ItemForge { Id = 705 , NameItem = "Sphere of Vitality", TypeItem = ItemType.jeweler, HP = 13000, HPRegen = 150, ForgeFrom = new List<int> { 704, 2005 } },
+        new ItemForge { Id = 706 , NameItem = "Aegle", TypeItem = ItemType.jeweler, HP = 68000, HPRegen = 300, Str = 200, ForgeFrom = new List<int> { 705, 1022, 2030, 2032 } },
+        new ItemForge { Id = 707 , NameItem = "Killer Blade (240 DMG)", Description = "Reduce enemy DEF by 40 on attack", TypeItem = ItemType.weapon, DMG = 240, ForgeFrom = new List<int> { 112, 1023 } },
+        new ItemForge { Id = 708 , NameItem = "Hitman Blade", Description = "Reduce enemy DEF by 80 on attack", TypeItem = ItemType.weapon, DMG = 500, ForgeFrom = new List<int> { 707, 1001, 2004 } },
+        new ItemForge { Id = 709 , NameItem = "Shaman Claws", TypeItem = ItemType.weapon, DMG = 30, ASPD = 30, ForgeFrom = new List<int> { 1000, 1024 } },
+        new ItemForge { Id = 710 , NameItem = "Elite Shaman Claws", TypeItem = ItemType.weapon, DMG = 200, ASPD = 200, ForgeFrom = new List<int> { 709, 1025, 2034 } },
+        new ItemForge { Id = 711 , NameItem = "Toxic Spear", TypeItem = ItemType.weapon, DMG = 40, Poison = new ItemPoison{ Chance = 12, Modificator = 40 }, ForgeFrom = new List<int> { 1000, 1026 } },
+        new ItemForge { Id = 712 , NameItem = "Noxious Spear", TypeItem = ItemType.weapon, DMG = 120, Poison = new ItemPoison{ Chance = 16, Modificator = 50 }, ForgeFrom = new List<int> { 711, 2011 } },
+        new ItemForge { Id = 713 , NameItem = "Poisonous Spear", TypeItem = ItemType.weapon, DMG = 160, Poison = new ItemPoison{ Chance = 20, Modificator = 80 }, ForgeFrom = new List<int> { 712, 1004, 2028 } },
+        new ItemForge { Id = 714 , NameItem = "Venomous Spear", TypeItem = ItemType.weapon, DMG = 400, Poison = new ItemPoison{ Chance = 25, Modificator = 100 }, ForgeFrom = new List<int> { 713, 135, 1001 } },
+        new ItemForge { Id = 715 , NameItem = "Baneful Spear", TypeItem = ItemType.weapon, DMG = 500, Poison = new ItemPoison{ Chance = 30, Modificator = 200 }, ForgeFrom = new List<int> { 714, 2006 } },
+        new ItemForge { Id = 716 , NameItem = "Grimoire of the Orc Soul", Description = "ACTIVE: Summon an Elite Orc Warrior (70 sec CD)", TypeItem = ItemType.weapon, AllStats = 40, HPRegen = 26, MP = 900, ForgeFrom = new List<int> { 1027, 2035, 2007 } },
+        new ItemForge { Id = 717 , NameItem = "Hell Grimoire", Description = "ACTIVE: Cast Hell Flame that deals 4000 DMG and stuns the target for 4 sec and summons 2 Hell Skeletons", TypeItem = ItemType.weapon, Int = 150, Str = 50, Agi = 50, HPRegen = 40, MP = 2000, ForgeFrom = new List<int> { 716, 252 } },
+        new ItemForge { Id = 718 , NameItem = "Rusty Figurine", TypeItem = ItemType.armor, AllStats = 5, Defence = 5, ForgeFrom = new List<int> { 1008, 1028 } },
+        new ItemForge { Id = 719 , NameItem = "Old Figurine", TypeItem = ItemType.armor, AllStats = 12, Defence = 12, DMG = 12, ForgeFrom = new List<int> { 718, 2021 } },
+        new ItemForge { Id = 720 , NameItem = "Ancient Figurine", TypeItem = ItemType.armor, AllStats = 30, Defence = 30, DMG = 30, ForgeFrom = new List<int> { 719, 1000, 2035 } },
+        new ItemForge { Id = 721 , NameItem = "Mystic Figurine", TypeItem = ItemType.armor, AllStats = 70, Defence = 70, DMG = 70, ForgeFrom = new List<int> { 720, 2000, 2035 } },
+        new ItemForge { Id = 722 , NameItem = "Figurine of Magnificence", TypeItem = ItemType.armor, AllStats = 400, Defence = 400, DMG = 400, ASPD = 100, ForgeFrom = new List<int> { 721, 624, 710 } },
+        new ItemForge { Id = 723 , NameItem = "Kratos", TypeItem = ItemType.armor, Str = 600, HP = 15000, HPRegen = 60, ForgeFrom = new List<int> { 604, 2005,2036, 2031 } },
+        new ItemForge { Id = 724 , NameItem = "Eidyia", TypeItem = ItemType.armor, Int = 700, MP = 20000, MPRegen = 500, ASPD = 500, ForgeFrom = new List<int> { 2037, 2036, 2004, 148 } },
+        new ItemForge { Id = 725 , NameItem = "Hermes", TypeItem = ItemType.armor, Agi = 1100, ForgeFrom = new List<int> { 1029, 609, 1030, 1031, 2005 } },
+        new ItemForge { Id = 726 , NameItem = "Ares", TypeItem = ItemType.armor, DMG = 3000, Defence = 200, AllStats = 200, HPRegen = 200, ForgeFrom = new List<int> { 238, 2036, 2031 } },
+        //etc end
+    };
+    string SearchItemOnWord = "";
+    List<ItemForge> SearchItem => ListItemForgeds.Where(x => x.NameItem.ToLower().Contains(SearchItemOnWord.ToLower())).ToList();
+    string FindItemOnId(int id)
+    {
+        return ListItemForgeds.Where(x => x.Id == id).FirstOrDefault().NameItem + " / ";
+    }
+    string GetDataToJson()
+    {
+        var jsonstr = System.Text.Json.JsonSerializer.Serialize(ListItemForgeds);
+        byte[] byteArray = System.Text.ASCIIEncoding.ASCII.GetBytes(jsonstr);
+        return "data:application/octet-stream;base64," + Convert.ToBase64String(byteArray);
+    }
+}
