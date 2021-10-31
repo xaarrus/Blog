@@ -6,53 +6,106 @@
 
         </div>
         <div class="col-3">
-            <a class="btn btn-outline-warning" download="itemSave.json" href=@GetDataToJson() target="_blank">Download Json</a>            
+            <a class="btn btn-outline-warning" download="itemSave.json" href=@GetDataToJson() target="_blank">Download Json</a>
         </div>
     </div>
 
-    <h3 class="text-center">Поиск предметов</h3>
-    <div>
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Поиск предмета:</span>
-            <input type="text" class="form-control" @bind-value:event="oninput" @bind-value="SearchItemOnWord" placeholder="Введите название..." aria-label="" aria-describedby="basic-addon1">
-        </div>
-        <div>
-            <table class="table table-striped table-dark">
-                <thead>
-                    <tr>
-                        <th class="col-4">Название</th>
-                        <th class="col-4">Состоит из</th>
-                        <th class="col-4">Бонусы</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (SearchItemOnWord == "")
-                    {
-                        <tr class="table-warning text-dark"><td class="text-center" colspan="3">Введите название...</td></tr>
-                    }
-                    else
-                    {
-                        @foreach (var item in SearchItem)
+    <div class="row">
+        <div class="col-6">
+            <h3 class="text-center">Поиск предметов</h3>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Поиск предмета:</span>
+                <input type="text" class="form-control" @bind-value:event="oninput" @bind-value="SearchItemOnWord" placeholder="Введите название..." aria-label="" aria-describedby="basic-addon1">
+            </div>
+            <div>
+                <table class="table table-striped table-dark">
+                    <thead>
+                        <tr>
+                            <th class="col-4">Название</th>
+                            <th class="col-4">Состоит из</th>
+                            <th class="col-4">Бонусы</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (SearchItemOnWord == "")
                         {
-                            <tr>
-                                <td>@item.NameItem : @item.Description</td>
-                                <td>
-                                    @if (item.ForgeFrom?.Count > 0)
-                                    {
-                                        @foreach (int itemId in item.ForgeFrom)
+                            <tr class="table-warning text-dark"><td class="text-center" colspan="3">Введите название...</td></tr>
+                        }
+                        else
+                        {
+                            @foreach (var item in SearchItem)
+                            {
+                                <tr>
+                                    <td><button class="btn btn-sm btn-outline-danger" @onclick="()=>AddToFavorite(item.Id)"><span class="oi oi-star"></span></button> @item.NameItem : @item.Description</td>
+                                    <td>
+                                        @if (item.ForgeFrom?.Count > 0)
                                         {
-                                            @FindItemOnId(itemId)
+                                            @foreach (int itemId in item.ForgeFrom)
+                                            {
+                                                @FindItemOnId(itemId)
+                                            }
+                                        }
+                                    </td>
+                                    <td>@item.SeeMeBonus()</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-6">
+            <div>
+                <button @onclick="ClearListFavorite" class="btn btn-warning"><span class="oi oi-trash"></span> Clear All Favorite</button>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingFavorite">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-Favorite" aria-expanded="false" aria-controls="panelsStayOpen-Favorite">
+                            Favorite
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-Favorite" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFavorite">
+                        <div class="accordion-body">
+                            <table class="table table-striped table-dark">
+                                <thead>
+                                    <tr>
+                                        <th class="col-4">Название</th>
+                                        <th class="col-4">Состоит из</th>
+                                        <th class="col-4">Бонусы</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (ListItemForgedsFavorite.Count > 0)
+                                    {
+                                        @foreach (var item in ListItemForgedsFavorite)
+                                        {
+                                            <tr>
+                                                <td><button class="btn btn-sm btn-outline-danger" @onclick="()=>DeleteFromFavorite(item.Id)"><span class="oi oi-trash"></span></button> @item.NameItem : @item.Description</td>
+                                                <td>
+                                                    @if (item.ForgeFrom?.Count > 0)
+                                                    {
+                                                        @foreach (int itemId in item.ForgeFrom)
+                                                        {
+                                                            @FindItemOnId(itemId)
+                                                        }
+                                                    }
+                                                </td>
+                                                <td>@item.SeeMeBonus()</td>
+                                            </tr>
                                         }
                                     }
-                                </td>
-                                <td>@item.SeeMeBonus()</td>
-                            </tr>
-                        }
-                    }
-                </tbody>
-            </table>
+                                    else
+                                    {
+                                        <tr class="table-warning text-dark"><td class="text-center" colspan="3">No add Item</td></tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
     <h3 class="text-center">Список предметов</h3>
     <div class="col-6">
 
@@ -79,7 +132,7 @@
                                 @foreach (var item in ListItemForgeds.Where(x => x.TypeItem == ItemType.weapon & x.Id > 199 & x.Id < 217))
                                 {
                                     <tr>
-                                        <td>@item.NameItem : @item.Description</td>
+                                        <td><button class="btn btn-sm btn-outline-danger" @onclick="()=>AddToFavorite(item.Id)"><span class="oi oi-star"></span></button> @item.NameItem : @item.Description</td>
                                         <td>
                                             @if (item.ForgeFrom?.Count > 0)
                                             {
@@ -96,7 +149,7 @@
                                 @foreach (var item in ListItemForgeds.Where(x => x.TypeItem == ItemType.weapon & x.Id >= 220 & x.Id <= 226))
                                 {
                                     <tr>
-                                        <td>@item.NameItem : @item.Description</td>
+                                        <td><button class="btn btn-sm btn-outline-danger" @onclick="()=>AddToFavorite(item.Id)"><span class="oi oi-star"></span></button> @item.NameItem : @item.Description</td>
                                         <td>
                                             @if (item.ForgeFrom?.Count > 0)
                                             {
@@ -113,7 +166,7 @@
                                 @foreach (var item in ListItemForgeds.Where(x => x.TypeItem == ItemType.weapon & x.Id >= 230 & x.Id <= 240))
                                 {
                                     <tr>
-                                        <td>@item.NameItem : @item.Description</td>
+                                        <td><button class="btn btn-sm btn-outline-danger" @onclick="()=>AddToFavorite(item.Id)"><span class="oi oi-star"></span></button> @item.NameItem : @item.Description</td>
                                         <td>
                                             @if (item.ForgeFrom?.Count > 0)
                                             {
@@ -130,7 +183,7 @@
                                 @foreach (var item in ListItemForgeds.Where(x => x.TypeItem == ItemType.weapon & x.Id >= 250 & x.Id <= 254))
                                 {
                                     <tr>
-                                        <td>@item.NameItem : @item.Description</td>
+                                        <td><button class="btn btn-sm btn-outline-danger" @onclick="()=>AddToFavorite(item.Id)"><span class="oi oi-star"></span></button> @item.NameItem : @item.Description</td>
                                         <td>
                                             @if (item.ForgeFrom?.Count > 0)
                                             {
@@ -172,7 +225,7 @@
                                 @foreach (var item in ListItemForgeds.Where(x => x.TypeItem == ItemType.jeweler & x.Id >= 600 & x.Id <= 610))
                                 {
                                     <tr>
-                                        <td>@item.NameItem : @item.Description</td>
+                                        <td><button class="btn btn-sm btn-outline-danger" @onclick="()=>AddToFavorite(item.Id)"><span class="oi oi-star"></span></button> @item.NameItem : @item.Description</td>
                                         <td>
                                             @if (item.ForgeFrom?.Count > 0)
                                             {
@@ -189,7 +242,7 @@
                                 @foreach (var item in ListItemForgeds.Where(x => x.TypeItem == ItemType.jeweler & x.Id >= 620 & x.Id <= 625))
                                 {
                                     <tr>
-                                        <td>@item.NameItem : @item.Description</td>
+                                        <td><button class="btn btn-sm btn-outline-danger" @onclick="()=>AddToFavorite(item.Id)"><span class="oi oi-star"></span></button> @item.NameItem : @item.Description</td>
                                         <td>
                                             @if (item.ForgeFrom?.Count > 0)
                                             {
@@ -231,7 +284,7 @@
                                 @foreach (var item in ListItemForgeds.Where(x => x.Id >= 700 & x.Id <= 726))
                                 {
                                     <tr>
-                                        <td>@item.NameItem : @item.Description</td>
+                                        <td><button class="btn btn-sm btn-outline-danger" @onclick="()=>AddToFavorite(item.Id)"><span class="oi oi-star"></span></button> @item.NameItem : @item.Description</td>
                                         <td>
                                             @if (item.ForgeFrom?.Count > 0)
                                             {
@@ -275,7 +328,7 @@
                                 @foreach (var item in ListItemForgeds.Where(x => x.TypeItem == ItemType.armor & x.Id >= 400 & x.Id <= 417))
                                 {
                                     <tr>
-                                        <td>@item.NameItem : @item.Description</td>
+                                        <td><button class="btn btn-sm btn-outline-danger" @onclick="()=>AddToFavorite(item.Id)"><span class="oi oi-star"></span></button> @item.NameItem : @item.Description</td>
                                         <td>
                                             @if (item.ForgeFrom?.Count > 0)
                                             {
@@ -292,7 +345,7 @@
                                 @foreach (var item in ListItemForgeds.Where(x => x.TypeItem == ItemType.armor & x.Id >= 450 & x.Id <= 455))
                                 {
                                     <tr>
-                                        <td>@item.NameItem : @item.Description</td>
+                                        <td><button class="btn btn-sm btn-outline-danger" @onclick="()=>AddToFavorite(item.Id)"><span class="oi oi-star"></span></button> @item.NameItem : @item.Description</td>
                                         <td>
                                             @if (item.ForgeFrom?.Count > 0)
                                             {
@@ -309,7 +362,7 @@
                                 @foreach (var item in ListItemForgeds.Where(x => x.TypeItem == ItemType.armor & x.Id >= 430 & x.Id <= 434))
                                 {
                                     <tr>
-                                        <td>@item.NameItem : @item.Description</td>
+                                        <td><button class="btn btn-sm btn-outline-danger" @onclick="()=>AddToFavorite(item.Id)"><span class="oi oi-star"></span></button> @item.NameItem : @item.Description</td>
                                         <td>
                                             @if (item.ForgeFrom?.Count > 0)
                                             {
@@ -326,7 +379,7 @@
                                 @foreach (var item in ListItemForgeds.Where(x => x.TypeItem == ItemType.armor & x.Id >= 460 & x.Id <= 463))
                                 {
                                     <tr>
-                                        <td>@item.NameItem : @item.Description</td>
+                                        <td><button class="btn btn-sm btn-outline-danger" @onclick="()=>AddToFavorite(item.Id)"><span class="oi oi-star"></span></button> @item.NameItem : @item.Description</td>
                                         <td>
                                             @if (item.ForgeFrom?.Count > 0)
                                             {
@@ -343,7 +396,7 @@
                                 @foreach (var item in ListItemForgeds.Where(x => x.TypeItem == ItemType.armor & x.Id >= 470 & x.Id <= 473))
                                 {
                                     <tr>
-                                        <td>@item.NameItem : @item.Description</td>
+                                        <td><button class="btn btn-sm btn-outline-danger" @onclick="()=>AddToFavorite(item.Id)"><span class="oi oi-star"></span></button> @item.NameItem : @item.Description</td>
                                         <td>
                                             @if (item.ForgeFrom?.Count > 0)
                                             {
@@ -383,7 +436,7 @@
                                 @foreach (var item in ListItemForgeds.Where(x => x.Id > 99 & x.Id < 150))
                                 {
                                     <tr>
-                                        <td>@item.NameItem </td>
+                                        <td><button class="btn btn-sm btn-outline-danger" @onclick="()=>AddToFavorite(item.Id)"><span class="oi oi-star"></span></button> @item.NameItem </td>
                                         <td>@item.SeeMeBonus()</td>
                                     </tr>
                                 }
@@ -455,25 +508,25 @@
         new ItemForge { Id = 1002 , NameItem = "Vampire Fang", TypeItem = ItemType.weapon, LifeSteal = 16 },
         new ItemForge { Id = 1003 , NameItem = "J ring", TypeItem = ItemType.jeweler, Agi = 7 },
         new ItemForge { Id = 1004 , NameItem = "Shamanic Totem", TypeItem = ItemType.weapon, DMG = 40 },
-        new ItemForge { Id = 1005 , NameItem = "Elegant Armor", TypeItem = ItemType.armor },
+        new ItemForge { Id = 1005 , NameItem = "Elegant Armor", TypeItem = ItemType.armor, Defence = 8, HP = 500, Str = 4, Agi = 4 },
         new ItemForge { Id = 1006 , NameItem = "Belt of Strength", TypeItem = ItemType.armor, Str = 6 },
         new ItemForge { Id = 1007 , NameItem = "Wand of wizard", TypeItem = ItemType.weapon, Int = 22 },
         new ItemForge { Id = 1008 , NameItem = "Shimmerweed", TypeItem = ItemType.jeweler, Agi = 4, Str = 4, Int = 4 },
         new ItemForge { Id = 1009 , NameItem = "Scroll of Strength", TypeItem = ItemType.jeweler, Str = 30 },
         new ItemForge { Id = 1010 , NameItem = "Scroll of Agility", TypeItem = ItemType.jeweler, Agi = 30 },
         new ItemForge { Id = 1011 , NameItem = "Horn of Toughness", TypeItem = ItemType.jeweler },
-        new ItemForge { Id = 1012 , NameItem = "Ring of Superiority", TypeItem = ItemType.jeweler },
+        new ItemForge { Id = 1012 , NameItem = "Ring of Superiority", TypeItem = ItemType.jeweler, AllStats = 44 },
         new ItemForge { Id = 1013 , NameItem = "Gem of Hades", TypeItem = ItemType.jeweler, AllStats = 80 },
-        new ItemForge { Id = 1014 , NameItem = "Robe of the Magic", TypeItem = ItemType.armor },
+        new ItemForge { Id = 1014 , NameItem = "Robe of the Magic", TypeItem = ItemType.armor, MP = 350, HP = 200, AllStats = 2 },
         new ItemForge { Id = 1015 , NameItem = "Mage Armor", TypeItem = ItemType.armor },
-        new ItemForge { Id = 1016 , NameItem = "Merlinis Cape", TypeItem = ItemType.armor },
+        new ItemForge { Id = 1016 , NameItem = "Merlins Cape", TypeItem = ItemType.armor, HPRegen = 11, MPRegen = 250 },
         new ItemForge { Id = 1017 , NameItem = "Spiked Carapace", TypeItem = ItemType.armor },
-        new ItemForge { Id = 1018 , NameItem = "Voodoo Doll", TypeItem = ItemType.armor },
+        new ItemForge { Id = 1018 , NameItem = "Voodoo Doll", TypeItem = ItemType.armor, HPRegen = 6 },
         new ItemForge { Id = 1019 , NameItem = "Boots of Courage", TypeItem = ItemType.armor },
         new ItemForge { Id = 1020 , NameItem = "Green Flag", TypeItem = ItemType.armor, HP = 420, Int = 12 },
         new ItemForge { Id = 1021 , NameItem = "Soul Gem", TypeItem = ItemType.armor, HPRegen = 7 },
         new ItemForge { Id = 1022 , NameItem = "Heart Container", TypeItem = ItemType.armor, HPRegen = 100 },
-        new ItemForge { Id = 1023 , NameItem = "Assassin?kller Blade", TypeItem = ItemType.weapon },
+        new ItemForge { Id = 1023 , NameItem = "Kller Blade", TypeItem = ItemType.weapon, DMG = 150, ASPD = 46, MP = 350 },
         new ItemForge { Id = 1024 , NameItem = "Savage Claws", TypeItem = ItemType.weapon },
         new ItemForge { Id = 1025 , NameItem = "Bloody Katana", TypeItem = ItemType.weapon },
         new ItemForge { Id = 1026 , NameItem = "Choro Spear", TypeItem = ItemType.weapon },
@@ -499,9 +552,9 @@
         new ItemForge { Id = 2012 , NameItem = "Decapitator recipe", Description = "8850 gold", TypeItem = ItemType.weapon },
         new ItemForge { Id = 2013 , NameItem = "Dark Staff", Description = "??? gold", TypeItem = ItemType.weapon },
         new ItemForge { Id = 2014 , NameItem = "Khadgar’s Gem of Energy", Description = "??? gold", TypeItem = ItemType.jeweler },
-        new ItemForge { Id = 2015 , NameItem = "Ring of Strength", Description = "1200 gold", TypeItem = ItemType.jeweler, Str = 10 },
+        new ItemForge { Id = 2015 , NameItem = "Ring of Strength", Description = "1200 gold", TypeItem = ItemType.jeweler, Str = 12 },
         new ItemForge { Id = 2016 , NameItem = "Ring of Agility", Description = "1200 gold", TypeItem = ItemType.jeweler, Agi = 12 },
-        new ItemForge { Id = 2017 , NameItem = "Ring of Intelligency", Description = "1200 gold", TypeItem = ItemType.jeweler, Int = 10 },
+        new ItemForge { Id = 2017 , NameItem = "Ring of Intelligency", Description = "1200 gold", TypeItem = ItemType.jeweler, Int = 12 },
         new ItemForge { Id = 2018 , NameItem = "Flag of Strength", Description = "???? gold", TypeItem = ItemType.jeweler },
         new ItemForge { Id = 2019 , NameItem = "Flute of Accuracy", Description = "???? gold", TypeItem = ItemType.jeweler },
         new ItemForge { Id = 2020 , NameItem = "Tizona", Description = "???? gold", TypeItem = ItemType.weapon },
@@ -572,7 +625,7 @@
 
 
         //Axes Hammer end
-        new ItemForge { Id = 250 , NameItem = "Firebolt Wand", Description = "ACTIVE: Shoot a firebolt that deals 1000 DMG and stuns for 2 sec (15 sec CD)", TypeItem = ItemType.weapon, Int = 40, ForgeFrom = new List<int> { 1007, 2012 } },
+        new ItemForge { Id = 250 , NameItem = "Firebolt Wand", Description = "ACTIVE: Shoot a firebolt that deals 1000 DMG and stuns for 2 sec (15 sec CD)", TypeItem = ItemType.weapon, Int = 40, ForgeFrom = new List<int> { 1007, 2013 } },
         new ItemForge { Id = 251 , NameItem = "Firebolt Staff", Description = "ACTIVE: Shoot a firebolt that deals 1400 DMG and stuns for 3 seconds (14 sec CD)", TypeItem = ItemType.weapon, Int = 50, MP = 500, ForgeFrom = new List<int> { 250, 108 } },
         new ItemForge { Id = 252 , NameItem = "Firebolt Scepter", Description = "ACTIVE: Shoots a firebolt that deals 2100 dmg and stuns for 4 seconds (13 sec CD)", TypeItem = ItemType.weapon, Int = 80, MP = 900, MPRegen = 100, ForgeFrom = new List<int> { 251, 118 } },
         new ItemForge { Id = 253 , NameItem = "Mystic Firebolt Scepter", Description = "ACTIVE:  Shoot a firebolt that deals 3300 DMG and stuns for 5 sec (12 sec CD)", TypeItem = ItemType.weapon, Int = 100, MP = 1300, MPRegen = 160, ForgeFrom = new List<int> { 252, 138 } },
@@ -671,6 +724,23 @@
     };
     string SearchItemOnWord = "";
     List<ItemForge> SearchItem => ListItemForgeds.Where(x => x.NameItem.ToLower().Contains(SearchItemOnWord.ToLower())).ToList();
+    List<ItemForge> ListItemForgedsFavorite = new List<ItemForge>();
+    void AddToFavorite(int idItem)
+    {
+        if (!ListItemForgedsFavorite.Contains(ListItemForgedsFavorite.Where(x => x.Id == idItem).FirstOrDefault()))
+        {
+            ListItemForgedsFavorite.Add(ListItemForgeds.Where(x => x.Id == idItem).FirstOrDefault());
+        }
+
+    }
+    void DeleteFromFavorite(int idItem)
+    {
+        ListItemForgedsFavorite.Remove(ListItemForgedsFavorite.Where(x => x.Id == idItem).FirstOrDefault());
+    }
+    void ClearListFavorite()
+    {
+        ListItemForgedsFavorite = new List<ItemForge>();
+    }
     string FindItemOnId(int id)
     {
         return ListItemForgeds.Where(x => x.Id == id).FirstOrDefault().NameItem + " / ";
