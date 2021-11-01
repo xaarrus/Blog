@@ -1,5 +1,7 @@
 ﻿@page "/notebook/notes"
 
+<Title Value="Блокнот - Задачи" />
+
 <NavNoteBook />
 <div class="notebook-body">
     <div class="row justify-content-evenly">
@@ -11,6 +13,7 @@
         </div>
     </div>
 </div>
+
 @code{
     [Parameter]
     public Note? notetoedit { get; set; }

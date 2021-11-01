@@ -57,7 +57,7 @@ namespace Blog.Shared.Data.WAR3
                 + (ASPD > 0 ? $" ASPD + {ASPD}%," : "")
                 + (ASPD < 0 ? $" ASPD {ASPD}%," : "")
                 + (LifeSteal > 0 ? $" LifeSteal + {LifeSteal}%," : "")
-                + (ReflectMeleDMG > 0 ? $" ReflectMeleDMG + {ReflectMeleDMG}%," : "")
+                + (ReflectMeleDMG > 0 ? $" ReflectMeleeDMG + {ReflectMeleDMG}%," : "")
                 + ((CriticalChance != null & CriticalChance != new ItemCritical()) ? $" Crit {CriticalChance.Chance}% to {CriticalChance.Modificator}x," : "")
                 + ((BlockChance != null & BlockChance != new ItemBlock()) ? $" with {BlockChance.Chance}% block {BlockChance.Modificator} dmg," : "")
                 + ((CleaveChance != null & CleaveChance != new ItemCleave()) ? $" cleave {CleaveChance.Chance}% {CleaveChance.Modificator} AOE," : "")

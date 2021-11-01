@@ -56,6 +56,7 @@
         </div>
         <div class="col-6">
             <div>
+                <h3 class="text-center">Избранное</h3>
                 <button @onclick="ClearListFavorite" class="btn btn-warning"><span class="oi oi-trash"></span> Clear All Favorite</button>
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="panelsStayOpen-headingFavorite">
@@ -526,7 +527,7 @@
         new ItemForge { Id = 1020 , NameItem = "Green Flag", TypeItem = ItemType.armor, HP = 420, Int = 12 },
         new ItemForge { Id = 1021 , NameItem = "Soul Gem", TypeItem = ItemType.armor, HPRegen = 7 },
         new ItemForge { Id = 1022 , NameItem = "Heart Container", TypeItem = ItemType.armor, HPRegen = 100 },
-        new ItemForge { Id = 1023 , NameItem = "Kller Blade", TypeItem = ItemType.weapon, DMG = 150, ASPD = 46, MP = 350 },
+        new ItemForge { Id = 1023 , NameItem = "Killer Blade", TypeItem = ItemType.weapon, DMG = 150, ASPD = 46, MP = 350 },
         new ItemForge { Id = 1024 , NameItem = "Savage Claws", TypeItem = ItemType.weapon },
         new ItemForge { Id = 1025 , NameItem = "Bloody Katana", TypeItem = ItemType.weapon },
         new ItemForge { Id = 1026 , NameItem = "Choro Spear", TypeItem = ItemType.weapon },
@@ -578,6 +579,8 @@
         new ItemForge { Id = 2038 , NameItem = "Royal Emblem", Description = "????? gold", TypeItem = ItemType.jeweler },
         new ItemForge { Id = 2039 , NameItem = "Corrupted Sword", Description = "????? gold", TypeItem = ItemType.weapon },
         new ItemForge { Id = 2040 , NameItem = "Masamune", Description = "????? gold", TypeItem = ItemType.weapon },
+        new ItemForge { Id = 2041 , NameItem = "Assassin Dagger", Description = "????? gold", TypeItem = ItemType.weapon },
+        new ItemForge { Id = 2042 , NameItem = "Assassin Blade", Description = "Assassin Dagger + Recipe", TypeItem = ItemType.weapon },
         // Buy item
 
         new ItemForge { Id = 200 , NameItem = "Improve Sword", TypeItem = ItemType.weapon, DMG = 50, ASPD = 15, ForgeFrom = new List<int> { 100, 1000 } },
@@ -614,7 +617,7 @@
         new ItemForge { Id = 230 , NameItem = "Heavy War Hammer", TypeItem = ItemType.weapon, DMG = 300, ForgeFrom = new List<int> { 122, 2008 } },
         new ItemForge { Id = 231 , NameItem = "Two Tons War Hammer", TypeItem = ItemType.weapon, DMG = 1700, ASPD = -80, ForgeFrom = new List<int> { 230, 132, 2009 } },
         new ItemForge { Id = 232 , NameItem = "Adamantium War Maul", TypeItem = ItemType.weapon, DMG = 6000, ASPD = -250, ForgeFrom = new List<int> { 231, 2004 } },
-        new ItemForge { Id = 233 , NameItem = "Shaman Axe", TypeItem = ItemType.weapon, DMG = 120, ForgeFrom = new List<int> { 102, 2004 } },
+        new ItemForge { Id = 233 , NameItem = "Shaman Axe", TypeItem = ItemType.weapon, DMG = 120, ForgeFrom = new List<int> { 102, 1004 } },
         new ItemForge { Id = 234 , NameItem = "Bone Axe", TypeItem = ItemType.weapon, DMG = 160, CleaveChance = new ItemCleave{ Chance = 30, Modificator = 300 }, ForgeFrom = new List<int> { 233, 2010 } },
         new ItemForge { Id = 235 , NameItem = "Destructive War Axe", TypeItem = ItemType.weapon, DMG = 280, CleaveChance = new ItemCleave{ Chance = 35, Modificator = 330 }, ForgeFrom = new List<int> { 234, 112 } },
         new ItemForge { Id = 236 , NameItem = "Decapitator (1400 damage)", TypeItem = ItemType.weapon, DMG = 1400, ForgeFrom = new List<int> { 2009, 2011, 2012 } },
@@ -672,7 +675,7 @@
         new ItemForge { Id = 471 , NameItem = "Audacity Boots", TypeItem = ItemType.armor, MoveSpeed = 135, Defence = 16, HP = 350, ForgeFrom = new List<int> { 470, 117 } },
         new ItemForge { Id = 472 , NameItem = "Bravery Boots", TypeItem = ItemType.armor, MoveSpeed = 150, Defence = 18, HP = 500, AllStats = 40, ForgeFrom = new List<int> { 471, 621 } },
         new ItemForge { Id = 473 , NameItem = "Heroism Boots", TypeItem = ItemType.armor, MoveSpeed = 250, Defence = 30, HP = 800, AllStats = 60, ForgeFrom = new List<int> { 472, 127 } },
-        new ItemForge { Id = 473 , NameItem = "Elite Rune Boots", Description = "PASSIVE: You are immune to slows, MAX Move Speed", TypeItem = ItemType.armor, MoveSpeed = 999, Defence = 40, ASPD = 35, AllStats = 20, HPRegen = 20, ForgeFrom = new List<int> { 472, 127 } },
+        new ItemForge { Id = 473 , NameItem = "Elite Rune Boots", Description = "PASSIVE: You are immune to slows, MAX Move Speed", TypeItem = ItemType.armor, MoveSpeed = 999, Defence = 40, ASPD = 35, AllStats = 20, HPRegen = 20, ForgeFrom = new List<int> { 147, 2004 } },
         //Boots end
         new ItemForge { Id = 600 , NameItem = "Belt of Giant Strength", TypeItem = ItemType.jeweler, Str = 16, ForgeFrom = new List<int> { 1008, 1006 } },
         new ItemForge { Id = 601 , NameItem = "Greater Ring of Strength", TypeItem = ItemType.jeweler, Str = 34, ForgeFrom = new List<int> { 600, 2015 } },
@@ -700,7 +703,7 @@
         new ItemForge { Id = 704 , NameItem = "Vitality Gem", TypeItem = ItemType.jeweler, HP = 5000, HPRegen = 80, ForgeFrom = new List<int> { 703, 2027, 2028 } },
         new ItemForge { Id = 705 , NameItem = "Sphere of Vitality", TypeItem = ItemType.jeweler, HP = 13000, HPRegen = 150, ForgeFrom = new List<int> { 704, 2005 } },
         new ItemForge { Id = 706 , NameItem = "Aegle", TypeItem = ItemType.jeweler, HP = 68000, HPRegen = 300, Str = 200, ForgeFrom = new List<int> { 705, 1022, 2030, 2032 } },
-        new ItemForge { Id = 707 , NameItem = "Killer Blade (240 DMG)", Description = "Reduce enemy DEF by 40 on attack", TypeItem = ItemType.weapon, DMG = 240, ForgeFrom = new List<int> { 112, 1023 } },
+        new ItemForge { Id = 707 , NameItem = "Killer Blade (240 DMG)", Description = "Reduce enemy DEF by 40 on attack", TypeItem = ItemType.weapon, DMG = 240, ForgeFrom = new List<int> { 112, 2042 } },
         new ItemForge { Id = 708 , NameItem = "Hitman Blade", Description = "Reduce enemy DEF by 80 on attack", TypeItem = ItemType.weapon, DMG = 500, ForgeFrom = new List<int> { 707, 1001, 2004 } },
         new ItemForge { Id = 709 , NameItem = "Shaman Claws", TypeItem = ItemType.weapon, DMG = 30, ASPD = 30, ForgeFrom = new List<int> { 1000, 1024 } },
         new ItemForge { Id = 710 , NameItem = "Elite Shaman Claws", TypeItem = ItemType.weapon, DMG = 200, ASPD = 200, ForgeFrom = new List<int> { 709, 1025, 2034 } },
