@@ -100,6 +100,31 @@
                                     }
                                 </tbody>
                             </table>
+                            <h3 class="text-center">Состоит из базовых предметов:</h3>
+                            <table class="table table-striped table-dark">
+                                <thead>
+                                    <tr>
+                                        <th class="col-4">Название</th>
+                                        <th class="col-4">Бонусы</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (ListItemForgedsFavoriteBase.Count > 0)
+                                    {
+                                        @foreach (var item in ListItemForgedsFavoriteBase)
+                                        {
+                                            <tr>
+                                                <td><input class="form-check-input" type="checkbox"> @item.NameItem @item.Description </td>
+                                                <td>@item.SeeMeBonus()</td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr class="table-warning text-dark"><td class="text-center" colspan="3">No base item</td></tr>
+                                    }
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -690,7 +715,7 @@
         new ItemForge { Id = 610 , NameItem = "Artemis Ring", TypeItem = ItemType.jeweler,DMG = 500, Agi = 500, Defence = 100, ForgeFrom = new List<int> { 609, 2005, 131 } },        
         //Ring Scroll end        
         new ItemForge { Id = 620 , NameItem = "Circlet of Aristocracy", TypeItem = ItemType.jeweler, AllStats = 10, ForgeFrom = new List<int> { 1008, 2021 } },
-        new ItemForge { Id = 621 , NameItem = "Circlet of Grandeur", TypeItem = ItemType.jeweler, AllStats = 28, ForgeFrom = new List<int> { 620, 2016, 2017, 2018 } },
+        new ItemForge { Id = 621 , NameItem = "Circlet of Grandeur", TypeItem = ItemType.jeweler, AllStats = 28, ForgeFrom = new List<int> { 620, 2015, 2016, 2017 } },
         new ItemForge { Id = 622 , NameItem = "Necklace of Greatness", TypeItem = ItemType.jeweler, AllStats = 50, ForgeFrom = new List<int> { 621, 2007 } },
         new ItemForge { Id = 623 , NameItem = "Necklace of Majesty", TypeItem = ItemType.jeweler, AllStats = 100, ForgeFrom = new List<int> { 622, 1012 } },
         new ItemForge { Id = 624 , NameItem = "Necklace of Magnificence", TypeItem = ItemType.jeweler, AllStats = 200, ForgeFrom = new List<int> { 623, 1013 } },
@@ -728,21 +753,42 @@
     string SearchItemOnWord = "";
     List<ItemForge> SearchItem => ListItemForgeds.Where(x => x.NameItem.ToLower().Contains(SearchItemOnWord.ToLower())).ToList();
     List<ItemForge> ListItemForgedsFavorite = new List<ItemForge>();
+    List<ItemForge> ListItemForgedsFavoriteBase = new List<ItemForge>();
+
+    void UpdateFavoriteBase()
+    {
+        ListItemForgedsFavoriteBase = new List<ItemForge>();
+        for (int i = 0; i < ListItemForgedsFavorite.Count; i++)
+        {
+            var TempIdInListInt = ListItemForgedsFavorite[i].ForgeFrom;
+            foreach (var itemIdForgeFrom in TempIdInListInt)
+            {
+                if (itemIdForgeFrom >= 100 & itemIdForgeFrom <= 150)
+                {
+                    ListItemForgedsFavoriteBase.Add(ListItemForgeds.Where(x => x.Id == itemIdForgeFrom).FirstOrDefault());
+                }
+            }
+        }
+        ListItemForgedsFavoriteBase = ListItemForgedsFavoriteBase.OrderBy(x => x.Id).ToList();
+    }
     void AddToFavorite(int idItem)
     {
         if (!ListItemForgedsFavorite.Contains(ListItemForgedsFavorite.Where(x => x.Id == idItem).FirstOrDefault()))
         {
             ListItemForgedsFavorite.Add(ListItemForgeds.Where(x => x.Id == idItem).FirstOrDefault());
+            UpdateFavoriteBase();
         }
 
     }
     void DeleteFromFavorite(int idItem)
     {
         ListItemForgedsFavorite.Remove(ListItemForgedsFavorite.Where(x => x.Id == idItem).FirstOrDefault());
+        UpdateFavoriteBase();
     }
     void ClearListFavorite()
     {
         ListItemForgedsFavorite = new List<ItemForge>();
+        UpdateFavoriteBase();
     }
     string FindItemOnId(int id)
     {
