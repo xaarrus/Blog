@@ -86,6 +86,48 @@ body {
         right: 0.75rem;
         top: 0.5rem;
     }
+.cursor-pointer {
+    cursor: pointer;
+}
+.border-play {
+    border: 3px solid white;
+    border-radius: 50% !important;
+    width: 25px;
+    height: 25px;
+}
+
+    .border-play span::before {
+        margin: 0 5px;
+    }
+
+.border-stop {
+    border: 3px solid white;
+    border-radius: 50% !important;
+    width: 30px;
+    height: 30px;
+    box-shadow: 0 0 0 rgba(31, 255, 49, 0.4);
+    animation: pulseBorderStop 3s infinite;
+}
+
+    .border-stop span::before {
+        margin: 0 3px;
+    }
+@keyframes pulseBorderStop {
+    0% {
+        -moz-box-shadow: 0 0 0 0 rgba(31, 255, 49, 0.4);
+        box-shadow: 0 0 0 0 rgba(31, 255, 49, 0.4);
+    }
+
+    70% {
+        -moz-box-shadow: 0 0 0 15px rgba(31, 255, 49, 0);
+        box-shadow: 0 0 0 15px rgba(31, 255, 49, 0);
+    }
+
+    100% {
+        -moz-box-shadow: 0 0 0 0 rgba(31, 255, 49, 0);
+        box-shadow: 0 0 0 0 rgba(31, 255, 49, 0);
+    }
+}
 /* war3 */
 .war3logo {
     margin: 0 auto;

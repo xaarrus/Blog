@@ -1,11 +1,12 @@
-﻿<span class="@(hidden ? spanplay : spanmute)" @onclick=@(()=>hidden=!hidden)></span>
-<div class=" invisible">
-    @if (!hidden)
-    {<audio autoplay><source src="/Blog/mus/Taishi%20-%20Strayer.mp3" /></audio> }
-    else
-    { <audio muted><source src="/Blog/mus/Taishi%20-%20Strayer.mp3" /></audio>}
+﻿<div class="@(hidden ? "border-play" : "border-stop")">
+    <span class="@(hidden ? spanplay : spanmute) cursor-pointer" @onclick=@(()=>hidden=!hidden)></span>
+    <div class=" invisible">
+        @if (!hidden)
+        {<audio autoplay><source src="/Blog/mus/Taishi%20-%20Strayer.mp3" /></audio> }
+        else
+        { <audio muted><source src="/Blog/mus/Taishi%20-%20Strayer.mp3" /></audio>}
+    </div>
 </div>
-
 
 @code{
     bool hidden = true;

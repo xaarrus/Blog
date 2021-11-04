@@ -17,6 +17,14 @@
                 <span class="input-group-text" id="basic-addon1">Поиск предмета:</span>
                 <input type="text" class="form-control" @bind-value:event="oninput" @bind-value="SearchItemOnWord" placeholder="Введите название..." aria-label="" aria-describedby="basic-addon1">
             </div>
+            <div class="p-3" id="Filter">
+                <button @onclick="()=>FilterBool(ref boolWeapon)" class="btn btn-warning"><input class="form-check-input" type="checkbox" @bind="boolWeapon"> Weapon</button>
+                <button @onclick="()=>FilterBool(ref boolArmor)" class="btn btn-warning"><input class="form-check-input" type="checkbox" @bind="boolArmor"> Armor</button>
+                <button @onclick="()=>FilterBool(ref boolStr)" class="btn btn-warning"><input class="form-check-input" type="checkbox" @bind="boolStr"> Str</button>
+                <button @onclick="()=>FilterBool(ref boolAgi)" class="btn btn-warning"><input class="form-check-input" type="checkbox" @bind="boolAgi"> Agi</button>
+                <button @onclick="()=>FilterBool(ref boolInt)" class="btn btn-warning"><input class="form-check-input" type="checkbox" @bind="boolInt"> Int</button>
+                <button @onclick="()=>FilterBool(ref boolHP)" class="btn btn-warning"><input class="form-check-input" type="checkbox" @bind="boolHP"> HP</button>
+            </div>
             <div>
                 <table class="table table-striped table-dark">
                     <thead>
@@ -479,54 +487,53 @@
     List<ItemForge> ListItemForgeds = new List<ItemForge>() {
 
         #region BaseItemForge
-        new ItemForge { Id = 100 , NameItem = "Iron Sword", TypeItem = ItemType.weapon, DMG = 30, ASPD = 10 },
-        new ItemForge { Id = 101 , NameItem = "Scimitar", TypeItem = ItemType.weapon, DMG = 30, Agi = 10 },
-        new ItemForge { Id = 102 , NameItem = "Iron Axe", TypeItem = ItemType.weapon, DMG = 50 },
-        new ItemForge { Id = 103 , NameItem = "Hide Armor", TypeItem = ItemType.armor, Defence = 16, HP = 350 },
-        new ItemForge { Id = 104 , NameItem = "Rusty Shield", TypeItem = ItemType.armor, Defence = 10, BlockChance = new ItemBlock { Chance=30, Modificator = 60 } },
-        new ItemForge { Id = 105 , NameItem = "Hide Helm", TypeItem = ItemType.armor, Defence = 8, HPRegen = 3 },
-        new ItemForge { Id = 106 , NameItem = "Leather Gloves", TypeItem = ItemType.armor, ASPD = 30, Defence = 3 },
-        new ItemForge { Id = 107 , NameItem = "Leather Boots", TypeItem = ItemType.armor, MoveSpeed = 30, Defence = 3 },
-        new ItemForge { Id = 108 , NameItem = "Lesser Mana Talisman", TypeItem = ItemType.jeweler, MP = 350, MPRegen = 75 },
-        new ItemForge { Id = 999 , NameItem = "AYAYA", TypeItem = ItemType.weapon },
+        new ItemForge { Id = 100 , NameItem = "Iron Sword", Description = "Lv 1", TypeItem = ItemType.weapon, DMG = 30, ASPD = 10 },
+        new ItemForge { Id = 101 , NameItem = "Scimitar", Description = "Lv 1", TypeItem = ItemType.weapon, DMG = 30, Agi = 10 },
+        new ItemForge { Id = 102 , NameItem = "Iron Axe", Description = "Lv 1", TypeItem = ItemType.weapon, DMG = 50 },
+        new ItemForge { Id = 103 , NameItem = "Hide Armor", Description = "Lv 1", TypeItem = ItemType.armor, Defence = 16, HP = 350 },
+        new ItemForge { Id = 104 , NameItem = "Rusty Shield", Description = "Lv 1", TypeItem = ItemType.armor, Defence = 10, BlockChance = new ItemBlock { Chance=30, Modificator = 60 } },
+        new ItemForge { Id = 105 , NameItem = "Hide Helm", Description = "Lv 1", TypeItem = ItemType.armor, Defence = 8, HPRegen = 3 },
+        new ItemForge { Id = 106 , NameItem = "Leather Gloves", Description = "Lv 1", TypeItem = ItemType.armor, ASPD = 30, Defence = 3 },
+        new ItemForge { Id = 107 , NameItem = "Leather Boots", Description = "Lv 1", TypeItem = ItemType.armor, MoveSpeed = 30, Defence = 3 },
+        new ItemForge { Id = 108 , NameItem = "Lesser Mana Talisman", Description = "Lv 1", TypeItem = ItemType.jeweler, MP = 350, MPRegen = 75 },
         // Base Item Lv1 End Iron
-        new ItemForge { Id = 110 , NameItem = "Steel Sword", TypeItem = ItemType.weapon, DMG = 70, ASPD = 30 },
-        new ItemForge { Id = 111 , NameItem = "Steel Scimitar", TypeItem = ItemType.weapon, DMG = 50, Agi = 20 },
-        new ItemForge { Id = 112 , NameItem = "Steel Axe", TypeItem = ItemType.weapon, DMG = 100 },
-        new ItemForge { Id = 113 , NameItem = "Steel Armor", TypeItem = ItemType.armor, Defence = 30, HP = 800 },
-        new ItemForge { Id = 114 , NameItem = "Steel Shield", TypeItem = ItemType.armor, Defence = 22, BlockChance = new ItemBlock { Chance=32, Modificator = 120 } },
-        new ItemForge { Id = 115 , NameItem = "Steel Helm", TypeItem = ItemType.armor, Defence = 10, HPRegen = 10 },
-        new ItemForge { Id = 116 , NameItem = "Steel Gloves", TypeItem = ItemType.armor, ASPD = 50, Defence = 5 },
-        new ItemForge { Id = 117 , NameItem = "Improve Boots", TypeItem = ItemType.armor, MoveSpeed = 70, Defence = 8 },
-        new ItemForge { Id = 118 , NameItem = "Mana Talisman", TypeItem = ItemType.jeweler, MP = 500, MPRegen = 160 },
+        new ItemForge { Id = 110 , NameItem = "Steel Sword", Description = "Lv 2", TypeItem = ItemType.weapon, DMG = 70, ASPD = 30 },
+        new ItemForge { Id = 111 , NameItem = "Steel Scimitar", Description = "Lv 2", TypeItem = ItemType.weapon, DMG = 50, Agi = 20 },
+        new ItemForge { Id = 112 , NameItem = "Steel Axe", Description = "Lv 2", TypeItem = ItemType.weapon, DMG = 100 },
+        new ItemForge { Id = 113 , NameItem = "Steel Armor", Description = "Lv 2", TypeItem = ItemType.armor, Defence = 30, HP = 800 },
+        new ItemForge { Id = 114 , NameItem = "Steel Shield", Description = "Lv 2", TypeItem = ItemType.armor, Defence = 22, BlockChance = new ItemBlock { Chance=32, Modificator = 120 } },
+        new ItemForge { Id = 115 , NameItem = "Steel Helm", Description = "Lv 2", TypeItem = ItemType.armor, Defence = 10, HPRegen = 10 },
+        new ItemForge { Id = 116 , NameItem = "Steel Gloves", Description = "Lv 2", TypeItem = ItemType.armor, ASPD = 50, Defence = 5 },
+        new ItemForge { Id = 117 , NameItem = "Improve Boots", Description = "Lv 2", TypeItem = ItemType.armor, MoveSpeed = 70, Defence = 8 },
+        new ItemForge { Id = 118 , NameItem = "Mana Talisman", Description = "Lv 2", TypeItem = ItemType.jeweler, MP = 500, MPRegen = 160 },
         // Base Item Lv2 End Steel
-        new ItemForge { Id = 120 , NameItem = "Mithril Sword", TypeItem = ItemType.weapon, DMG = 100, ASPD = 50 },
-        new ItemForge { Id = 121 , NameItem = "Mithril Scimitar", TypeItem = ItemType.weapon, DMG = 50, Agi = 20 },
-        new ItemForge { Id = 122 , NameItem = "Mithril Axe", TypeItem = ItemType.weapon, DMG = 100 },
-        new ItemForge { Id = 123 , NameItem = "Mithril Armor", TypeItem = ItemType.armor, Defence = 50, HP = 1100 },
-        new ItemForge { Id = 124 , NameItem = "Mithril Shield", TypeItem = ItemType.armor, Defence = 22, BlockChance = new ItemBlock { Chance=32, Modificator = 120 } },
-        new ItemForge { Id = 125 , NameItem = "Mithril Helm", TypeItem = ItemType.armor, Defence = 10, HPRegen = 10 },
-        new ItemForge { Id = 126 , NameItem = "Mithril Gloves", TypeItem = ItemType.armor, ASPD = 80, Defence = 10 },
-        new ItemForge { Id = 127 , NameItem = "Mithril Boots", TypeItem = ItemType.armor, MoveSpeed = 70, Defence = 8 },
+        new ItemForge { Id = 120 , NameItem = "Mithril Sword", Description = "Lv 2-3", TypeItem = ItemType.weapon, DMG = 100, ASPD = 50 },
+        new ItemForge { Id = 121 , NameItem = "Mithril Scimitar", Description = "Lv 2-3", TypeItem = ItemType.weapon, DMG = 70, Agi = 30 },
+        new ItemForge { Id = 122 , NameItem = "Mithril Axe", Description = "Lv 2-3", TypeItem = ItemType.weapon, DMG = 100 },
+        new ItemForge { Id = 123 , NameItem = "Mithril Armor", Description = "Lv 2-3", TypeItem = ItemType.armor, Defence = 50, HP = 1100 },
+        new ItemForge { Id = 124 , NameItem = "Mithril Shield", Description = "Lv 2-3", TypeItem = ItemType.armor, Defence = 30, BlockChance = new ItemBlock { Chance=35, Modificator = 160 } },
+        new ItemForge { Id = 125 , NameItem = "Mithril Helm", Description = "Lv 2-3", TypeItem = ItemType.armor, Defence = 10, HPRegen = 10 },
+        new ItemForge { Id = 126 , NameItem = "Mithril Gloves", Description = "Lv 2-3", TypeItem = ItemType.armor, ASPD = 80, Defence = 10 },
+        new ItemForge { Id = 127 , NameItem = "Mithril Boots", Description = "Lv 2-3", TypeItem = ItemType.armor, MoveSpeed = 135, Defence = 18 },
         // Base Item Lv2-3 End Mithril
-        new ItemForge { Id = 130 , NameItem = "Titanium Sword", TypeItem = ItemType.weapon, DMG = 250, ASPD = 80 },
-        new ItemForge { Id = 131 , NameItem = "Titanium Scimitar", TypeItem = ItemType.weapon, DMG = 50, Agi = 20 },
-        new ItemForge { Id = 132 , NameItem = "Titanium Axe", TypeItem = ItemType.weapon, DMG = 100 },
-        new ItemForge { Id = 133 , NameItem = "Titanium Armor", TypeItem = ItemType.armor, Defence = 30, HP = 800 },
-        new ItemForge { Id = 134 , NameItem = "Titanium Shield", TypeItem = ItemType.armor, Defence = 22, BlockChance = new ItemBlock { Chance=32, Modificator = 120 } },
-        new ItemForge { Id = 135 , NameItem = "Titanium Helm", TypeItem = ItemType.armor, Defence = 10, HPRegen = 10 },
-        new ItemForge { Id = 136 , NameItem = "Titanium Gloves", TypeItem = ItemType.armor, ASPD = 50, Defence = 5 },
-        new ItemForge { Id = 138 , NameItem = "Bigger Mana Talisman", TypeItem = ItemType.jeweler, MP = 1300, MPRegen = 250 },
+        new ItemForge { Id = 130 , NameItem = "Titanium Sword", Description = "Lv 3", TypeItem = ItemType.weapon, DMG = 250, ASPD = 80 },
+        new ItemForge { Id = 131 , NameItem = "Titanium Scimitar", Description = "Lv 3", TypeItem = ItemType.weapon, DMG = 50, Agi = 20 },
+        new ItemForge { Id = 132 , NameItem = "Titanium Axe", Description = "Lv 3", TypeItem = ItemType.weapon, DMG = 100 },
+        new ItemForge { Id = 133 , NameItem = "Titanium Armor", Description = "Lv 3", TypeItem = ItemType.armor, Defence = 30, HP = 800 },
+        new ItemForge { Id = 134 , NameItem = "Titanium Shield", Description = "Lv 3", TypeItem = ItemType.armor, Defence = 60, BlockChance = new ItemBlock { Chance=40, Modificator = 300 } },
+        new ItemForge { Id = 135 , NameItem = "Titanium Helm", Description = "Lv 3", TypeItem = ItemType.armor, Defence = 50, HPRegen = 26 },
+        new ItemForge { Id = 136 , NameItem = "Titanium Gloves", Description = "Lv 3", TypeItem = ItemType.armor, ASPD = 140, Defence = 18 },
+        new ItemForge { Id = 138 , NameItem = "Bigger Mana Talisman", Description = "Lv 3", TypeItem = ItemType.jeweler, MP = 1300, MPRegen = 250 },
         // Base Item Lv3 End Titanium
-        new ItemForge { Id = 140 , NameItem = "Rune Sword", TypeItem = ItemType.weapon, DMG = 70, ASPD = 30 },
-        new ItemForge { Id = 141 , NameItem = "Rune Scimitar", TypeItem = ItemType.weapon, DMG = 180, Agi = 56 },
-        new ItemForge { Id = 142 , NameItem = "Rune Axe", TypeItem = ItemType.weapon, DMG = 100 },
-        new ItemForge { Id = 143 , NameItem = "Rune Armor", TypeItem = ItemType.armor, Defence = 200, HP = 3000 },
-        new ItemForge { Id = 144 , NameItem = "Rune Shield", TypeItem = ItemType.armor, Defence = 22, BlockChance = new ItemBlock { Chance=32, Modificator = 120 } },
-        new ItemForge { Id = 145 , NameItem = "Rune Helm", TypeItem = ItemType.armor, Defence = 10, HPRegen = 10 },
-        new ItemForge { Id = 146 , NameItem = "Rune Gloves", TypeItem = ItemType.armor, ASPD = 50, Defence = 5 },
-        new ItemForge { Id = 147 , NameItem = "Rune Boots", TypeItem = ItemType.armor, MoveSpeed = 70, Defence = 8 },
-        new ItemForge { Id = 148 , NameItem = "Greator Mana Talisman", TypeItem = ItemType.jeweler, MP = 500, MPRegen = 160 },
+        new ItemForge { Id = 140 , NameItem = "Rune Sword", Description = "Lv 4", TypeItem = ItemType.weapon, DMG = 500, ASPD = 140 },
+        new ItemForge { Id = 141 , NameItem = "Rune Scimitar", Description = "Lv 4", TypeItem = ItemType.weapon, DMG = 300, Agi = 100 },
+        new ItemForge { Id = 142 , NameItem = "Rune Axe", Description = "Lv 4", TypeItem = ItemType.weapon, DMG = 700 },
+        new ItemForge { Id = 143 , NameItem = "Rune Armor", Description = "Lv 4", TypeItem = ItemType.armor, Defence = 200, HP = 3000 },
+        new ItemForge { Id = 144 , NameItem = "Rune Shield", Description = "Lv 4", TypeItem = ItemType.armor, Defence = 150, BlockChance = new ItemBlock { Chance=45, Modificator = 500 } },
+        new ItemForge { Id = 145 , NameItem = "Rune Helm", Description = "Lv 4", TypeItem = ItemType.armor, Defence = 110, HPRegen = 80 },
+        new ItemForge { Id = 146 , NameItem = "Rune Gloves", Description = "Lv 4", TypeItem = ItemType.armor, ASPD = 300, Defence = 25 },
+        new ItemForge { Id = 147 , NameItem = "Rune Boots", Description = "Lv 4", TypeItem = ItemType.armor, MoveSpeed = 180, Defence = 30 },
+        new ItemForge { Id = 148 , NameItem = "Greater Mana Talisman", Description = "Lv 4", TypeItem = ItemType.jeweler, MP = 3000, MPRegen = 400 },
         // Base Item Lv4 End Rune
         #endregion BaseItemForge
         new ItemForge { Id = 1000 , NameItem = "Rusty Mining Pick", TypeItem = ItemType.weapon, DMG = 17 },
@@ -751,9 +758,17 @@
         //etc end
     };
     string SearchItemOnWord = "";
-    List<ItemForge> SearchItem => ListItemForgeds.Where(x => x.NameItem.ToLower().Contains(SearchItemOnWord.ToLower())).ToList();
+    List<ItemForge> SearchItem => ListItemForgeds.Where(x => x.NameItem.ToLower().Contains(SearchItemOnWord.ToLower())
+    && (boolWeapon == true ? (x.TypeItem == ItemType.weapon) : x.Id != null)
+    && (boolArmor == true ? (x.TypeItem == ItemType.armor) : x.Id != null)
+    && (boolStr == true ? x.Str > 0 : x.Str != null)
+    && (boolAgi == true ? x.Agi > 0 : x.Agi != null)
+    && (boolInt == true ? x.Int > 0 : x.Int != null)
+    && (boolHP == true ? x.HP > 0 : x.HP != null)
+    ).ToList();
     List<ItemForge> ListItemForgedsFavorite = new List<ItemForge>();
     List<ItemForge> ListItemForgedsFavoriteBase = new List<ItemForge>();
+    bool boolWeapon = false, boolArmor = false, boolStr = false, boolAgi = false, boolInt = false, boolHP = false;
 
     void UpdateFavoriteBase()
     {
@@ -771,6 +786,7 @@
         }
         ListItemForgedsFavoriteBase = ListItemForgedsFavoriteBase.OrderBy(x => x.Id).ToList();
     }
+
     void AddToFavorite(int idItem)
     {
         if (!ListItemForgedsFavorite.Contains(ListItemForgedsFavorite.Where(x => x.Id == idItem).FirstOrDefault()))
@@ -778,26 +794,34 @@
             ListItemForgedsFavorite.Add(ListItemForgeds.Where(x => x.Id == idItem).FirstOrDefault());
             UpdateFavoriteBase();
         }
-
     }
+
     void DeleteFromFavorite(int idItem)
     {
         ListItemForgedsFavorite.Remove(ListItemForgedsFavorite.Where(x => x.Id == idItem).FirstOrDefault());
         UpdateFavoriteBase();
     }
+
     void ClearListFavorite()
     {
         ListItemForgedsFavorite = new List<ItemForge>();
         UpdateFavoriteBase();
     }
+
     string FindItemOnId(int id)
     {
         return ListItemForgeds.Where(x => x.Id == id).FirstOrDefault().NameItem + " / ";
     }
+
     string GetDataToJson()
     {
         var jsonstr = System.Text.Json.JsonSerializer.Serialize(ListItemForgeds);
         byte[] byteArray = System.Text.ASCIIEncoding.ASCII.GetBytes(jsonstr);
         return "data:application/octet-stream;base64," + Convert.ToBase64String(byteArray);
+    }
+
+    void FilterBool(ref bool refBool)
+    {
+        refBool = !refBool;
     }
 }
