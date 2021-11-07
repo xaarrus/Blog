@@ -1,6 +1,8 @@
 ﻿@page "/notebook/calc/"
 @page "/notebook/calc/{addrSkill?}"
 @inject NavigationManager navigationManager
+@inject IJSRuntime JSRuntime
+@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
 
 <Title Value="Блокнот - Калькулятор. Временно доступен только лучник!" />
 <Meta name="description" content="Временно доступен только лучник" />
@@ -195,9 +197,21 @@
                 }
             </div>
             <div class="input-group mb-3">
-                <button class="btn btn-outline-secondary" type="button" @onclick="GetUrlToShare">Создать ссылку</button>
-                <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="" value="@ResultUrl">
-            </div>           
+                <button title="Скопировать ссылку" class="btn btn-outline-secondary" type="button" @onclick="CopyUrlToShare"><span class="oi oi-clipboard"></span></button>
+                <input type="text" id="copyText" class="form-control" placeholder="" aria-label="" aria-describedby="" value="@ResultUrl">
+                <button title="Сохранить ссылку в локальное хранилище браузера" class="btn btn-outline-secondary" type="button" @onclick="SaveUrlToLocalStorage"><span class="oi oi-book"></span></button>
+            </div>
+            <div>
+                @if (UrlFromLocalStorage != null & UrlFromLocalStorage != "")
+                {
+                    <a title="Загрузить сборку навыков" class="btn btn-dark" href=@LinkFromSave(UrlFromLocalStorage)><span class="oi oi-share-boxed"></span></a>
+                    <button title="Удалить ссылку из локального хранилища браузера" class="btn btn-danger" type="button" @onclick="DeleteUrlToLocalStorage"><span class="oi oi-trash"></span></button>
+                }
+                else
+                {
+                    <span>Сохранений нет</span>
+                }
+            </div>
         </div>
     </div>
 </div>
@@ -206,7 +220,7 @@
 @code {
     [Parameter]
     public string addrSkill { get; set; }
-    private string classChar, addrskill, skillvar, chClassBg, ResultUrl;
+    private string classChar, addrskill, skillvar, chClassBg, ResultUrl, UrlFromLocalStorage;
     private int newSkillLv;
     public string[] CharacterClassName = new string[4] { "chwar", "chmag", "charc", "chthi" };
     public List<char> validChar = new List<char>() { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k' };
@@ -234,6 +248,8 @@
         }
         GetChClass();
         GetChSkillVar();
+        LoadSaveUrl();
+        GetUrlToShare();
     }
     protected override async Task OnParametersSetAsync()
     {
@@ -246,6 +262,7 @@
             addrskill = addrSkill;
             GetChClass();
             GetChSkillVar();
+            GetUrlToShare();
         }
     }
     void GetChClass()
@@ -271,7 +288,7 @@
                 break;
             default:
                 classChar = "Nonset";
-                chClassBg = SetChClassBg(CharacterClassName[new Random().Next(0,4)]);
+                chClassBg = SetChClassBg(CharacterClassName[new Random().Next(0, 4)]);
                 break;
         }
     }
@@ -348,6 +365,35 @@
         }
     }
     string SetChClassBg(string classname) => classname + "bg";
+
+    void CopyUrlToShare()
+    {
+        JSRuntime.InvokeVoidAsync("navigator.clipboard.writeText", ResultUrl);
+    }
+
+    void SaveUrlToLocalStorage()
+    {
+        localStorage.SetItem("Calc", ResultUrl);
+        LoadSaveUrl();
+    }
+    void DeleteUrlToLocalStorage()
+    {
+        localStorage.RemoveItem("Calc");
+        UrlFromLocalStorage = "";
+        LoadSaveUrl();
+    }
+    void LoadSaveUrl()
+    {
+        if (localStorage.GetItemAsString("Calc") != null & localStorage.GetItemAsString("Calc") != "")
+        {
+            UrlFromLocalStorage = localStorage.GetItemAsString("Calc");
+        }
+    }
+    string LinkFromSave(string s)
+    {
+        Uri Temp = new Uri(s.Replace('\"', ' ').Trim());
+        return Temp.LocalPath.ToString();
+    }
 
     public class SkillExampleModel
     {

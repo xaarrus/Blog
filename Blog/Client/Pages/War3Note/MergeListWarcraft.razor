@@ -6,7 +6,7 @@
 
         </div>
         <div class="col-3">
-            <a class="btn btn-outline-warning" download="itemSave.json" href=@GetDataToJson() target="_blank">Download Json</a>
+            <a title="Сохранить все предметы на ПК в Json формате." class="btn btn-outline-warning" download="itemSave.json" href=@GetDataToJson() target="_blank">Download Json</a>
         </div>
     </div>
 
@@ -18,12 +18,30 @@
                 <input type="text" class="form-control" @bind-value:event="oninput" @bind-value="SearchItemOnWord" placeholder="Введите название..." aria-label="" aria-describedby="basic-addon1">
             </div>
             <div class="p-3" id="Filter">
-                <button @onclick="()=>FilterBool(ref boolWeapon)" class="btn btn-warning"><input class="form-check-input" type="checkbox" @bind="boolWeapon"> Weapon</button>
-                <button @onclick="()=>FilterBool(ref boolArmor)" class="btn btn-warning"><input class="form-check-input" type="checkbox" @bind="boolArmor"> Armor</button>
-                <button @onclick="()=>FilterBool(ref boolStr)" class="btn btn-warning"><input class="form-check-input" type="checkbox" @bind="boolStr"> Str</button>
-                <button @onclick="()=>FilterBool(ref boolAgi)" class="btn btn-warning"><input class="form-check-input" type="checkbox" @bind="boolAgi"> Agi</button>
-                <button @onclick="()=>FilterBool(ref boolInt)" class="btn btn-warning"><input class="form-check-input" type="checkbox" @bind="boolInt"> Int</button>
-                <button @onclick="()=>FilterBool(ref boolHP)" class="btn btn-warning"><input class="form-check-input" type="checkbox" @bind="boolHP"> HP</button>
+                <h4>Фильтры:</h4>
+                <button @onclick="()=>FilterBool(ref boolWeapon)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolWeapon"> Weapon</button>
+                <button @onclick="()=>FilterBool(ref boolArmor)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolArmor"> Armor</button>
+                <button @onclick="()=>FilterBool(ref boolJeweler)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolArmor"> Jeweler</button>
+                <button @onclick="()=>FilterBool(ref boolStr)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolStr"> Str</button>
+                <button @onclick="()=>FilterBool(ref boolAgi)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolAgi"> Agi</button>
+                <button @onclick="()=>FilterBool(ref boolInt)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolInt"> Int</button>
+                <button @onclick="()=>FilterBool(ref boolAllStats)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolAllStats"> AllStats</button>
+                <button @onclick="()=>FilterBool(ref boolHP)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolHP"> HP</button>
+                <button @onclick="()=>FilterBool(ref boolHPRegen)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolHPRegen"> HPRegen</button>
+                <button @onclick="()=>FilterBool(ref boolDefence)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolDefence"> Def</button>
+                <button @onclick="()=>FilterBool(ref boolMagRes)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolMagRes"> MagRes</button>
+                <button @onclick="()=>FilterBool(ref boolMP)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolMP"> MP</button>
+                <button @onclick="()=>FilterBool(ref boolMPRegen)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolMPRegen"> MPRegen</button>
+                <button @onclick="()=>FilterBool(ref boolMoveSpeed)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolMoveSpeed"> MoveSpeed</button>
+                <button @onclick="()=>FilterBool(ref boolDMG)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolDMG"> DMG</button>
+                <button @onclick="()=>FilterBool(ref boolDMGPercent)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolDMGPercent"> DMGPercent</button>
+                <button @onclick="()=>FilterBool(ref boolASPD)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolASPD"> ASPD</button>
+                <button @onclick="()=>FilterBool(ref boolLifeSteal)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolLifeSteal"> LifeSteal</button>
+                <button @onclick="()=>FilterBool(ref boolReflectMeleDMG)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolReflectMeleDMG"> ReflectMeleDMG</button>
+                <button @onclick="()=>FilterBool(ref boolCriticalChance)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolCriticalChance"> Critical</button>
+                <button @onclick="()=>FilterBool(ref boolCleaveChance)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolCleaveChance"> Cleave</button>
+                <button @onclick="()=>FilterBool(ref boolBlockChance)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolBlockChance"> Block</button>
+                <button @onclick="()=>FilterBool(ref boolPoison)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolPoison"> Poison</button>
             </div>
             <div>
                 <table class="table table-striped table-dark">
@@ -65,7 +83,7 @@
         <div class="col-6">
             <div>
                 <h3 class="text-center">Избранное</h3>
-                <button @onclick="ClearListFavorite" class="btn btn-warning"><span class="oi oi-trash"></span> Clear All Favorite</button>
+                <button title="Удаляет все предметы из избранного." @onclick="ClearListFavorite" class="btn btn-warning"><span class="oi oi-trash"></span> Clear All Favorite</button>
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="panelsStayOpen-headingFavorite">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-Favorite" aria-expanded="false" aria-controls="panelsStayOpen-Favorite">
@@ -758,17 +776,40 @@
         //etc end
     };
     string SearchItemOnWord = "";
+
     List<ItemForge> SearchItem => ListItemForgeds.Where(x => x.NameItem.ToLower().Contains(SearchItemOnWord.ToLower())
     && (boolWeapon == true ? (x.TypeItem == ItemType.weapon) : x.Id != null)
     && (boolArmor == true ? (x.TypeItem == ItemType.armor) : x.Id != null)
-    && (boolStr == true ? x.Str > 0 : x.Str != null)
-    && (boolAgi == true ? x.Agi > 0 : x.Agi != null)
-    && (boolInt == true ? x.Int > 0 : x.Int != null)
-    && (boolHP == true ? x.HP > 0 : x.HP != null)
+    && (boolJeweler == true ? (x.TypeItem == ItemType.jeweler) : x.Id != null)
+    && (boolStr == true ? x.Str > 0 : x.Id != null)
+    && (boolAgi == true ? x.Agi > 0 : x.Id != null)
+    && (boolInt == true ? x.Int > 0 : x.Id != null)
+    && (boolHP == true ? x.HP > 0 : x.Id != null)
+    && (boolAllStats == true ? x.AllStats > 0 : x.Id != null)
+    && (boolDefence == true ? x.Defence > 0 : x.Id != null)
+    && (boolMagRes == true ? x.MagRes > 0 : x.Id != null)
+    && (boolHPRegen == true ? x.HPRegen > 0 : x.Id != null)
+    && (boolMP == true ? x.MP > 0 : x.Id != null)
+    && (boolMPRegen == true ? x.MPRegen > 0 : x.Id != null)
+    && (boolMoveSpeed == true ? x.MoveSpeed > 0 : x.Id != null)
+    && (boolDMG == true ? x.DMG > 0 : x.Id != null)
+    && (boolDMGPercent == true ? x.DMGPercent > 0 : x.Id != null)
+    && (boolASPD == true ? x.ASPD > 0 : x.Id != null)
+    && (boolLifeSteal == true ? x.LifeSteal > 0 : x.Id != null)
+    && (boolReflectMeleDMG == true ? x.ReflectMeleDMG > 0 : x.Id != null)
+    && (boolCriticalChance == true ? x.CriticalChance?.Chance > 0 : x.Id != null)
+    && (boolCleaveChance == true ? x.CleaveChance?.Chance > 0 : x.Id != null)
+    && (boolBlockChance == true ? x.BlockChance?.Chance > 0 : x.Id != null)
+    && (boolPoison == true ? x.Poison?.Chance > 0 : x.Id != null)
     ).ToList();
+
     List<ItemForge> ListItemForgedsFavorite = new List<ItemForge>();
     List<ItemForge> ListItemForgedsFavoriteBase = new List<ItemForge>();
-    bool boolWeapon = false, boolArmor = false, boolStr = false, boolAgi = false, boolInt = false, boolHP = false;
+    bool boolWeapon = false, boolArmor = false, boolJeweler = false, boolStr = false, boolAgi = false, boolInt = false, boolHP = false,
+    boolAllStats = false, boolDefence = false, boolMagRes = false, boolHPRegen = false,
+    boolMP = false, boolMPRegen = false, boolMoveSpeed = false, boolDMG = false,
+    boolDMGPercent = false, boolASPD = false, boolLifeSteal = false, boolReflectMeleDMG = false,
+    boolCriticalChance = false, boolCleaveChance = false, boolBlockChance = false, boolPoison = false;
 
     void UpdateFavoriteBase()
     {

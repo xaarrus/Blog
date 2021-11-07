@@ -59,8 +59,9 @@ namespace Blog.Shared.Data.WAR3
                 + (LifeSteal > 0 ? $" LifeSteal + {LifeSteal}%," : "")
                 + (ReflectMeleDMG > 0 ? $" ReflectMeleeDMG + {ReflectMeleDMG}%," : "")
                 + ((CriticalChance != null & CriticalChance != new ItemCritical()) ? $" Crit {CriticalChance.Chance}% to {CriticalChance.Modificator}x," : "")
-                + ((BlockChance != null & BlockChance != new ItemBlock()) ? $" with {BlockChance.Chance}% block {BlockChance.Modificator} dmg," : "")
-                + ((CleaveChance != null & CleaveChance != new ItemCleave()) ? $" cleave {CleaveChance.Chance}% {CleaveChance.Modificator} AOE," : "")
+                + ((BlockChance != null & BlockChance != new ItemBlock()) ? $" With {BlockChance.Chance}% block {BlockChance.Modificator} dmg," : "")
+                + ((CleaveChance != null & CleaveChance != new ItemCleave()) ? $" Cleave {CleaveChance.Chance}% {CleaveChance.Modificator} AOE," : "")
+                + ((Poison != null & Poison != new ItemPoison()) ? $" Poison {Poison.Modificator}dmg in sec/{Poison.Chance} sec," : "")
                 ;
             return result;
         }
