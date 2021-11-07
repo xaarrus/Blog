@@ -350,6 +350,7 @@
             TemplSkillInfo.SkillLvCurrent++;
             LocalSkillStorage[LocalSkillStorage.FindIndex(index => index.SkillId.Equals(skId))] = TemplSkillInfo;
         }
+        GetUrlToShare();
     }
     void SkillDownLv(int skId)
     {
@@ -363,6 +364,7 @@
             TemplSkillInfo.SkillLvCurrent--;
             LocalSkillStorage[LocalSkillStorage.FindIndex(index => index.SkillId.Equals(skId))] = TemplSkillInfo;
         }
+        GetUrlToShare();
     }
     string SetChClassBg(string classname) => classname + "bg";
 
