@@ -21,7 +21,7 @@
                 <h4>Фильтры:</h4>
                 <button @onclick="()=>FilterBool(ref boolWeapon)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolWeapon"> Weapon</button>
                 <button @onclick="()=>FilterBool(ref boolArmor)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolArmor"> Armor</button>
-                <button @onclick="()=>FilterBool(ref boolJeweler)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolArmor"> Jeweler</button>
+                <button @onclick="()=>FilterBool(ref boolJeweler)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolJeweler"> Jeweler</button>
                 <button @onclick="()=>FilterBool(ref boolStr)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolStr"> Str</button>
                 <button @onclick="()=>FilterBool(ref boolAgi)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolAgi"> Agi</button>
                 <button @onclick="()=>FilterBool(ref boolInt)" class="btn btn-warning m-1"><input class="form-check-input" type="checkbox" @bind="boolInt"> Int</button>
@@ -106,7 +106,7 @@
                                         @foreach (var item in ListItemForgedsFavorite)
                                         {
                                             <tr>
-                                                <td><button class="btn btn-sm btn-outline-danger" @onclick="()=>DeleteFromFavorite(item.Id)"><span class="oi oi-trash"></span></button> @item.NameItem : @item.Description</td>
+                                                <td><button class="btn btn-sm btn-outline-warning" @onclick="()=>DeleteFromFavorite(item.Id)"><span class="oi oi-trash"></span></button> @item.NameItem : @item.Description</td>
                                                 <td>
                                                     @if (item.ForgeFrom?.Count > 0)
                                                     {
