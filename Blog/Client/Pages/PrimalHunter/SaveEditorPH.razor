@@ -1,6 +1,18 @@
-﻿<div>
+﻿<div style="background-color:rgba(0,0,0, 0.5);">
     <div id="LogoPrimalEditor">
-        <img src="/Blog/img/ph/_th_ico_50.png" style="display: block;margin-left: auto;margin-right: auto;" />
+        <img src="/Blog/img/ph/_th_logo_0_0.png" style="display: block;margin-left: auto;margin-right: auto;" />
+    </div>
+    <div id="LoadSaveButton" class="row">
+            <div class="col-md-6">
+                <h2>Load you tHPsave.sav file for edit:</h2>
+                <InputFile class="form-control" style="max-width:500px;" OnChange="@LoadSave" multiple />
+            </div>
+            <div class="col-md-6">
+                @if (newPHSaveData != null)
+                {
+                    <a title="Generate and Download new .sav file" class="btn btn-warning" style="padding:5px;" download="tHPsave.sav" href=@GenerateSaveFile() target="_blank">Download Save</a>
+                }
+            </div>
     </div>
     <div id="ItemsToAddInInventory" class="row">
         @if (DataPrimalItemsList == null)
@@ -9,6 +21,7 @@
         }
         else
         {
+            <h2 style="text-align: center;">Item for add to inventory.</h2>
             @foreach (var item in DataPrimalItemsList.OrderBy(x => x.item_id))
             {
                 <div class="col-md-1">
@@ -28,16 +41,7 @@
             }
         }
     </div>
-    <div id="LoadSaveAndEdit">
-        <div id="LoadSaveButton" class="row">
-            <div class="col-md-6"><InputFile class="form-control" style="max-width:500px;" OnChange="@LoadSave" multiple /></div>
-            <div class="col-md-6">
-                @if (newPHSaveData != null)
-                {
-                    <a title="Generate and Download new .sav file" class="btn btn-warning" style="padding:5px;" download="tHPsave.sav" href=@GenerateSaveFile() target="_blank">Download Save</a>
-                }
-            </div>
-        </div>
+    <div id="LoadSaveAndEdit">        
         <div id="LoadingDataFromSave" class="row">
             @if (newPHSaveData == null)
             {
@@ -46,8 +50,8 @@
             else
             {
                 <div id="Inventory" class="row">
-                    <h1>Inventory.</h1>
-                    <div class="row border border-dark">
+                    <h1 style="text-align: center;">Inventory.</h1>
+                    <div class="row">
                         @foreach (var item in newPHSaveData.inventory.Where(x => x.slot == 1).OrderBy(y => y.item_id))
                         {
                             var t = DataPrimalItemsList.FirstOrDefault(x => x.item_id == item.item_id);
@@ -81,7 +85,7 @@
                     </div>
                     <div id="WeaponAndClothes" class="row">
                         <div id="Weapon" class="col-md-6">
-                                <h1>Weapon First.</h1>
+                        <h1 style="text-align: center;">Weapon First.</h1>
                                 <div class="row">
                             @foreach (var item in newPHSaveData.inventory.Where(x => x.slot == 2))
                             {
@@ -133,7 +137,7 @@
                                 }
                             }
                                 </div>
-                                <h1>Weapon Second.</h1>
+                        <h1 style="text-align: center;">Weapon Second.</h1>
                                 <div class="row">
                             @foreach (var item in newPHSaveData.inventory.Where(x => x.slot == 3))
                             {
@@ -185,7 +189,7 @@
                                 }
                             }
                                 </div>
-                                <h1>Weapon Third.</h1>
+                        <h1 style="text-align: center;">Weapon Third and Four, Five.</h1>
                                 <div class="row">
                             @foreach (var item in newPHSaveData.inventory.Where(x => x.slot == 4))
                             {
@@ -246,7 +250,7 @@
                                 </div>
                             </div>
                         <div id="Clothes" class="col-md-6">
-                            <h1>Clothes</h1>
+                        <h1 style="text-align: center;">Clothes</h1>
                         @if (newPHSaveData.inventory.Where(x => x.slot == 18 | x.slot == 19 | x.slot == 20 | x.slot == 21 | x.slot == 22 | x.slot == 24).Count() > 0)
                         {
                             <div class="row">
@@ -275,7 +279,7 @@
                         </div>
                     </div>
                     <div id="Avatar" class="row">
-                        <h1>Avatar.</h1>
+                    <h1 style="text-align: center;">Avatar.</h1>
                         <div class="col-md-3"><img src=@UrlIconItemPrimal(1000000) style=@(styleAvatarBorder(1000000, newPHSaveData.avatar)) @onclick="()=>ChangeAvatar(1000000)" /></div>
                         <div class="col-md-3"><img src=@UrlIconItemPrimal(1000001) style=@(styleAvatarBorder(1000001, newPHSaveData.avatar)) @onclick="()=>ChangeAvatar(1000001)" /></div>
                         <div class="col-md-3"><img src=@UrlIconItemPrimal(1000002) style=@(styleAvatarBorder(1000002, newPHSaveData.avatar)) @onclick="()=>ChangeAvatar(1000002)" /></div>
@@ -368,6 +372,10 @@
     string ToolTipAddItem => "Add Item in you inventory to save.\nIf its ammo or canister add 999.";
     void AddItemInInventory(int id, string name)
     {
+        if(newPHSaveData == null)
+        {
+            return;
+        }
         string randomGuid = new Random().Next(minValue: 9000, maxValue: 9999).ToString();
         int countItem = -2;
         while (newPHSaveData.inventory.FirstOrDefault(x => x.guid == randomGuid) != null)
