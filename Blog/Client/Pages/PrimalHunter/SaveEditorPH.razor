@@ -21,24 +21,107 @@
         }
         else
         {
-            <h2 style="text-align: center;">Item for add to inventory.</h2>
-            @foreach (var item in DataPrimalItemsList.OrderBy(x => x.item_id))
-            {
-                <div class="col-md-1">
-                    <div style="border: 2px solid grey; margin:5px;">
-                        <div class="card text-bg-dark">
-                            <img src=@UrlIconItemPrimal(item.item_id) title="@item.item_name" class="card-img" />
-                            <div class="card-img-overlay" title="@item.item_name" style="padding:0px;">
-                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                    <button class="btn btn-success" style="padding: 3px 8px;"
-                                    @onclick="()=>AddItemInInventory(item.item_id, item.item_name)" title=@ToolTipAddItem>
-                                    <span class="oi oi-plus" aria-hidden="true"></span></button>
+            <div id="bundleSection" class="row">
+                <div id="woodenBundle" class="col-md-4">
+                    <HelperPHBundleList ListPHItems=@(BundleGenerator(new int[] { 232, 233 })) HeaderText="Wooden Bundle" AddToBundleCallback=@AddBundleToInventory />
+                </div>
+                <div id="talonBundle" class="col-md-4">
+                    <HelperPHBundleList ListPHItems=@(BundleGenerator(new int[] { 85, 86 })) HeaderText="Talon Bundle" AddToBundleCallback=@AddBundleToInventory />
+                </div>
+                <div id="fangBundle" class="col-md-4">
+                    <HelperPHBundleList ListPHItems=@(BundleGenerator(new int[] { 1016, 1019 })) HeaderText="Fang Bundle" AddToBundleCallback=@AddBundleToInventory />
+                </div>
+                <div id="handgunBundle" class="col-md-4">
+                    <HelperPHBundleList ListPHItems=@(BundleGenerator(new int[] { 345, 4, 13 })) HeaderText="Handgun Bundle" AddToBundleCallback=@AddBundleToInventory />
+                </div>
+                <div id="shotgunBundle" class="col-md-4">
+                    <HelperPHBundleList ListPHItems=@(BundleGenerator(new int[] { 9, 255, 113, 69 })) HeaderText="Shotgun Bundle" AddToBundleCallback=@AddBundleToInventory />
+                </div>
+                <div id="duelingBundle" class="col-md-4">
+                    <HelperPHBundleList ListPHItems=@(BundleGenerator(new int[] { 215, 131 })) HeaderText="Dueling Bundle" AddToBundleCallback=@AddBundleToInventory />
+                </div>
+                <div id="antiPersonnelBundle" class="col-md-4">
+                    <HelperPHBundleList ListPHItems=@(BundleGenerator(new int[] { 348, 131 })) HeaderText="Anti-personnel Bundle" AddToBundleCallback=@AddBundleToInventory />
+                </div>
+                <div id="marksmanBundle" class="col-md-4">
+                    <HelperPHBundleList ListPHItems=@(BundleGenerator(new int[] { 129, 130, 131 })) HeaderText="Marksman Bundle" AddToBundleCallback=@AddBundleToInventory />
+                </div>
+                <div id="doubleBundle" class="col-md-4">
+                    <HelperPHBundleList ListPHItems=@(BundleGenerator(new int[] { 112, 1000 })) HeaderText="Double Bundle" AddToBundleCallback=@AddBundleToInventory />
+                </div>
+                <div id="assaultBundle" class="col-md-4">
+                    <HelperPHBundleList ListPHItems=@(BundleGenerator(new int[] { 1009, 1010 })) HeaderText="Assault Bundle" AddToBundleCallback=@AddBundleToInventory />
+                </div>
+                <div id="sniperBundle" class="col-md-4">
+                    <HelperPHBundleList ListPHItems=@(BundleGenerator(new int[] { 1006, 1004, 1007 })) HeaderText="Sniper Bundle" AddToBundleCallback=@AddBundleToInventory />
+                </div>
+                <div id="pionerBundle" class="col-md-4">
+                    <HelperPHBundleList ListPHItems=@(BundleGenerator(new int[] { 188, 37, 63 })) HeaderText="Pioner Bundle" AddToBundleCallback=@AddBundleToInventory />
+                </div>
+                <div id="settlerBundle" class="col-md-4">
+                    <HelperPHBundleList ListPHItems=@(BundleGenerator(new int[] { 47, 29, 36, 22, 60 })) HeaderText="Settler Bundle" AddToBundleCallback=@AddBundleToInventory />
+                </div>
+                <div id="gruntBundle" class="col-md-4">
+                    <HelperPHBundleList ListPHItems=@(BundleGenerator(new int[] { 45, 40, 32, 62, 23 })) HeaderText="Grunt Bundle" AddToBundleCallback=@AddBundleToInventory />
+                </div>
+                <div id="navyBundle" class="col-md-4">
+                    <HelperPHBundleList ListPHItems=@(BundleGenerator(new int[] { 59, 48, 24, 26, 38 })) HeaderText="Navy Bundle" AddToBundleCallback=@AddBundleToInventory />
+                </div>
+                <div id="specopsBundle" class="col-md-4">
+                    <HelperPHBundleList ListPHItems=@(BundleGenerator(new int[] { 88, 89, 25, 44, 91 })) HeaderText="Spec-Ops Bundle" AddToBundleCallback=@AddBundleToInventory />
+                </div>
+                <div id="nobleBundle" class="col-md-4">
+                    <HelperPHBundleList ListPHItems=@(BundleGenerator(new int[] { 33, 61, 41, 46, 87, 90 })) HeaderText="Noble Bundle" AddToBundleCallback=@AddBundleToInventory />
+                </div>
+                <div id="eyeBundle" class="col-md-4">
+                    <HelperPHBundleList ListPHItems=@(BundleGenerator(new int[] { 50, 174, 175, 176 })) HeaderText="Glasses Bundle" AddToBundleCallback=@AddBundleToInventory />
+                </div>
+                <div id="medBundle" class="col-md-4">
+                    <HelperPHBundleList ListPHItems=@(BundleGenerator(new int[] { 1001, 1002, 1003 })) HeaderText="Medkit Bundle" AddToBundleCallback=@AddBundleToInventory />
+                </div>
+                <div id="adventureBundle" class="col-md-4">
+                    <HelperPHBundleList ListPHItems=@(BundleGenerator(new int[] { 1005, 1008, 150, 173, 1017 })) HeaderText="Adventure Bundle" AddToBundleCallback=@AddBundleToInventory />
+                </div>
+                <div id="mapBundle" class="col-md-4">
+                    <HelperPHBundleList ListPHItems=@(BundleGenerator(new int[] { 363 })) HeaderText="Maps x10 Bundle" AddToBundleCallback=@AddBundleToInventory />
+                </div>
+                <div id="glandBundle" class="col-md-4">
+                    <HelperPHBundleList ListPHItems=@(BundleGenerator(new int[] { 1018 })) HeaderText="Primal Roar Bundle" AddToBundleCallback=@AddBundleToInventory />
+                </div>
+            </div>
+            <div class="accordion" id="accordionPanelsStayOpen">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
+                            Full list items for add to inventory.
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+                        <div class="accordion-body">
+                            <div class="row">
+                            @foreach (var item in DataPrimalItemsList.OrderBy(x => x.item_id))
+                            {
+                                <div class="col-md-1">
+                                    <div style="border: 2px solid grey; margin:5px;">
+                                        <div class="card text-bg-dark">
+                                            <img src=@UrlIconItemPrimal(item.item_id) title="@item.item_name" class="card-img" />
+                                            <div class="card-img-overlay" title="@item.item_name" style="padding:0px;">
+                                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                    <button class="btn btn-success" style="padding: 3px 8px;"
+                                                    @onclick="()=>AddItemInInventory(item.item_id, item.item_name)" title=@ToolTipAddItem>
+                                                        <span class="oi oi-plus" aria-hidden="true"></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            }
+                        </div>
                         </div>
                     </div>
                 </div>
-            }
+            </div>
         }
     </div>
     <div id="LoadSaveAndEdit">        
@@ -83,211 +166,308 @@
                         }
                         </div>
                     </div>
-                    <div id="WeaponAndClothes" class="row">
-                        <div id="Weapon" class="col-md-6">
-                        <h1 style="text-align: center;">Weapon First.</h1>
-                                <div class="row">
-                            @foreach (var item in newPHSaveData.inventory.Where(x => x.slot == 2))
-                            {
-                                @if (item != null)
-                                {
-                                    <div class="col-md-4">
-                                        <img src=@UrlIconItemPrimal(item.item_id) />
-                                        @{
-                                            var t = DataPrimalItemsList.FirstOrDefault(x => x.item_id == item.item_id);
-                                        }
-                                        @if (t != null)
-                                        {
-                                            <p>@t.item_name</p>
-                                        }
-                                    </div>
-                                }
-                            }
-                            @foreach (var item in newPHSaveData.inventory.Where(x => x.slot == 8))
-                            {
-                                @if (item != null)
-                                {
-                                    <div class="col-md-4">
-                                        <img src=@UrlIconItemPrimal(item.item_id) />
-                                        @{
-                                            var t = DataPrimalItemsList.FirstOrDefault(x => x.item_id == item.item_id);
-                                        }
-                                        @if (t != null)
-                                        {
-                                            <p>@t.item_name</p>
-                                        }
-                                        <EditForm Model="newPHSaveData"><InputNumber style="max-width:70px;" @bind-Value="item.health" /></EditForm>
-                                    </div>
-                                }
-                            }
-                            @foreach (var item in newPHSaveData.inventory.Where(x => x.slot == 5))
-                            {
-                                @if (item != null)
-                                {
-                                    <div class="col-md-4">
-                                        <img src=@UrlIconItemPrimal(item.item_id) />
-                                        @{
-                                            var t = DataPrimalItemsList.FirstOrDefault(x => x.item_id == item.item_id);
-                                        }
-                                        @if (t != null)
-                                        {
-                                            <p>@t.item_name</p>
-                                        }
-                                    </div>
-                                }
-                            }
-                                </div>
-                        <h1 style="text-align: center;">Weapon Second.</h1>
-                                <div class="row">
-                            @foreach (var item in newPHSaveData.inventory.Where(x => x.slot == 3))
-                            {
-                                @if (item != null)
-                                {
-                                    <div class="col-md-4">
-                                        <img src=@UrlIconItemPrimal(item.item_id) />
-                                        @{
-                                            var t = DataPrimalItemsList.FirstOrDefault(x => x.item_id == item.item_id);
-                                        }
-                                        @if (t != null)
-                                        {
-                                            <p>@t.item_name</p>
-                                        }
-                                    </div>
-                                }
-                            }
-                            @foreach (var item in newPHSaveData.inventory.Where(x => x.slot == 9))
-                            {
-                                @if (item != null)
-                                {
-                                    <div class="col-md-4">
-                                        <img src=@UrlIconItemPrimal(item.item_id) />
-                                        @{
-                                            var t = DataPrimalItemsList.FirstOrDefault(x => x.item_id == item.item_id);
-                                        }
-                                        @if (t != null)
-                                        {
-                                            <p>@t.item_name</p>
-                                        }
-                                        <EditForm Model="newPHSaveData"><InputNumber style="max-width:70px;" @bind-Value="item.health" /></EditForm>
-                                    </div>
-                                }
-                            }
-                            @foreach (var item in newPHSaveData.inventory.Where(x => x.slot == 6))
-                            {
-                                @if (item != null)
-                                {
-                                    <div class="col-md-4">
-                                        <img src=@UrlIconItemPrimal(item.item_id) />
-                                        @{
-                                            var t = DataPrimalItemsList.FirstOrDefault(x => x.item_id == item.item_id);
-                                        }
-                                        @if (t != null)
-                                        {
-                                            <p>@t.item_name</p>
-                                        }
-                                    </div>
-                                }
-                            }
-                                </div>
-                        <h1 style="text-align: center;">Weapon Third and Four, Five.</h1>
-                                <div class="row">
-                            @foreach (var item in newPHSaveData.inventory.Where(x => x.slot == 4))
-                            {
-                                @if (item != null)
-                                {
-                                    <div class="col-md-4">
-                                        <img src=@UrlIconItemPrimal(item.item_id) />
-                                        @{
-                                            var t = DataPrimalItemsList.FirstOrDefault(x => x.item_id == item.item_id);
-                                        }
-                                        @if (t != null)
-                                        {
-                                            <p>@t.item_name</p>
-                                        }
-                                    </div>
-                                }
-                            }
-                            @foreach (var item in newPHSaveData.inventory.Where(x => x.slot == 11))
-                            {
-                                @if (item != null)
-                                {
-                                    <div class="col-md-4">
-                                        <img src=@UrlIconItemPrimal(item.item_id) />
-                                        @{
-                                            var t = DataPrimalItemsList.FirstOrDefault(x => x.item_id == item.item_id);
-                                        }
-                                        @if (t != null)
-                                        {
-                                            <p>@t.item_name</p>
-                                        }
-                                        @if (t.item_name.ToLower().Contains("ammo") | t.item_name.ToLower().Contains("bolts") | t.item_name.ToLower().Contains("canister") | t.item_name.ToLower().Contains("arrows"))
-                                        {
-                                            <EditForm Model="newPHSaveData"><InputNumber style="max-width:70px;" @bind-Value="item.health" /></EditForm>
-                                        }
-                                    </div>
-                                }
-                            }  
-                            @foreach (var item in newPHSaveData.inventory.Where(x => x.slot == 12))
-                            {
-                                @if (item != null)
-                                {
-                                    <div class="col-md-4">
-                                        <img src=@UrlIconItemPrimal(item.item_id) />
-                                        @{
-                                            var t = DataPrimalItemsList.FirstOrDefault(x => x.item_id == item.item_id);
-                                        }
-                                        @if (t != null)
-                                        {
-                                            <p>@t.item_name</p>
-                                        }
-                                        @if (t.item_name.ToLower().Contains("ammo") | t.item_name.ToLower().Contains("bolts") | t.item_name.ToLower().Contains("canister") | t.item_name.ToLower().Contains("arrows"))
-                                        {
-                                            <EditForm Model="newPHSaveData"><InputNumber style="max-width:70px;" @bind-Value="item.health" /></EditForm>
-                                        }
-                                    </div>
-                                }
-                            }                             
-                                </div>
-                            </div>
-                        <div id="Clothes" class="col-md-6">
-                        <h1 style="text-align: center;">Clothes</h1>
-                        @if (newPHSaveData.inventory.Where(x => x.slot == 18 | x.slot == 19 | x.slot == 20 | x.slot == 21 | x.slot == 22 | x.slot == 24).Count() > 0)
-                        {
-                            <div class="row">
-                                @foreach (var item in newPHSaveData.inventory.Where(x => x.slot == 18 | x.slot == 19 | x.slot == 20 | x.slot == 21 | x.slot == 22 | x.slot == 24).OrderBy(y => y.slot))
-                                {
-                                    @if (item != null)
+                <div id="WeaponAndClothes" class="row">
+                    <div id="Weapon" class="col-md-4">
+                        <div id="mapequip" style="width:250px; height:260px;">
+                            <div class="card text-bg-dark start-50">
+                                <img src="/Blog/img/ph/_th_map_weapon_equip.png" />
+                                <div class="card-img-overlay" style="padding:0px;">
+                                    @if (newPHSaveData.inventory.Where(x => x.slot == 2 | x.slot == 8 | x.slot == 5 | x.slot == 3 | x.slot == 9 | x.slot == 6 | x.slot == 4 | x.slot == 11 | x.slot == 12).Count() > 0)
                                     {
-                                        <div class="col-md-4">
-                                            <img src=@UrlIconItemPrimal(item.item_id) />
-                                            @{
-                                                var t = DataPrimalItemsList.FirstOrDefault(x => x.item_id == item.item_id);
-                                            }
-                                            @if (t != null)
+                                        <div class="row">
+                                            @foreach (var item in newPHSaveData.inventory.Where(x => x.slot == 2).OrderBy(y => y.slot))
                                             {
-                                                <p>@t.item_name</p>
+                                                @if (item != null)
+                                                {
+                                                    <div id="weaponeOne" style="position: absolute;left: -4px;top: 21px;">
+                                                        @{
+                                                            var t = DataPrimalItemsList.FirstOrDefault(x => x.item_id == item.item_id);
+                                                        }
+                                                        @if (t != null)
+                                                        {
+                                                            <img src=@UrlIconItemPrimal(item.item_id) title=@t.item_name />
+                                                        }
+                                                    </div>
+                                                }
+                                            }
+                                            @foreach (var item in newPHSaveData.inventory.Where(x => x.slot == 8).OrderBy(y => y.slot))
+                                            {
+                                                @if (item != null)
+                                                {
+                                                    <div id="ammoOne" style="position: absolute;left: 77px;top: 21px;">
+                                                        @{
+                                                            var t = DataPrimalItemsList.FirstOrDefault(x => x.item_id == item.item_id);
+                                                        }
+                                                        @if (t != null)
+                                                        {
+                                                            <div class="card text-bg-dark" style="width:62px; height:62px;">
+                                                                <img src=@UrlIconItemPrimal(item.item_id) title="@t.item_name" class="card-img" />
+                                                                <div class="card-img-overlay" title="@t.item_name" style="padding:0px;">
+                                                                    @if (t.item_name.ToLower().Contains("ammo") | t.item_name.ToLower().Contains("bolts") | t.item_name.ToLower().Contains("canister") | t.item_name.ToLower().Contains("arrows"))
+                                                                    {
+                                                                        <EditForm Model="newPHSaveData"><InputNumber style="max-width:58px;position: absolute;bottom: 0;background: rgba(255, 255, 255, 0.2);border: none;outline: none;" @bind-Value="item.health" /></EditForm>
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                }
+                                            }
+                                            @foreach (var item in newPHSaveData.inventory.Where(x => x.slot == 5).OrderBy(y => y.slot))
+                                            {
+                                                @if (item != null)
+                                                {
+                                                    <div id="scopeOne" style="position: absolute;left: 158px;top: 21px;">
+                                                        @{
+                                                            var t = DataPrimalItemsList.FirstOrDefault(x => x.item_id == item.item_id);
+                                                        }
+                                                        @if (t != null)
+                                                        {
+                                                            <img src=@UrlIconItemPrimal(item.item_id) title=@t.item_name />
+                                                        }
+                                                    </div>
+                                                }
+                                            }
+                                            @foreach (var item in newPHSaveData.inventory.Where(x => x.slot == 3).OrderBy(y => y.slot))
+                                            {
+                                                @if (item != null)
+                                                {
+                                                    <div id="weaponeTwo" style="position: absolute;left: -4px;top: 105px;">
+                                                        @{
+                                                            var t = DataPrimalItemsList.FirstOrDefault(x => x.item_id == item.item_id);
+                                                        }
+                                                        @if (t != null)
+                                                        {
+                                                            <img src=@UrlIconItemPrimal(item.item_id) title=@t.item_name />
+                                                        }
+                                                    </div>
+                                                }
+                                            }
+                                            @foreach (var item in newPHSaveData.inventory.Where(x => x.slot == 9).OrderBy(y => y.slot))
+                                            {
+                                                @if (item != null)
+                                                {
+                                                    <div id="ammoTwo" style="position: absolute;left: 77px;top: 105px;">
+                                                        @{
+                                                            var t = DataPrimalItemsList.FirstOrDefault(x => x.item_id == item.item_id);
+                                                        }
+                                                        @if (t != null)
+                                                        {
+                                                            <div class="card text-bg-dark" style="width:62px; height:62px;">
+                                                                <img src=@UrlIconItemPrimal(item.item_id) title="@t.item_name" class="card-img" />
+                                                                <div class="card-img-overlay" title="@t.item_name" style="padding:0px;">
+                                                                    @if (t.item_name.ToLower().Contains("ammo") | t.item_name.ToLower().Contains("bolts") | t.item_name.ToLower().Contains("canister") | t.item_name.ToLower().Contains("arrows"))
+                                                                    {
+                                                                        <EditForm Model="newPHSaveData"><InputNumber style="max-width:58px;position: absolute;bottom: 0;background: rgba(255, 255, 255, 0.2);border: none;outline: none;" @bind-Value="item.health" /></EditForm>
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                }
+                                            }
+                                            @foreach (var item in newPHSaveData.inventory.Where(x => x.slot == 6).OrderBy(y => y.slot))
+                                            {
+                                                @if (item != null)
+                                                {
+                                                    <div id="scopeTwo" style="position: absolute;left: 158px;top: 105px;">
+                                                        @{
+                                                            var t = DataPrimalItemsList.FirstOrDefault(x => x.item_id == item.item_id);
+                                                        }
+                                                        @if (t != null)
+                                                        {
+                                                            <img src=@UrlIconItemPrimal(item.item_id) title=@t.item_name />
+                                                        }
+                                                    </div>
+                                                }
+                                            }
+                                            @foreach (var item in newPHSaveData.inventory.Where(x => x.slot == 4).OrderBy(y => y.slot))
+                                            {
+                                                @if (item != null)
+                                                {
+                                                    <div id="weaponeThird" style="position: absolute;left: -4px;top: 187px;">
+                                                        @{
+                                                            var t = DataPrimalItemsList.FirstOrDefault(x => x.item_id == item.item_id);
+                                                        }
+                                                        @if (t != null)
+                                                        {
+                                                            <img src=@UrlIconItemPrimal(item.item_id) title=@t.item_name />
+                                                        }
+                                                    </div>
+                                                }
+                                            }
+                                            @foreach (var item in newPHSaveData.inventory.Where(x => x.slot == 11).OrderBy(y => y.slot))
+                                            {
+                                                @if (item != null)
+                                                {
+                                                    <div id="slot4" style="position: absolute;left: 77px;top: 187px;">
+                                                        @{
+                                                            var t = DataPrimalItemsList.FirstOrDefault(x => x.item_id == item.item_id);
+                                                        }
+                                                        @if (t != null)
+                                                        {
+                                                            <div class="card text-bg-dark" style="width:62px; height:62px;">
+                                                                <img src=@UrlIconItemPrimal(item.item_id) title="@t.item_name" class="card-img" />
+                                                                <div class="card-img-overlay" title="@t.item_name" style="padding:0px;">
+                                                                    @if (t.item_name.ToLower().Contains("ammo") | t.item_name.ToLower().Contains("bolts") | t.item_name.ToLower().Contains("canister") | t.item_name.ToLower().Contains("arrows"))
+                                                                    {
+                                                                        <EditForm Model="newPHSaveData"><InputNumber style="max-width:58px;position: absolute;bottom: 0;background: rgba(255, 255, 255, 0.2);border: none;outline: none;" @bind-Value="item.health" /></EditForm>
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                }
+                                            }
+                                            @foreach (var item in newPHSaveData.inventory.Where(x => x.slot == 12).OrderBy(y => y.slot))
+                                            {
+                                                @if (item != null)
+                                                {
+                                                    <div id="slot5" style="position: absolute;left: 158px;top: 187px;">
+                                                        @{
+                                                            var t = DataPrimalItemsList.FirstOrDefault(x => x.item_id == item.item_id);
+                                                        }
+                                                        @if (t != null)
+                                                        {
+                                                            <div class="card text-bg-dark" style="width:62px; height:62px;">
+                                                                <img src=@UrlIconItemPrimal(item.item_id) title="@t.item_name" class="card-img" />
+                                                                <div class="card-img-overlay" title="@t.item_name" style="padding:0px;">
+                                                                    @if (t.item_name.ToLower().Contains("ammo") | t.item_name.ToLower().Contains("bolts") | t.item_name.ToLower().Contains("canister") | t.item_name.ToLower().Contains("arrows"))
+                                                                    {
+                                                                        <EditForm Model="newPHSaveData"><InputNumber style="max-width:70px;position: absolute;bottom: 0;background: rgba(255, 255, 255, 0.2);border: none;outline: none;" @bind-Value="item.health" /></EditForm>
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                }
                                             }
                                         </div>
                                     }
-                                }
-                            </div>  
-                        }
-                        else
-                        {
-                            <h2>No equip clothes.</h2>
-                        }
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div id="Avatar" class="row">
-                    <h1 style="text-align: center;">Avatar.</h1>
-                        <div class="col-md-3"><img src=@UrlIconItemPrimal(1000000) style=@(styleAvatarBorder(1000000, newPHSaveData.avatar)) @onclick="()=>ChangeAvatar(1000000)" /></div>
-                        <div class="col-md-3"><img src=@UrlIconItemPrimal(1000001) style=@(styleAvatarBorder(1000001, newPHSaveData.avatar)) @onclick="()=>ChangeAvatar(1000001)" /></div>
-                        <div class="col-md-3"><img src=@UrlIconItemPrimal(1000002) style=@(styleAvatarBorder(1000002, newPHSaveData.avatar)) @onclick="()=>ChangeAvatar(1000002)" /></div>
-                        <div class="col-md-3"><img src=@UrlIconItemPrimal(1000003) style=@(styleAvatarBorder(1000003, newPHSaveData.avatar)) @onclick="()=>ChangeAvatar(1000003)" /></div>
+                    <div id="Clothes" class="col-md-4">
+                        <div id="mapequip" style="width:460px; height:300px;">
+                            <div class="card text-bg-dark">
+                                <img src="/Blog/img/ph/_th_map_equip.png" />
+                                <div class="card-img-overlay" style="padding:0px;">
+                                    @if (newPHSaveData.inventory.Where(x => x.slot == 18 | x.slot == 19 | x.slot == 20 | x.slot == 21 | x.slot == 22 | x.slot == 24).Count() > 0)
+                                    {
+                                        <div class="row">
+                                            @foreach (var item in newPHSaveData.inventory.Where(x => x.slot == 24).OrderBy(y => y.slot))
+                                            {
+                                                @if (item != null)
+                                                {
+                                                    <div id="eyeequip" style="position: absolute;left: 84px;top: 15px; max-width: 80px;">
+                                                        @{
+                                                            var t = DataPrimalItemsList.FirstOrDefault(x => x.item_id == item.item_id);
+                                                        }
+                                                        @if (t != null)
+                                                        {
+                                                            <img src=@UrlIconItemPrimal(item.item_id) title=@t.item_name />
+                                                        }
+                                                    </div>
+                                                }
+                                            }
+                                            @foreach (var item in newPHSaveData.inventory.Where(x => x.slot == 21).OrderBy(y => y.slot))
+                                            {
+                                                @if (item != null)
+                                                {
+                                                    <div id="headequip" style="position: absolute;left: 319px;top: 15px; max-width: 80px;">
+                                                        @{
+                                                            var t = DataPrimalItemsList.FirstOrDefault(x => x.item_id == item.item_id);
+                                                        }
+                                                        @if (t != null)
+                                                        {
+                                                            <img src=@UrlIconItemPrimal(item.item_id) title=@t.item_name />
+                                                        }
+                                                    </div>
+                                                }
+                                            }
+                                            @foreach (var item in newPHSaveData.inventory.Where(x => x.slot == 18).OrderBy(y => y.slot))
+                                            {
+                                                @if (item != null)
+                                                {
+                                                    <div id="bodyequip" style="position: absolute;left: 8px;top: 105px; max-width: 80px;">
+                                                        @{
+                                                            var t = DataPrimalItemsList.FirstOrDefault(x => x.item_id == item.item_id);
+                                                        }
+                                                        @if (t != null)
+                                                        {
+                                                            <img src=@UrlIconItemPrimal(item.item_id) title=@t.item_name />
+                                                        }
+                                                    </div>
+                                                }
+                                            }
+                                            @foreach (var item in newPHSaveData.inventory.Where(x => x.slot == 19).OrderBy(y => y.slot))
+                                            {
+                                                @if (item != null)
+                                                {
+                                                    <div id="pantsequip" style="position: absolute;left: 46px;top: 197px; max-width: 80px;">
+                                                        @{
+                                                            var t = DataPrimalItemsList.FirstOrDefault(x => x.item_id == item.item_id);
+                                                        }
+                                                        @if (t != null)
+                                                        {
+                                                            <img src=@UrlIconItemPrimal(item.item_id) title=@t.item_name />
+                                                        }
+                                                    </div>
+                                                }
+                                            }
+                                            @foreach (var item in newPHSaveData.inventory.Where(x => x.slot == 20).OrderBy(y => y.slot))
+                                            {
+                                                @if (item != null)
+                                                {
+                                                    <div id="bootsequip" style="position: absolute;left: 342px;top: 222px; max-width: 80px;">
+                                                        @{
+                                                            var t = DataPrimalItemsList.FirstOrDefault(x => x.item_id == item.item_id);
+                                                        }
+                                                        @if (t != null)
+                                                        {
+                                                            <img src=@UrlIconItemPrimal(item.item_id) title=@t.item_name />
+                                                        }
+                                                    </div>
+                                                }
+                                            }
+                                            @foreach (var item in newPHSaveData.inventory.Where(x => x.slot == 22).OrderBy(y => y.slot))
+                                            {
+                                                @if (item != null)
+                                                {
+                                                    <div id="glovesequip" style="position: absolute;left: 358px;top: 135px; max-width: 80px;">
+                                                        @{
+                                                            var t = DataPrimalItemsList.FirstOrDefault(x => x.item_id == item.item_id);
+                                                        }
+                                                        @if (t != null)
+                                                        {
+                                                            <img src=@UrlIconItemPrimal(item.item_id) title=@t.item_name />
+                                                        }
+                                                    </div>
+                                                }
+                                            }
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <div id="Avatar" class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-3"><img src=@UrlIconItemPrimal(1000000) style=@(styleAvatarBorder(1000000, newPHSaveData.avatar)) @onclick="()=>ChangeAvatar(1000000)" title="Change Avatar" /></div>
+                            <div class="col-md-3"><img src=@UrlIconItemPrimal(1000001) style=@(styleAvatarBorder(1000001, newPHSaveData.avatar)) @onclick="()=>ChangeAvatar(1000001)" title="Change Avatar" /></div>
+                            <div class="col-md-3"><img src=@UrlIconItemPrimal(1000002) style=@(styleAvatarBorder(1000002, newPHSaveData.avatar)) @onclick="()=>ChangeAvatar(1000002)" title="Change Avatar" /></div>
+                            <div class="col-md-3"><img src=@UrlIconItemPrimal(1000003) style=@(styleAvatarBorder(1000003, newPHSaveData.avatar)) @onclick="()=>ChangeAvatar(1000003)" title="Change Avatar" /></div>
+                        </div>
+                    </div>
+                </div>
             }
         </div>
     </div>
+    @if (!string.IsNullOrEmpty(playAudioSource))
+    {
+        <audio controls="controls" autoplay="autoplay" style="display:none;" src=@playAudioSource />
+    }
 </div>
 
 @code {
@@ -326,7 +506,7 @@
         new PrimalHunterModels.PrimalHunterItemModel(){ item_id = 232, item_name = "Wooden Bow" },
         new PrimalHunterModels.PrimalHunterItemModel(){ item_id = 345, item_name = ".44 Disciplinary Handgun" },
         new PrimalHunterModels.PrimalHunterItemModel(){ item_id = 4, item_name = "Handgun Scope" },
-        new PrimalHunterModels.PrimalHunterItemModel(){ item_id = 87, item_name = "Nooble Hunting Gloves" },
+        new PrimalHunterModels.PrimalHunterItemModel(){ item_id = 87, item_name = "Noble Hunting Gloves" },
         new PrimalHunterModels.PrimalHunterItemModel(){ item_id = 50, item_name = "Correctional Pilot Glasses" },
         new PrimalHunterModels.PrimalHunterItemModel(){ item_id = 1009, item_name = "5.56 Assault Rifle" },
         new PrimalHunterModels.PrimalHunterItemModel(){ item_id = 1006, item_name = ".50 Spec Ops Sniper Rifle" },
@@ -351,9 +531,34 @@
         new PrimalHunterModels.PrimalHunterItemModel(){ item_id = 40, item_name = "Merc Grunt Pants" },
         new PrimalHunterModels.PrimalHunterItemModel(){ item_id = 60, item_name = "Settler Shoes" },
         new PrimalHunterModels.PrimalHunterItemModel(){ item_id = 29, item_name = "Settler T-Shirt" },
-        new PrimalHunterModels.PrimalHunterItemModel(){ item_id = 176, item_name = "Black Rimmed Glasses" }
+        new PrimalHunterModels.PrimalHunterItemModel(){ item_id = 176, item_name = "Black Rimmed Glasses" },
+        new PrimalHunterModels.PrimalHunterItemModel(){ item_id = 22, item_name = "Settler Gloves" },
+        new PrimalHunterModels.PrimalHunterItemModel(){ item_id = 47, item_name = "Settler Cap" },
+        new PrimalHunterModels.PrimalHunterItemModel(){ item_id = 24, item_name = "Merc Navy Gloves" },
+        new PrimalHunterModels.PrimalHunterItemModel(){ item_id = 36, item_name = "Settler Pants" },
+        new PrimalHunterModels.PrimalHunterItemModel(){ item_id = 26, item_name = "Merc Navy Shirt" },
+        new PrimalHunterModels.PrimalHunterItemModel(){ item_id = 38, item_name = "Merc Navy Pants" },
+        new PrimalHunterModels.PrimalHunterItemModel(){ item_id = 32, item_name = "Merc Grunt Shirt" },
+        new PrimalHunterModels.PrimalHunterItemModel(){ item_id = 62, item_name = "Merc Grunt Boots" },
+        new PrimalHunterModels.PrimalHunterItemModel(){ item_id = 23, item_name = "Merc Grunt Gloves" },
+        new PrimalHunterModels.PrimalHunterItemModel(){ item_id = 91, item_name = "Merc Spec-Ops Boots" }
     };
+    List<PrimalHunterModels.PrimalHunterItemModel> BundleGenerator(int[] ii)
+    {
+        List<PrimalHunterModels.PrimalHunterItemModel> temp = new();
+        for (int i = 0; i < ii.Count(); i++)
+        {
+            var itemp = DataPrimalItemsList.Where(x => x.item_id == ii[i]).FirstOrDefault();
+            if (itemp != null)
+            {
+                temp.Add(itemp);
+            }
+        }
+        return temp;
+    }
+    string playAudioSource;
     string UrlIconItemPrimal(int id) => @"/Blog/img/ph/" + id + ".png";
+    string audioSource(string play) => @"/Blog/img/ph/" + play + ".mp3";
     string GenerateSaveFile()
     {
         var jsonstr = System.Text.Json.JsonSerializer.Serialize(newPHSaveData);
@@ -382,12 +587,38 @@
         {
             randomGuid = new Random().Next(minValue: 9000, maxValue: 9999).ToString();
         }
+        if (id == 1018)
+        {
+            playAudioSource = audioSource("ph_primal_roar");
+        }
         if (name.ToLower().Contains("ammo") | name.ToLower().Contains("bolts") | name.ToLower().Contains("canister") | name.ToLower().Contains("arrows"))
         {
             countItem = 999;
         }
         newPHSaveData.inventory.Add(new() { item_id = id, slot = 1, guid = randomGuid, health = countItem });
-        return;
+    }
+    void AddBundleToInventory(List<PrimalHunterModels.PrimalHunterItemModel> itemsBundle)
+    {
+        foreach (var item in itemsBundle)
+        {
+            if (item.item_id != 363)
+            {
+                AddItemInInventory(item.item_id, item.item_name);
+            }
+            else
+            {
+                AddItemInInventory(item.item_id, item.item_name);
+                AddItemInInventory(item.item_id, item.item_name);
+                AddItemInInventory(item.item_id, item.item_name);
+                AddItemInInventory(item.item_id, item.item_name);
+                AddItemInInventory(item.item_id, item.item_name);
+                AddItemInInventory(item.item_id, item.item_name);
+                AddItemInInventory(item.item_id, item.item_name);
+                AddItemInInventory(item.item_id, item.item_name);
+                AddItemInInventory(item.item_id, item.item_name);
+                AddItemInInventory(item.item_id, item.item_name);
+            }
+        }
     }
     void DeleteFromInventory(string guidDelete)
     {

@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Pages\PrimalHunter\HelperPHBundleList.razor" />
     <None Include="wwwroot\css\bootstrap\bootstrap.min.css.map" />
     <None Include="wwwroot\js\bootstrap.js" />
     <None Include="wwwroot\js\bootstrap.js.map" />

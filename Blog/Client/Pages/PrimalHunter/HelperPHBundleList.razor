@@ -1,0 +1,30 @@
+﻿@using static Blog.Shared.Data.PH.PrimalHunterModels
+
+<div class="row border border-dark" style="margin:10px; padding:5px;">
+    <p>@HeaderText</p>
+    @foreach (var item in ListPHItems)
+    {
+        <div class="col-md-1" style="min-width: 82px;min-height: 62px;">
+            <div class="card text-bg-dark" style="min-width: 62px;min-height: 62px;">
+                <img src=@UrlIconItemPrimal(item.item_id) title="@item.item_name" class="card-img" />
+                <div class="card-img-overlay" title="@item.item_name" style="padding:0px;">
+                </div>
+            </div>
+        </div>
+    }
+    <button class="btn btn-danger col-md-1" style="width: 55px;height: 40px; margin-top:10px;" @onclick=@BundleAddUp>Add</button>
+</div>
+
+@code {
+    [Parameter]
+    public string HeaderText { get; set; }
+    [Parameter]
+    public List<PrimalHunterItemModel> ListPHItems { get; set; }
+    [Parameter]
+    public EventCallback<List<PrimalHunterItemModel>> AddToBundleCallback { get; set; }
+    void BundleAddUp()
+    {
+        AddToBundleCallback.InvokeAsync(ListPHItems);
+    }
+    string UrlIconItemPrimal(int id) => @"/img/ph/" + id + ".png";
+}
